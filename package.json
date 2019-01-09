@@ -38,5 +38,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "proxy": "http://localhost:5569"
+  "proxy": "http://localhost:5569",
+  "nodemonConfig": {
+    "ext": "js,sql",
+    "ignore": [
+      "src/*"
+    ]
+  }
 }
