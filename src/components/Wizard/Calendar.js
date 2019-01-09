@@ -8,7 +8,7 @@ export default class Calendar extends Component {
         super()
         this.state = {
             from: undefined,
-            to: undefined
+            to: undefined,
         }
         this.handleDayClick=this.handleDayClick.bind(this);
         this.handleResetClick=this.handleResetClick.bind(this);
@@ -22,7 +22,7 @@ export default class Calendar extends Component {
         this.setState({from: undefined, to: undefined})
     }
     render(){
-        const {to, from} = this.state
+        const {to, from, length} = this.state
         const modifiers = { start: from, end: to}
     
     return(
@@ -31,7 +31,7 @@ export default class Calendar extends Component {
                 {!from && !to && 'Please select the first day'}
                 {from && !to && 'Please select the last day'}
                 {from && to && 
-                    `Selected from ${from.toLocaleDateString()} to ${to.toLocaleDateString()}`} {' '}
+                    `Selected from ${from.toLocaleDateString()} to ${to.toLocaleDateString()} ${to.getTime()/86400000-from.getTime()/86400000} ` } 
                 {from && to && 
                     (
                         <button className="link"onClick={this.handleResetClick}>Reset</button>
@@ -59,7 +59,7 @@ export default class Calendar extends Component {
                 //   .Selectable .DayPicker-Day--end {
                 //     border-top-right-radius: 50% !important;
                 //     border-bottom-right-radius: 50% !important;
-                  }
+                //   }
                  `}</style>
              </Helmet>
         </div>
