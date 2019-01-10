@@ -22,7 +22,6 @@ class Auth extends Component {
 
     handleChange = e => {
         let { name, value } = e.target
-        console.log(name, value)
         this.setState({
             [name]: value
         })
@@ -54,10 +53,7 @@ class Auth extends Component {
     loginUser = () => {
         axios.post('/auth/login', this.state).then( response => {
             this.props.userLoggedIn(response.data)
-            this.setState({
-                email: '',
-                password: ''
-            })
+            this.props.history.push(`/profile/${response.data.id}`)
         }).catch( error => {
             this.setState({
                 errorMessage: error.response.data
@@ -66,7 +62,6 @@ class Auth extends Component {
     }
 
   render() {
-      console.log(this.props.user)
     return (
       <div>
         {this.state.login ? 

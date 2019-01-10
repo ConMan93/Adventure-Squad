@@ -1,0 +1,4 @@
+
+will want to render users username on their browser when viewing others profile
+when logged in: only can change own info
+get friend profile

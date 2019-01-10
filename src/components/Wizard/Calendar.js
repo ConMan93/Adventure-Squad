@@ -22,7 +22,7 @@ export default class Calendar extends Component {
         this.setState({from: undefined, to: undefined})
     }
     render(){
-        const {to, from, length} = this.state
+        const {to, from} = this.state
         const modifiers = { start: from, end: to}
     
     return(
