@@ -1,41 +1,52 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Message from './Message';
+import MessageForm from './MessageForm';
+import { connect } from 'react-redux';
+import { updateDiscussionBoard } from '../../../Redux/reducer';
 
-export default class Board extends Component {
-
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            discussion: []
-        }
-    }
+class Board extends Component {
 
     componentDidMount() {
         axios.get('/trip/discussion').then( response => {
-            console.log(response)
-            this.setState({
-                discussion: response.data
-            })
+            this.props.updateDiscussionBoard(response.data)
+        })
+    }
+
+    displayUpdatedDiscussion = messages => {
+        this.setState({
+            discussion: messages
         })
     }
 
     render() {
 
-        let discussionBoard = this.state.discussion.map( note => {
+        let discussionBoard = this.props.discussion.map( note => {
             return (<Message 
                 key={note.id}
                 message={note.message}
                 user_id={note.user_id}
+                id={note.id}
+                displayUpdatedDiscussionFn={this.displayUpdatedDiscussion}
             />)
         })
 
         return (
         <div>
             Discussion!
+            <MessageForm 
+            displayUpdatedDiscussionFn={this.displayUpdatedDiscussion}
+            />
             {discussionBoard}
         </div>
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        discussion: state.discussion
+    }
+}
+
+export default connect(mapStateToProps, { updateDiscussionBoard })(Board)
