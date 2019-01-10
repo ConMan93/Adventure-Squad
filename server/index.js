@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const massive = require('massive');
 const ac = require('./controllers/authController');
 const tc = require('./controllers/tripsController');
+const fc = require('./controllers/friendsController')
 const app = express();
 
 const { SESSION_SECRET, CONNECTION_STRING, SERVER_PORT } = process.env
@@ -31,6 +32,13 @@ app.get('/auth/currentuser', ac.currentUser)
 // app.get('/trip/discussion/:tripid', tc.getTripDiscussion)
 app.get('/trip/discussion', tc.getTripDiscussion)
 app.get('/trip/discussionauthor/:userid', tc.getDiscussionAuthor)
+
+// Friends endpoints
+app.get('/friends/get', fc.getFriends)
+// app.get('/profile/:id', fc.getProfile)
+app.post('/friends/add', fc.addFriends)
+app.delete('/friends/delete/:id', fc.deleteFriends)
+app.get('/friends/users', fc.getAllUsers)
 
 
 app.listen(SERVER_PORT, () => {

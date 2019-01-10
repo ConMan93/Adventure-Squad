@@ -14,7 +14,6 @@ export default class Board extends Component {
 
     componentDidMount() {
         axios.get('/trip/discussion').then( response => {
-            console.log(response)
             this.setState({
                 discussion: response.data
             })

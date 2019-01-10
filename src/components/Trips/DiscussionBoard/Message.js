@@ -28,7 +28,6 @@ export default class Message extends Component {
     }
 
   render() {
-      console.log(this.state)
     return (
       <div style={{border: '1px solid black'}}>
         <h2>{this.state.author.username}</h2>
