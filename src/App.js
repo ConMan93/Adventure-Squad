@@ -1,51 +1,61 @@
 import React, { Component } from 'react';
 import './App.css';
-import {Switch, Route, HashRouter} from 'react-router-dom';
-import Calendar from './components/Wizard/Calendar';
-import Dashboard from './components/User/Dashboard'
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
-import {connect} from 'react-redux'
-import {userLoggedIn} from './Redux/reducer'
+import { connect } from 'react-redux';
+import { userLoggedIn } from './Redux/reducer';
 
 //Components
-import Auth from './components/Auth';
-// import Board from './components/Trips/DiscussionBoard/Board';
+import Auth from './components/Home/Auth';
+import Board from './components/Trips/DiscussionBoard/Board';
+import HomePage from './components/Home/HomePage';
+import Calendar from './components/Wizard/Calendar';
+import Dashboard from './components/User/Dashboard';
+
 
 class App extends Component {
-  constructor(){
-    super()
-      this.state={ 
-        loading: true
-      }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: true
+    }
   }
-  componentDidMount(){
-    axios.get('/auth/currentuser').then (results => {
-      if (results.data) {
-        this.props.userLoggedIn(results.data)
+
+  componentDidMount() {
+    axios.get('/auth/currentuser').then( response => {
+      if (response.data) {
+        console.log(response.data)
+        this.props.userLoggedIn(response.data)
       }
     })
+
+    this.setState({
+      loading: false
+    })
   }
+
   
   render() {
+    
     return (
-      <div>
+      this.state.loading ?
+      <div></div>
+      :
       <HashRouter>
-        <div className="App">
-          <Switch>
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route path="/calendar" component={Calendar}/>
-            <Route path='/login' component={Auth} />
-          </Switch>
-
-        </div>
-      </HashRouter>
-        {/* <img src='https://picsum.photos/200/300/?random' alt='' /> */}
-        {/* <Board /> */}
-      </div>
-    );
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+          <Route path='/login' component={Auth} />
+          <Route path='/trip' component={Board} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/calendar" component={Calendar}/>
+        </Switch>
+      </HashRouter> 
+    )
   }
 }
   
 
 
-export default connect(null,  {userLoggedIn})(App)
+export default connect(null, { userLoggedIn })(App);
