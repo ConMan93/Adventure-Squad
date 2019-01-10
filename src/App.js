@@ -21,7 +21,6 @@ class App extends Component {
   componentDidMount(){
     axios.get('/auth/currentuser').then (results => {
       if (results.data) {
-        console.log(results.data)
         this.props.userLoggedIn(results.data)
       }
     })
