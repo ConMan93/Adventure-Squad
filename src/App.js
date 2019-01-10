@@ -9,6 +9,8 @@ import { userLoggedIn } from './Redux/reducer';
 import Auth from './components/Home/Auth';
 import Board from './components/Trips/DiscussionBoard/Board';
 import HomePage from './components/Home/HomePage';
+import Calendar from './components/Wizard/Calendar';
+import Dashboard from './components/User/Dashboard';
 
 
 class App extends Component {
@@ -34,6 +36,7 @@ class App extends Component {
     })
   }
 
+  
   render() {
     
     return (
@@ -45,10 +48,14 @@ class App extends Component {
           <Route exact path='/' component={HomePage} />
           <Route path='/login' component={Auth} />
           <Route path='/trip' component={Board} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/calendar" component={Calendar}/>
         </Switch>
       </HashRouter> 
     )
   }
 }
+  
+
 
 export default connect(null, { userLoggedIn })(App);
