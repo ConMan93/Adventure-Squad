@@ -11,6 +11,7 @@ import Board from './components/Trips/DiscussionBoard/Board';
 import HomePage from './components/Home/HomePage';
 import Calendar from './components/Wizard/Calendar';
 import Dashboard from './components/User/Dashboard';
+import UserProfile from './components/User/UserProfile';
 
 
 class App extends Component {
@@ -50,6 +51,7 @@ class App extends Component {
           <Route path='/trip' component={Board} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/calendar" component={Calendar}/>
+          <Route path='/profile/:id' component={UserProfile} />
         </Switch>
       </HashRouter> 
     )

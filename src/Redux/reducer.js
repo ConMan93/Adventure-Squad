@@ -3,7 +3,6 @@ const initialState = {
     user: {},
     discussion: [],
     allUsers: [],
-    user: {},
     friends: [],
     viewedProfile: {}
 }

@@ -82,6 +82,20 @@ module.exports = {
             console.log(error)
             return res.status(500).send(error)
         }
+    },
+
+    getTrips: async (req, res) => {
+
+        try {
+            let db = req.app.get('db')
+            let id = +req.params.id
+
+            let trips = await db.get_trip(id)
+            return res.send(trips)
+        } catch(error) {
+            console.log(error)
+            res.status(500).send(error)
+        }
     }
 
 }

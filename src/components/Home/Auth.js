@@ -54,10 +54,7 @@ class Auth extends Component {
     loginUser = () => {
         axios.post('/auth/login', this.state).then( response => {
             this.props.userLoggedIn(response.data)
-            this.setState({
-                email: '',
-                password: ''
-            })
+            this.props.history.push('/dashboard')
         }).catch( error => {
             this.setState({
                 errorMessage: error.response.data

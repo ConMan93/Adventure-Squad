@@ -42,8 +42,6 @@ module.exports = {
             const db = req.app.get('db')
             let user_id = req.session.user.id
             let {friend_id} = req.body
-            console.log(friend_id)
-            console.log(req.body)
             let newFriend = await db.add_friends([friend_id, user_id])
             res.send(newFriend)
 
@@ -66,6 +64,20 @@ module.exports = {
             console.log('error deleting friend', error)
             res.status(500).send(error)
         }       
-    }
+    },
+
+    getUsersFriends: async (req, res) => {
+
+        try {
+            const db = req.app.get('db')
+            let id = +req.params.id
+            let friends = await db.get_friends(id)
+            res.send(friends);
+
+        } catch (error) {
+            console.log('error getting friends', error)
+            res.status(500).send(error)
+        }
+    }, 
 
 }
