@@ -1,4 +1,4 @@
-select t.*
-from trips t
-join trips_users tu on tu.trip_id = t.id
-where tu.user_id = $1;
+SELECT t.* 
+FROM trips t
+JOIN trips_users tu ON tu.trip_id = t.id
+WHERE tu.user_id = $1;
