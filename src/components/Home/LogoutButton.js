@@ -8,11 +8,11 @@ class LogoutButton extends Component {
     handleLogout = () => {
         axios.get('/auth/logout').then( response => {
             this.props.userLoggedOut()
+            this.props.history.push('/login')
         })
     }
 
     render() {
-        console.log(this.props)
         return (
             <div>
                 {this.props.isAuthenticated ?
