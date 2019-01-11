@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { userLoggedOut } from '../Redux/reducer';
+import { userLoggedOut } from '../../Redux/reducer';
 
 class LogoutButton extends Component {
 

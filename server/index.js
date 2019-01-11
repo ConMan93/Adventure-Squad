@@ -32,6 +32,9 @@ app.get('/auth/currentuser', ac.currentUser)
 // app.get('/trip/discussion/:tripid', tc.getTripDiscussion)
 app.get('/trip/discussion', tc.getTripDiscussion)
 app.get('/trip/discussionauthor/:userid', tc.getDiscussionAuthor)
+app.put('/trip/discussion/:id', tc.updateDiscussion)
+app.delete('/trip/discussion/:id', tc.deleteMessage)
+app.post('/trip/discussion', tc.createMessage)
 
 // Friends endpoints
 app.get('/friends/get', fc.getFriends)

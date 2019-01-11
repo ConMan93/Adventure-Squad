@@ -1,5 +1,7 @@
 const initialState = {
     isAuthenticated: false,
+    user: {},
+    discussion: [],
     allUsers: [],
     user: {},
     friends: [],
@@ -8,6 +10,7 @@ const initialState = {
 
 const USER_LOGGED_IN = 'USER_LOGGED_IN';
 const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
+const UPDATE_DISCUSSION_BOARD = 'UPDATE_DISCUSSION_BOARD';
 const SET_FRIENDS = 'SET_FRIENDS';
 const DISPLAY_USERS = 'DISPLAY_USERS';
 const VIEW_PROFILE = 'VIEW_PROFILE';
@@ -37,6 +40,9 @@ export default function reducer(state = initialState, action) {
             return {...state, user: action.payload}
         
 
+        case UPDATE_DISCUSSION_BOARD:
+            return {...state, discussion: action.payload}
+
         default:
             return state;
 
@@ -54,6 +60,13 @@ export function userLoggedIn(user) {
 export function userLoggedOut() {
     return {
         type: USER_LOGGED_OUT
+    }
+}
+
+export function updateDiscussionBoard(discussion) {
+    return {
+        type: UPDATE_DISCUSSION_BOARD,
+        payload: discussion
     }
 }
 
