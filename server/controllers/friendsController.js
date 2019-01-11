@@ -29,6 +29,7 @@ module.exports = {
             const db = req.app.get('db')
             let {id} = req.session.user
             let friends = await db.get_friends(id)
+        
             res.send(friends);
 
         } catch (error) {
@@ -42,8 +43,6 @@ module.exports = {
             const db = req.app.get('db')
             let user_id = req.session.user.id
             let {friend_id} = req.body
-            console.log(friend_id)
-            console.log(req.body)
             let newFriend = await db.add_friends([friend_id, user_id])
             res.send(newFriend)
 
@@ -66,6 +65,24 @@ module.exports = {
             console.log('error deleting friend', error)
             res.status(500).send(error)
         }       
+    }, 
+
+    changeImage: async (req, res) => {
+        try{
+            const db = req.app.get('db')
+            let {profile_img, id} = req.body
+            console.log(req.body)
+    
+            let updatedImg = await db.add_pic([profile_img, id])
+            console.log(updatedImg)
+            req.session.user = {...req.session.user, ...updatedImg[0]}
+            console.log(req.session.user)
+            res.send(req.session.user)
+        } catch (error) {
+            console.log('error updating image', error)
+            res.status(500).send(error)
+        }
+
     }
 
 }

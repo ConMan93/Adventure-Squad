@@ -11,6 +11,7 @@ const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
 const SET_FRIENDS = 'SET_FRIENDS';
 const DISPLAY_USERS = 'DISPLAY_USERS';
 const VIEW_PROFILE = 'VIEW_PROFILE';
+const SET_USER = 'SET_USER'
 
 
 export default function reducer(state = initialState, action) {
@@ -31,6 +32,9 @@ export default function reducer(state = initialState, action) {
 
         case VIEW_PROFILE:
             return {...state, viewedProfile: action.payload}
+        
+        case SET_USER:
+            return {...state, user: action.payload}
         
 
         default:
@@ -70,6 +74,12 @@ export function displayUsers (allUsers) {
 export function viewProfile(user) {
     return {
         type: VIEW_PROFILE,
+        payload: user
+    }
+}
+export function setUser(user) {
+    return {
+        type: SET_USER,
         payload: user
     }
 }

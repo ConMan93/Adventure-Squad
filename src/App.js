@@ -10,6 +10,7 @@ import {userLoggedIn} from './Redux/reducer'
 //Components
 import Auth from './components/Auth';
 // import Board from './components/Trips/DiscussionBoard/Board';
+import Header from './components/User/Header';
 
 class App extends Component {
   constructor(){
@@ -29,6 +30,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Header/>
       <HashRouter>
         <div className="App">
           <Switch>
