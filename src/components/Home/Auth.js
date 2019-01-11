@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { userLoggedIn } from '../../Redux/reducer';
-import LogoutButton from './LogoutButton';
+// import LogoutButton from './LogoutButton';
 import { Link } from 'react-router-dom';
 
 class Auth extends Component {
@@ -54,10 +54,7 @@ class Auth extends Component {
     loginUser = () => {
         axios.post('/auth/login', this.state).then( response => {
             this.props.userLoggedIn(response.data)
-            this.setState({
-                email: '',
-                password: ''
-            })
+            this.props.history.push('/dashboard')
         }).catch( error => {
             this.setState({
                 errorMessage: error.response.data
@@ -86,7 +83,7 @@ class Auth extends Component {
             <button onClick={this.registerUser} >Register</button>
             <p>Already have an account? <button onClick={this.loginViewVisible}>Log In!</button></p>
         </div>}
-        <LogoutButton />
+        {/* <LogoutButton /> */}
       </div>
     )
   }

@@ -65,6 +65,20 @@ module.exports = {
             console.log('error deleting friend', error)
             res.status(500).send(error)
         }       
+    },
+
+    getUsersFriends: async (req, res) => {
+
+        try {
+            const db = req.app.get('db')
+            let id = +req.params.id
+            let friends = await db.get_friends(id)
+            res.send(friends);
+
+        } catch (error) {
+            console.log('error getting friends', error)
+            res.status(500).send(error)
+        }
     }, 
 
     changeImage: async (req, res) => {
