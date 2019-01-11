@@ -11,6 +11,7 @@ import Board from './components/Trips/DiscussionBoard/Board';
 import HomePage from './components/Home/HomePage';
 import Calendar from './components/Wizard/Calendar';
 import Dashboard from './components/User/Dashboard';
+import Header from './components/User/Header';
 
 
 class App extends Component {
@@ -40,7 +41,9 @@ class App extends Component {
   render() {
     
     return (
-      this.state.loading ?
+      <div>
+        <Header/>
+      {this.state.loading ?
       <div></div>
       :
       <HashRouter>
@@ -51,7 +54,8 @@ class App extends Component {
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/calendar" component={Calendar}/>
         </Switch>
-      </HashRouter> 
+      </HashRouter> }
+      </div>
     )
   }
 }

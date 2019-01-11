@@ -42,6 +42,7 @@ app.get('/friends/get', fc.getFriends)
 app.post('/friends/add', fc.addFriends)
 app.delete('/friends/delete/:id', fc.deleteFriends)
 app.get('/friends/users', fc.getAllUsers)
+app.put('/friends/img', fc.changeImage)
 
 
 app.listen(SERVER_PORT, () => {

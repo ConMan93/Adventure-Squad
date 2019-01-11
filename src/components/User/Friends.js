@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {setFriends} from '../../Redux/reducer';
+import {setFriends, displayUsers} from '../../Redux/reducer';
 import {Link} from 'react-router-dom'
 
 
@@ -18,6 +18,9 @@ class Friends extends Component {
     handleDeleteFriend(id){
         axios.delete(`/friends/delete/${id}`).then(results => {
             this.props.setFriends(results.data)
+            axios.get(`/friends/users`).then(results => {
+                this.props.displayUsers(results.data)
+            }) 
         })
     }
 
@@ -45,4 +48,4 @@ function mapStateToProps(state){
     return {friends, user}
 }
 
-export default connect(mapStateToProps, {setFriends})(Friends)
+export default connect(mapStateToProps, {setFriends, displayUsers})(Friends)
