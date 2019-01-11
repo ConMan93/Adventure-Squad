@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { userLoggedIn } from '../../Redux/reducer';
-import LogoutButton from './LogoutButton';
+// import LogoutButton from './LogoutButton';
 import { Link } from 'react-router-dom';
 
 class Auth extends Component {
@@ -83,7 +83,7 @@ class Auth extends Component {
             <button onClick={this.registerUser} >Register</button>
             <p>Already have an account? <button onClick={this.loginViewVisible}>Log In!</button></p>
         </div>}
-        <LogoutButton />
+        {/* <LogoutButton /> */}
       </div>
     )
   }

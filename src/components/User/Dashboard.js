@@ -65,7 +65,7 @@ class Dashboard extends Component{
         }).map((user, i) => {
             return <div key={i}>
                 <Link to={`/profile/${user.id}`}><img src={user.profile_img} alt="profile_pic"/>{user.username}</Link>
-                <button onClick={()=>this.handleAddFriend(user.id)}>Add Friend</button>
+                <button onClick={()=>this.handleAddFriend(user.id)}>+</button>
             </div>
         })
 
@@ -100,17 +100,18 @@ class Dashboard extends Component{
                     trips
                     {tripsDisplay}
                 </div>
-            </div>
+            </div>          
         )
     }
 }
 function MapStateToProps(state){
-    let {user, allUsers, friends, viewedProfile} = state
+    let {user, allUsers, friends, viewedProfile, isAuthenticated} = state
     return {
         user,
         allUsers, 
         friends, 
-        viewedProfile
+        viewedProfile,
+        isAuthenticated
     }
 }
 export default connect(MapStateToProps, {setFriends, displayUsers, viewProfile})(Dashboard)

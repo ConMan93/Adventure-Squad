@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './reset.css';
 import './App.css';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
@@ -12,6 +13,7 @@ import HomePage from './components/Home/HomePage';
 import Calendar from './components/Wizard/Calendar';
 import Dashboard from './components/User/Dashboard';
 import UserProfile from './components/User/UserProfile';
+import LogoutButton from '../src/components/Home/LogoutButton';
 
 
 class App extends Component {
@@ -45,14 +47,17 @@ class App extends Component {
       <div></div>
       :
       <HashRouter>
-        <Switch>
-          <Route exact path='/' component={HomePage} />
-          <Route path='/login' component={Auth} />
-          <Route path='/trip' component={Board} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/calendar" component={Calendar}/>
-          <Route path='/profile/:id' component={UserProfile} />
-        </Switch>
+        <div>
+          <LogoutButton />
+          <Switch>
+            <Route exact path='/' component={HomePage} />
+            <Route path='/login' component={Auth} />
+            <Route path='/trip' component={Board} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/calendar" component={Calendar}/>
+            <Route path='/profile/:id' component={UserProfile} />
+          </Switch>
+        </div>
       </HashRouter> 
     )
   }
