@@ -14,7 +14,7 @@ import Calendar from './components/Wizard/Calendar';
 import Dashboard from './components/User/Dashboard';
 import UserProfile from './components/User/UserProfile';
 import LogoutButton from '../src/components/Home/LogoutButton';
-import Header from './components/User/Header';
+import StepOne from './components/Wizard/StepOne';
 
 
 class App extends Component {
@@ -50,15 +50,14 @@ class App extends Component {
         :
         <HashRouter>
           <div>
-            <Header/>
-            <LogoutButton />
             <Switch>
               <Route exact path='/' component={HomePage} />
               <Route path='/login' component={Auth} />
-              <Route path='/trip' component={Board} />
+              <Route path='/trip/:id' component={Board} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/calendar" component={Calendar}/>
               <Route path='/profile/:id' component={UserProfile} />
+              <Route path='/stepone' component={StepOne} />
             </Switch>
           </div>
         </HashRouter>}

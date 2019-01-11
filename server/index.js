@@ -36,6 +36,7 @@ app.put('/trip/discussion/:id', tc.updateDiscussion)
 app.delete('/trip/discussion/:id', tc.deleteMessage)
 app.post('/trip/discussion', tc.createMessage)
 app.get('/trips/:id', tc.getTrips)
+app.post('/trip/create', tc.createTrip)
 
 // Friends endpoints
 app.get('/friends/get', fc.getFriends)
