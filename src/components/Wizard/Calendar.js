@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import DayPicker, {DateUtils} from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
+import { setDates, clearTrip } from '../../Redux/reducer';
 
-export default class Calendar extends Component {
+class Calendar extends Component {
     constructor() {
         super()
         this.state = {
@@ -15,11 +17,14 @@ export default class Calendar extends Component {
     }
     handleDayClick(day){
         const range = DateUtils.addDayToRange(day, this.state);
+        console.log(range)
+        this.props.setDates(range)
         this.setState(range);
     }
 
     handleResetClick(){
         this.setState({from: undefined, to: undefined})
+        this.props.clearTrip()
     }
     render(){
         const {to, from} = this.state
@@ -65,3 +70,5 @@ export default class Calendar extends Component {
         </div>
     )
 }}
+
+export default connect(null, { setDates, clearTrip })(Calendar)

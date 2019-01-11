@@ -4,7 +4,13 @@ const initialState = {
     discussion: [],
     allUsers: [],
     friends: [],
-    viewedProfile: {}
+    viewedProfile: {},
+    to: '',
+    from: '',
+    destinationState: '',
+    destinationCity: '',
+    originState: '',
+    originCity: ''
 }
 
 const USER_LOGGED_IN = 'USER_LOGGED_IN';
@@ -13,7 +19,13 @@ const UPDATE_DISCUSSION_BOARD = 'UPDATE_DISCUSSION_BOARD';
 const SET_FRIENDS = 'SET_FRIENDS';
 const DISPLAY_USERS = 'DISPLAY_USERS';
 const VIEW_PROFILE = 'VIEW_PROFILE';
-const SET_USER = 'SET_USER'
+const SET_USER = 'SET_USER';
+const SET_DATES = 'SET_DATES';
+const HANDLE_DESTINATION_CHANGE = 'HANDLE_DESTINATION_CHANGE';
+const HANDLE_CITY_CHANGE = 'HANDLE_CITY_CHANGE';
+const CLEAR_TRIP = 'CLEAR_TRIP';
+const SET_ORIGIN_CITY = 'SET_ORIGIN_CITY';
+const SET_ORIGIN_STATE = 'SET_ORIGIN_STATE';
 
 
 export default function reducer(state = initialState, action) {
@@ -38,9 +50,26 @@ export default function reducer(state = initialState, action) {
         case SET_USER:
             return {...state, user: action.payload}
         
-
         case UPDATE_DISCUSSION_BOARD:
             return {...state, discussion: action.payload}
+
+        case SET_DATES:
+            return {...state, from: action.payload.from, to: action.payload.to}
+
+        case HANDLE_DESTINATION_CHANGE:
+            return {...state, destinationState: action.payload}
+
+        case HANDLE_CITY_CHANGE:
+            return {...state, destinationCity: action.payload}
+
+        case CLEAR_TRIP:
+            return {...state, to: '', from: '', destinationCity: '', destinationState: ''}
+
+        case SET_ORIGIN_CITY:
+            return {...state, originCity: action.payload}
+
+        case SET_ORIGIN_STATE:
+            return {...state, originState: action.payload}
 
         default:
             return state;
@@ -93,5 +122,46 @@ export function setUser(user) {
     return {
         type: SET_USER,
         payload: user
+    }
+}
+
+export function setDates(dates) {
+    return {
+        type: SET_DATES,
+        payload: dates
+    }
+}
+
+export function handleDestinationChange(destination) {
+    return {
+        type: HANDLE_DESTINATION_CHANGE,
+        payload: destination
+    }
+}
+
+export function handleCityChange(city) {
+    return {
+        type: HANDLE_CITY_CHANGE,
+        payload: city
+    }
+}
+
+export function clearTrip() {
+    return {
+        type: CLEAR_TRIP
+    }
+}
+
+export function setOriginState(origin) {
+    return {
+        type: SET_ORIGIN_STATE,
+        payload: origin
+    }
+}
+
+export function setOriginCity(city) {
+    return {
+        type: SET_ORIGIN_CITY,
+        payload: city
     }
 }
