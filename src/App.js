@@ -7,10 +7,11 @@ import { userLoggedIn } from './Redux/reducer';
 
 //Components
 import Auth from './components/Home/Auth';
-// import Board from './components/Trips/DiscussionBoard/Board';
+import Board from './components/Trips/DiscussionBoard/Board';
 import HomePage from './components/Home/HomePage';
 import Calendar from './components/Wizard/Calendar';
 import Dashboard from './components/User/Dashboard';
+import Header from './components/User/Header';
 
 
 class App extends Component {
@@ -40,14 +41,11 @@ class App extends Component {
   render() {
     
     return (
-<<<<<<< HEAD
       <div>
         <Header/>
-=======
-      this.state.loading ?
+      {this.state.loading ?
       <div></div>
       :
->>>>>>> 924d4996e651c3a26e1d12abe604e853632fb0ea
       <HashRouter>
         <Switch>
           <Route exact path='/' component={HomePage} />
@@ -56,7 +54,8 @@ class App extends Component {
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/calendar" component={Calendar}/>
         </Switch>
-      </HashRouter> 
+      </HashRouter> }
+      </div>
     )
   }
 }
