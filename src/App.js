@@ -13,8 +13,8 @@ import HomePage from './components/Home/HomePage';
 import Calendar from './components/Wizard/Calendar';
 import Dashboard from './components/User/Dashboard';
 import UserProfile from './components/User/UserProfile';
-import LogoutButton from '../src/components/Home/LogoutButton';
 import StepOne from './components/Wizard/StepOne';
+import MapContainer from './components/Trips/MapContainer';
 
 
 class App extends Component {
@@ -58,6 +58,7 @@ class App extends Component {
               <Route path="/calendar" component={Calendar}/>
               <Route path='/profile/:id' component={UserProfile} />
               <Route path='/stepone' component={StepOne} />
+              <Route path='/map' component={MapContainer} />
             </Switch>
           </div>
         </HashRouter>}

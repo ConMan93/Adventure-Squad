@@ -27,12 +27,12 @@ class StepOne extends Component {
 
       let stateOptions = this.state.states.map(state => {
           return (
-              <option value={`${state.id}`} key={state.id} name={state.name} >{state.name}</option>
+              <option value={state.id} key={state.id} name={state.name} >{state.name}</option>
           )
       })
 
       if (this.props.destinationState) {
-          let cities = getCitiesOfState(+this.props.destinationState)
+          let cities = getCitiesOfState(this.props.destinationState)
           citiesOptions = cities.map((city, i) => {
               return (
                   <option value={city.name} key={i} >{city.name}</option>
@@ -42,7 +42,7 @@ class StepOne extends Component {
 
     let originCitiesOptions = []
       if (this.props.originState) {
-        let originCities = getCitiesOfState(+this.props.originState)
+        let originCities = getCitiesOfState(this.props.originState)
         originCitiesOptions = originCities.map((city, i) => {
             return (
                 <option value={city.name} key={i} >{city.name}</option>
