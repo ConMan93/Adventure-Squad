@@ -56,7 +56,7 @@ class StepOne extends Component {
         <Calendar />
         <p>Coming From:</p>
         <select onChange={e => this.props.setOriginState(e.target.value)}>
-            <option value='' >Select City</option>
+            <option value='' >Select State</option>
             {stateOptions}
         </select>
         <select onChange={e => this.props.setOriginCity(e.target.value)}>
