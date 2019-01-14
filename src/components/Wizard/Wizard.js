@@ -4,10 +4,6 @@ import StepOne from './StepOne';
 import { connect } from 'react-redux';
 import { clearTrip } from '../../Redux/reducer';
 import axios from 'axios';
-<<<<<<< HEAD
-=======
-import { getStateById } from 'country-state-city';
->>>>>>> master
 
 
 const customStyles = {
@@ -49,13 +45,7 @@ class Wizard extends Component {
 
     createTrip = () => {
         let { originCity, originState, destinationCity, destinationState, to, from } = this.props
-<<<<<<< HEAD
         axios.post('/trip/create', { originCity, originState, destinationCity, destinationState, to, from }).then( response => {
-=======
-        originState = getStateById(originState - 1)
-        destinationState = getStateById(destinationState - 3)
-        axios.post('/trip/create', { originCity, originState: originState.name, destinationCity, destinationState: destinationState.name, to, from }).then( response => {
->>>>>>> master
             this.setState({
                 modalIsOpen: false
             })

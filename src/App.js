@@ -15,10 +15,7 @@ import Dashboard from './components/User/Dashboard';
 import UserProfile from './components/User/UserProfile';
 import LogoutButton from '../src/components/Home/LogoutButton';
 import StepOne from './components/Wizard/StepOne';
-<<<<<<< HEAD
 import Trip from './components/Trips/Trip';
-=======
->>>>>>> master
 
 
 class App extends Component {
@@ -57,11 +54,7 @@ class App extends Component {
             <Switch>
               <Route exact path='/' component={HomePage} />
               <Route path='/login' component={Auth} />
-<<<<<<< HEAD
               <Route path='/trip/:id' component={Trip} />
-=======
-              <Route path='/trip/:id' component={Board} />
->>>>>>> master
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/calendar" component={Calendar}/>
               <Route path='/profile/:id' component={UserProfile} />
