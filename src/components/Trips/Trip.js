@@ -17,7 +17,8 @@ export default class Trip extends Component {
             dest_lng: '',
             dest_IATA: '',
             dest_city: '',
-            flights: []
+            flights: [],
+            hotels: []
         }
     }
     
@@ -35,31 +36,35 @@ export default class Trip extends Component {
                 org_city: this.state.trip.origin_city.slice(4),
                 dest_city: this.state.trip.destination_city.slice(4)
             });
-            this.getGeocodingCoordinates();
+            // this.getGeocodingCoordinates();
             this.getAmadeus();
         });
     }
 
-    getGeocodingCoordinates = () => {
-        const {org_city, dest_city} = this.state;
-        const {origin_state, destination_state} = this.state.trip;
-        console.log('getting in function')
-        // console.log(IATAArray)
-        axios.get(`http://geoservices.tamu.edu/Services/Geocode/WebService/GeocoderWebServiceHttpNonParsed_V04_01.aspx?apiKey${process.env.REACT_APP_GEOSERVICES_KEY}=&version=4.01&city=${org_city}&state=${origin_state}`).then(res => {
-            let arr = res.data.split(',')
-            this.setState({
-                org_lat: arr[3],
-                org_lng: arr[4]
-            })
-        })
-        axios.get(`http://geoservices.tamu.edu/Services/Geocode/WebService/GeocoderWebServiceHttpNonParsed_V04_01.aspx?apiKey${process.env.REACT_APP_GEOSERVICES_KEY}=&version=4.01&city=${dest_city}&state=${destination_state}`).then(res => {
-            let arr = res.data.split(',')
-            this.setState({
-                dest_lat: arr[3],
-                dest_lng: arr[4]
-            })
-        })
-    }
+    // getGeocodingCoordinates = () => {
+    //     const {org_city, dest_city} = this.state;
+    //     const {origin_state, destination_state} = this.state.trip;
+    //     console.log('getting in function')
+    //     console.log(org_city, dest_city, origin_state, destination_state)
+    //     // console.log(IATAArray)
+    //     axios.get(`http://geoservices.tamu.edu/Services/Geocode/WebService/GeocoderWebServiceHttpNonParsed_V04_01.aspx?apiKey=${process.env.REACT_APP_GEOSERVICES_KEY}=&version=4.01&city=${org_city}&state=${origin_state}`).then(res => {
+    //         console.log(res)
+    //         let arr = res.data.split(',')
+    //         this.setState({
+    //             org_lat: arr[3],
+    //             org_lng: arr[4]
+    //         })
+    //         console.log('done2', this.state.org_lat, this.state.org_lng)
+    //     })
+    //     axios.get(`http://geoservices.tamu.edu/Services/Geocode/WebService/GeocoderWebServiceHttpNonParsed_V04_01.aspx?apiKey=${process.env.REACT_APP_GEOSERVICES_KEY}=&version=4.01&city=${dest_city}&state=${destination_state}`).then(res => {
+    //         let arr = res.data.split(',')
+    //         this.setState({
+    //             dest_lat: arr[3],
+    //             dest_lng: arr[4]
+    //         })
+    //         console.log('done1', this.state.dest_lat, this.state.dest_lng)
+    //     })
+    // }
 
     getAmadeus = () => {
         var Amadeus = require('amadeus');
@@ -83,15 +88,23 @@ export default class Trip extends Component {
                 flights: res.data
             });
             amadeus.shopping.hotelOffers.get({
-                latitude: this.state.dest_lat,
-                longitude: this.state.dest_lng,
+                cityCode: this.state.dest_IATA,
                 checkInDate: leaving_date,
                 checkOutDate: returning_date,
-                radius: 20
+                radius: 20,
+                radiusUnit: 'MILE'
             }).then(res => {
+                var results1 = res.data.filter(hotel => {
+                    return hotel.hotel.rating >= 3
+                })
+                var results2 = results1.filter(hotel => {
+                    return hotel.hotel.address.stateCode === this.state.trip.destination_state
+                })
                 console.log(res)
+                console.log(results1)
+                console.log(results2)
                 this.setState({
-                    hotels: res.data
+                    hotels: results2.slice(0,5)
                 })
             })
         })
@@ -104,7 +117,7 @@ export default class Trip extends Component {
             trip =  <div>
                         <h1>Trip to {this.state.dest_city}</h1>
                         <Flights flights={this.state.flights} />
-                        <Housing city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>
+                        <Housing hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>
                     </div> 
         }
         return (

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Hotel from './Hotel';
 // var airbnb = require('airapi')
 
 export default class Housing extends Component {
@@ -6,6 +7,7 @@ export default class Housing extends Component {
         super(props);
         const {city, state, checkin, checkout} = props
         this.state = {
+
             city,
             state,
             checkin,
@@ -15,11 +17,22 @@ export default class Housing extends Component {
 
     render() {
         const {city, state, checkin, checkout} = this.state
-        const link = `https://www.airbnb.com/s/${city}--${state}--United-States/homes?query=${city}%2C%20${state}%2C%20United%20States&checkin=${checkin}&checkout=${checkout}&adults=4&price_max=100`
+        const link = `https://www.airbnb.com/s/${city}--${state}--United-States/homes?query=${city}%2C%20${state}%2C%20United%20States&checkin=${checkin}&checkout=${checkout}&adults=4&price_max=100`;
+
+        if (this.props.hotels.length) {
+        var hotels = this.props.hotels.map(hotel => {
+            var price = +hotel.offers[0].price.total / ((new Date(checkout).getTime()- new Date(checkin).getTime())/86400000)
+            var price1 = price.toString().slice(0,6);
+            const {name, rating, contact} = hotel.hotel;
+            return <Hotel base={price1} name={name} rating={rating} contact={contact}/>
+        })} else {
+            hotels = <div>One moment while we search for hotels</div>
+        }
         return (
             <div>
                 {/* <button onClick={this.getListings}>Get Listings</button> */}
-                <a href={link} target='_blank'>Search Airbnb Listings</a>
+                {hotels}
+                <a href={link} target='_blank' rel="noopener noreferrer">Search Airbnb Listings</a>
             </div>
         )
     }

@@ -14,7 +14,8 @@ export default class extends Component {
             //pulling off total price
             const {total, totalTaxes} = flight.offerItems[0].price
             const priceNum = +total + +totalTaxes;
-            const price = `$${priceNum} USD (tax included)`
+            const priceString = priceNum.toString().slice(0,6)
+            const price = `$${priceString} USD (tax included)`
 
             //pulling off # of stops for leaving trip
             if (flight.offerItems[0].services[0].segments.length === 1) {var leavingStops = 'Direct'} else {leavingStops = flight.offerItems[0].services[0].segments.length-1}
