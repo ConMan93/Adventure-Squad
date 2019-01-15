@@ -5,8 +5,7 @@ module.exports = {
 
         try {
             let db = req.app.get('db')
-            //let { trip_id } = req.params
-            let trip_id = 1
+            let trip_id  = +req.params.trip_id
 
             let tripDiscussion = await db.get_trip_discussion(trip_id)
             res.status(200).send(tripDiscussion)
@@ -70,9 +69,8 @@ module.exports = {
 
         try {
             let db = req.app.get('db')
-            let { message } = req.body
+            let { message, trip_id } = req.body
             let user_id = req.session.user.id 
-            let trip_id = 1
 
             await db.create_new_message({user_id, trip_id, message})
             let tripDiscussion = await db.get_trip_discussion(trip_id)
@@ -117,6 +115,32 @@ module.exports = {
 
         } catch(error) {
             console.log(error)
+            return res.status(500).send(error)
+        }
+    },
+
+    getLoggedInUsersTrips: async (req, res) => {
+        try {
+            const db = req.app.get('db')
+            let { id } = req.session.user
+
+            let usersTrips = await db.get_users_trips(id)
+            return res.send(usersTrips)
+            
+        } catch(error) {
+            console.log(error)
+            return res.status(500).send(error)
+        }
+    },
+
+    getUserProfileTrips: async (req, res) => {
+        try {
+            const db = req.app.get('db')
+            let { user_id } = req.params
+
+            let tripsResponse = await db.get_userprofile_trips(user_id)
+            return res.send(tripsResponse)
+        } catch(error) {
             return res.status(500).send(error)
         }
     }

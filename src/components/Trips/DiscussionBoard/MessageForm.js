@@ -29,7 +29,9 @@ class MessageForm extends Component {
     }
 
     postMessage = () => {
-        axios.post('/trip/discussion', this.state).then( response => {
+        let { message } = this.state
+        let trip_id = +this.props.trip_id
+        axios.post('/trip/discussion', { message, trip_id }).then( response => {
             this.props.updateDiscussionBoard(response.data)
             this.setState({
                 newMessage: false,
@@ -38,7 +40,15 @@ class MessageForm extends Component {
         })
     }
 
+    handleToggle = () => {
+        this.setState({
+            message: '',
+            newMessage: false
+        })
+    }
+
   render() {
+
     return (
       <div>
         Message Form
@@ -47,9 +57,11 @@ class MessageForm extends Component {
         <div>
             <textarea value={this.state.message} onChange={this.handleChange} name='message' />
             <button onClick={this.postMessage}>Post</button>
+            <button onClick={this.handleToggle}>Cancel</button>
         </div> 
         :
-        null}
+        <div>
+        </div>}
       </div>
     )
   }

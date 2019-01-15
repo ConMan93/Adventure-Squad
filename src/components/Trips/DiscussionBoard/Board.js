@@ -8,7 +8,7 @@ import { updateDiscussionBoard } from '../../../Redux/reducer';
 class Board extends Component {
 
     componentDidMount() {
-        axios.get('/trip/discussion').then( response => {
+        axios.get(`/trip/discussion/${this.props.trip_id}`).then( response => {
             this.props.updateDiscussionBoard(response.data)
         })
     }
@@ -23,7 +23,7 @@ class Board extends Component {
 
         let discussionBoard = this.props.discussion.map( note => {
             return (<Message 
-                key={note.id}
+                key={'note' + note.id}
                 message={note.message}
                 user_id={note.user_id}
                 id={note.id}
@@ -36,6 +36,7 @@ class Board extends Component {
             Discussion!
             <MessageForm 
             displayUpdatedDiscussionFn={this.displayUpdatedDiscussion}
+            trip_id={this.props.trip_id}
             />
             {discussionBoard}
         </div>
