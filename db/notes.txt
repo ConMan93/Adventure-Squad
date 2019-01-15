@@ -1,1 +1,2 @@
 need to add img for trip in table
+navigate to user profile after login

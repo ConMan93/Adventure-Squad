@@ -38,12 +38,18 @@ module.exports = {
         }
     }, 
 
+
     addFriends: async (req, res) => {
         try {
             const db = req.app.get('db')
             let user_id = req.session.user.id
             let {friend_id} = req.body
+            let checkFriend = await db.check_friend([user_id, friend_id])
+            if (checkFriend[0]) {
+                return res.status(409).send('friend already exists')
+            }
             let newFriend = await db.add_friends([friend_id, user_id])
+           
             res.send(newFriend)
 
         } catch (error) {

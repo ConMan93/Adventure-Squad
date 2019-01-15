@@ -14,8 +14,12 @@ import Calendar from './components/Wizard/Calendar';
 import Dashboard from './components/User/Dashboard';
 import UserProfile from './components/User/UserProfile';
 import StepOne from './components/Wizard/StepOne';
+<<<<<<< HEAD
+import LocationImage from './components/Trips/LocationImage';
+=======
 import MapContainer from './components/Trips/MapContainer';
 import Trip from './components/Trips/Trip';
+>>>>>>> master
 
 
 class App extends Component {
@@ -31,7 +35,6 @@ class App extends Component {
   componentDidMount() {
     axios.get('/auth/currentuser').then( response => {
       if (response.data) {
-        console.log(response.data)
         this.props.userLoggedIn(response.data)
       }
     })
@@ -59,7 +62,12 @@ class App extends Component {
               <Route path="/calendar" component={Calendar}/>
               <Route path='/profile/:id' component={UserProfile} />
               <Route path='/stepone' component={StepOne} />
+<<<<<<< HEAD
+              <Route path='/image' component={LocationImage} />
+
+=======
               <Route path='/map' component={MapContainer} />
+>>>>>>> master
             </Switch>
           </div>
         </HashRouter>}

@@ -4,8 +4,6 @@ import axios from 'axios';
 import {setFriends, displayUsers, viewProfile, setUser} from '../../Redux/reducer';
 import {Link} from 'react-router-dom';
 import Friends from './Friends';
-import Wizard from '../Wizard/Wizard';
-import Header from './Header';
 
 
 class Dashboard extends Component{
@@ -66,7 +64,7 @@ class Dashboard extends Component{
     }
 
     handleSearchFriends(filter){
-        this.setState({filterFriends:filter})
+        this.setState({filterFriends:filter.toLowerCase()})
     }
     onImageChange = (value) => {
         this.setState({profile_img:value})
@@ -79,7 +77,7 @@ class Dashboard extends Component{
     render(){
         let {allUsers} = this.props
         let eachUser = allUsers.filter(user => {
-           return user.username.toLowerCase().includes(this.state.filterFriends)
+           return user.username.toLowerCase().charAt(0).includes(this.state.filterFriends)
         }).map((user, i) => {
             return <div key={i}>
                 <Link to={`/profile/${user.id}`}>
@@ -104,8 +102,6 @@ class Dashboard extends Component{
         let {username, venmo, profile_img} = this.props.user
         return(
             <div>
-                <Header 
-                history={this.props.history}/>
                 <Link to="/login">Login</Link>
                 <br/>
                <img src={profile_img} alt="img" /><button onClick={this.toggleEdit}>Edit picture</button> 
@@ -132,14 +128,12 @@ class Dashboard extends Component{
                 <div>
                     My Adventures
                     {tripsDisplay}
-                    <Wizard 
-                    history={this.props.history}/>
                 </div>
             </div>          
         )
     }
 }
-function MapStateToProps(state){
+function mapStateToProps(state){
     let {user, allUsers, friends, viewedProfile, isAuthenticated} = state
     return {
         user,
@@ -149,4 +143,4 @@ function MapStateToProps(state){
         isAuthenticated
     }
 }
-export default connect(MapStateToProps, {setFriends, displayUsers, viewProfile, setUser})(Dashboard)
+export default connect(mapStateToProps, {setFriends, displayUsers, viewProfile, setUser})(Dashboard)

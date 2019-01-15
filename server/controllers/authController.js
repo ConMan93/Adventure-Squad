@@ -35,7 +35,7 @@ module.exports = {
 
         try {
             let db = req.app.get('db');
-            let { username, email, password, confirmPassword, venmo, profile_img } = req.body;
+            let { username, email, password, confirmPassword, venmo} = req.body;
             email = email.toLowerCase();
 
             if (username.length < 4) {
@@ -62,7 +62,7 @@ module.exports = {
             const salt = bcrypt.genSaltSync(10)
             password = bcrypt.hashSync(password, salt)
 
-            let response = await db.register_user({username, password, email, venmo, profile_img})
+            let response = await db.register_user({username, password, email, venmo})
             let newUser = response[0]
 
             delete newUser.password
