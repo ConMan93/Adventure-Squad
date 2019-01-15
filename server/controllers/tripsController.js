@@ -91,7 +91,7 @@ module.exports = {
             let id = +req.params.id
 
             let trips = await db.get_trip(id)
-            return res.send(trips)
+            return res.status(200).send(trips)
         } catch(error) {
             console.log(error)
             res.status(500).send(error)
