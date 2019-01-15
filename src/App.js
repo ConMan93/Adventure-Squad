@@ -15,6 +15,7 @@ import Dashboard from './components/User/Dashboard';
 import UserProfile from './components/User/UserProfile';
 import StepOne from './components/Wizard/StepOne';
 import MapContainer from './components/Trips/MapContainer';
+import Trip from './components/Trips/Trip';
 
 
 class App extends Component {
@@ -53,7 +54,7 @@ class App extends Component {
             <Switch>
               <Route exact path='/' component={HomePage} />
               <Route path='/login' component={Auth} />
-              <Route path='/trip/:id' component={Board} />
+              <Route path='/trip/:id' component={Trip} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/calendar" component={Calendar}/>
               <Route path='/profile/:id' component={UserProfile} />

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Calendar from './Calendar';
 import { connect } from 'react-redux';
 import { handleDestinationChange, handleCityChange, setOriginCity, setOriginState } from '../../Redux/reducer';
-import { getStatesOfCountry, getCitiesOfState } from 'country-state-city';
+import cityArray from '../Trips/IATA'
 
 class StepOne extends Component {
 
@@ -10,45 +10,46 @@ class StepOne extends Component {
         super(props);
 
         this.state = {
-            states: []
+            states: cityArray
         }
     }
 
-    componentDidMount() {
-        let b = getStatesOfCountry(231)
-        this.setState({
-            states: b
-        })
-    }
     
   render() {
 
-    let citiesOptions = []
-
-      let stateOptions = this.state.states.map(state => {
-          return (
-              <option value={state.id} key={state.id} name={state.name} >{state.name}</option>
-          )
-      })
-
-      if (this.props.destinationState) {
-          let cities = getCitiesOfState(this.props.destinationState)
-          citiesOptions = cities.map((city, i) => {
-              return (
-                  <option value={city.name} key={i} >{city.name}</option>
-              )
-          })
-      }
-
-    let originCitiesOptions = []
-      if (this.props.originState) {
-        let originCities = getCitiesOfState(this.props.originState)
-        originCitiesOptions = originCities.map((city, i) => {
-            return (
-                <option value={city.name} key={i} >{city.name}</option>
+      
+    let stateOptions = this.state.states.cityArray.map((obj, i) => {
+        return (
+            <option value={obj.state} key={'state'+i}>{obj.state}</option>
             )
         })
-      }
+        
+    const {destinationState, originState} = this.props;
+    if (destinationState) {
+        let state = this.state.states.cityArray.find(function(obj) {
+            return obj.state === destinationState
+        });
+        let cities = state.cities;
+        var citiesOptions = cities.map((city, i) => {
+            let cityName = city.slice(4)
+            return (
+                <option value={city} key={i} >{cityName}</option>
+            )
+        })
+    }
+
+    if (originState) {
+        let state = this.state.states.cityArray.find(function(obj) {
+            return obj.state === originState
+        });
+        let cities = state.cities;
+        var originCitiesOptions = cities.map((city, i) => {
+            let cityName = city.slice(4)
+            return (
+                <option value={city} key={i} >{cityName}</option>
+            )
+        })
+    }
 
     return (
       <div>
