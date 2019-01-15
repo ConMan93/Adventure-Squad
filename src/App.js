@@ -15,6 +15,7 @@ import Dashboard from './components/User/Dashboard';
 import UserProfile from './components/User/UserProfile';
 import LogoutButton from '../src/components/Home/LogoutButton';
 import StepOne from './components/Wizard/StepOne';
+import LocationImage from './components/Trips/LocationImage';
 
 
 class App extends Component {
@@ -30,7 +31,6 @@ class App extends Component {
   componentDidMount() {
     axios.get('/auth/currentuser').then( response => {
       if (response.data) {
-        console.log(response.data)
         this.props.userLoggedIn(response.data)
       }
     })
@@ -58,6 +58,8 @@ class App extends Component {
               <Route path="/calendar" component={Calendar}/>
               <Route path='/profile/:id' component={UserProfile} />
               <Route path='/stepone' component={StepOne} />
+              <Route path='/image' component={LocationImage} />
+
             </Switch>
           </div>
         </HashRouter>}

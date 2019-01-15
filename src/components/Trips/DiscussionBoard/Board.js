@@ -4,6 +4,7 @@ import Message from './Message';
 import MessageForm from './MessageForm';
 import { connect } from 'react-redux';
 import { updateDiscussionBoard } from '../../../Redux/reducer';
+import Members from '../Members';
 
 class Board extends Component {
 
@@ -38,6 +39,8 @@ class Board extends Component {
             displayUpdatedDiscussionFn={this.displayUpdatedDiscussion}
             />
             {discussionBoard}
+            <Members 
+            trip_id={this.props.match.params.id} />
         </div>
         )
     }
