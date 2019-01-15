@@ -9,55 +9,31 @@ class Members extends Component {
   
 componentDidMount(){
     let {trip_id} = this.props
-    axios.get(`/trip/addmembers/${trip_id}`).then(results => {
-        console.log(results.data)
-        this.props.setFriends(results.data
-        )
-    })
-    axios.get(`/trip/members/${trip_id}`).then(results => {
+    axios.get(`/trip/members/${+trip_id}`).then(results => {
         this.props.setMembers(results.data)
     })
 }
-handleAddMember(user_id){
-    let {trip_id} = this.props
-    axios.post('/trip/members', {user_id, trip_id}).then(results => {
-        this.props.setMembers(results.data)
-        axios.get(`/trip/addmembers/${trip_id}`).then(results => {
-            console.log(results.data)
-            this.props.setFriends(results.data
-            )
-        })
-    })
-}
+
 handleDeleteMember(user_id){
     let {trip_id} = this.props
-    axios.delete(`/trip/member/${user_id}/${trip_id}`).then(results => {
-        console.log(results.data)
+    axios.delete(`/trip/member/${user_id}/${+trip_id}`).then(results => {
         this.props.setMembers(results.data)
     })
 }
 
     render(){
-        let {friends, tripMembers} = this.props
-        let displayFriends = friends.map((friend, i) => {
-           return <div key={i}>
-                    <div>{friend.username}</div>
-                    <Link to={`/profile/${friend.id}`}><img src={friend.profile_img} alt="profile_pic"/></Link>
-                    <button onClick={()=>this.handleAddMember(friend.id)}>Add Member</button>
-                 </div>
-        })
-        let displayTripMembers = tripMembers.map((member, index) => {
-            return <div key={index}>
-                           <div>{member.username}</div>
-                    <Link to={`/profile/${member.id}`}><img src={member.profile_img} alt="profile_pic"/></Link>
-                    <button onClick={()=>this.handleDeleteMember(member.id)}>Remove From Trip</button>
+        let {tripMembers} = this.props
+ 
+        let displayTripMembers = tripMembers.map((member, i) => {
+            return <div key={"member"+i}>
+                    <Link to={`/profile/${member.id}`}><img src={member.profile_img} alt="profile_pic" height="60" width="60"/>
+                    <div>{member.username}</div></Link>
+                    <button onClick={()=>this.handleDeleteMember(member.id)}><i className="fas fa-user-times"></i></button>
                 </div>
         })
         return (
             <div>
-                <h1> All my friends:
-                    {displayFriends}
-                </h1>
+            
                 <h2> My Adventure Squad:
                     {displayTripMembers}
                 </h2>

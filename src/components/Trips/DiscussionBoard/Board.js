@@ -39,8 +39,7 @@ class Board extends Component {
             displayUpdatedDiscussionFn={this.displayUpdatedDiscussion}
             />
             {discussionBoard}
-            <Members 
-            trip_id={this.props.match.params.id} />
+          
         </div>
         )
     }
