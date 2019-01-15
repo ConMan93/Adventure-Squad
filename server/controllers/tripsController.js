@@ -104,8 +104,10 @@ module.exports = {
             const db = req.app.get('db')
             let user_id = req.session.user.id
             let { originCity, originState, destinationCity, destinationState, to, from } = req.body
+            console.log(req.body)
 
             let newTrip = await db.create_trip([originState, originCity, destinationState, destinationCity, from, to])
+            console.log(newTrip)
             let createdTrip = newTrip[0]
             let trip_id = createdTrip.id
 
