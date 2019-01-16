@@ -6,6 +6,7 @@ const massive = require('massive');
 const ac = require('./controllers/authController');
 const tc = require('./controllers/tripsController');
 const fc = require('./controllers/friendsController')
+const checkForSession = require('./middleware/checkForSession');
 const app = express();
 
 const { SESSION_SECRET, CONNECTION_STRING, SERVER_PORT } = process.env
@@ -28,15 +29,18 @@ app.post('/auth/login', ac.login)
 app.get('/auth/logout', ac.logout)
 app.get('/auth/currentuser', ac.currentUser)
 
+app.use(checkForSession)
 // Trips Endpoints
-// app.get('/trip/discussion/:tripid', tc.getTripDiscussion)
-app.get('/trip/discussion', tc.getTripDiscussion)
+app.get('/trip/discussion/:trip_id', tc.getTripDiscussion)
+// app.get('/trip/discussion', tc.getTripDiscussion)
+app.get('/dashboard/trips', tc.getLoggedInUsersTrips)
 app.get('/trip/discussionauthor/:userid', tc.getDiscussionAuthor)
 app.put('/trip/discussion/:id', tc.updateDiscussion)
 app.delete('/trip/discussion/:id', tc.deleteMessage)
 app.post('/trip/discussion', tc.createMessage)
 app.get('/trip/:id', tc.getTrips)
 app.post('/trip/create', tc.createTrip)
+app.get('/userprofile/trips/:user_id', tc.getUserProfileTrips)
 app.post('/trip/members', tc.addMember)
 app.get('/trip/members/:trip_id', tc.getTripMembers)
 app.get('/trip/addmembers/:trip_id', tc.getMembersToAdd)

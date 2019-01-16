@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import axios from 'axios';
-import StarRatings from 'react-star-ratings';
 
 export class MapContainer extends Component {
 
@@ -14,7 +13,9 @@ export class MapContainer extends Component {
             selectedPlace: {},
             nearbyFoodPlaces: [],
             nearbyBars: [],
-            nearbyStores: []
+            nearbyStores: [],
+            lat: 0,
+            lng: 0
         }
     }
 
@@ -36,26 +37,42 @@ export class MapContainer extends Component {
     }
 
     fetchPlaces = (mapProps, map) => {
-        axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${mapProps.initialCenter.lat},${mapProps.initialCenter.lng}&rankby=distance&keyword=food&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`).then( response => {
-            this.setState({
-                nearbyFoodPlaces: response.data.results
-            })
-        })
+        
+        const geocoder = new mapProps.google.maps.Geocoder()
+        geocoder.geocode( { 'address': `${this.props.state}, ${this.props.city}`}, (results, status) => {
+            if (status === "OK") {
+                this.setState({
+                    lat: results[0].geometry.location.lat(),
+                    lng: results[0].geometry.location.lng()
+                }, () => {
+                    axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat},${this.state.lng}&rankby=distance&keyword=food&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`).then( response => {
+                        this.setState({
+                            nearbyFoodPlaces: response.data.results
+                        }, () => {
+                            axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat},${this.state.lng}&rankby=distance&keyword=bar&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`).then( response => {
+                                this.setState({
+                                    nearbyBars: response.data.results
+                                }, () => {
+                                    axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat},${this.state.lng}&rankby=distance&type=clothing_store&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`).then( response => {
+                                        this.setState({
+                                            nearbyStores: response.data.results
+                                        })
+                                    })
+                                })
+                            })
+                        })
+                    })
+                })
+            } else {
+                console.log('something went wrong ' + status)
+            }
+        }) 
 
-        axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${mapProps.initialCenter.lat},${mapProps.initialCenter.lng}&rankby=distance&keyword=bar&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`).then( response => {
-            this.setState({
-                nearbyBars: response.data.results
-            })
-        })
-
-        axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${mapProps.initialCenter.lat},${mapProps.initialCenter.lng}&rankby=distance&type=clothing_store&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`).then( response => {
-            this.setState({
-                nearbyStores: response.data.results
-            })
-        })
     }
 
     render() {
+
+        
 
         const nearbyFood = this.state.nearbyFoodPlaces.map((food, i) => {
             return (
@@ -165,13 +182,14 @@ export class MapContainer extends Component {
         return (
             <Map 
             google={this.props.google} 
-            zoom={18} 
+            zoom={14} 
             initialCenter={{lat: 40.7618, lng: -111.8907}}
             onClick={this.onMapClicked}
-            onReady={this.fetchPlaces}>
+            onReady={this.fetchPlaces}
+            center={{lat: this.state.lat, lng: this.state.lng}}>
 
                 <Marker onClick={this.onMarkerClick}
-                        name={'Current location'}
+                        name={'Your destination'}
                         icon={{
                             url: 'http://www.clker.com/cliparts/e/3/F/I/0/A/google-maps-marker-for-residencelamontagne-hi.png',
                             scaledSize: new this.props.google.maps.Size(27, 43)

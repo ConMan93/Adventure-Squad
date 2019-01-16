@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import Flights from './Flights';
 import Housing from './Housing';
+import MapContainer from './MapContainer';
+import Board from './DiscussionBoard/Board';
 
 export default class Trip extends Component {
     constructor() {
@@ -29,15 +31,25 @@ export default class Trip extends Component {
             console.log(res);
             this.setState({
                 trip: res.data[0]
+            }, () => {
+                this.setState({
+                    org_IATA: this.state.trip.origin_city.slice(0,3),
+                    dest_IATA: this.state.trip.destination_city.slice(0,3),
+                    org_city: this.state.trip.origin_city.slice(4),
+                    dest_city: this.state.trip.destination_city.slice(4)
+                });
             });
-            this.setState({
-                org_IATA: this.state.trip.origin_city.slice(0,3),
-                dest_IATA: this.state.trip.destination_city.slice(0,3),
-                org_city: this.state.trip.origin_city.slice(4),
-                dest_city: this.state.trip.destination_city.slice(4)
-            });
+            // this.setState({
+            //     org_IATA: this.state.trip.origin_city.slice(0,3),
+            //     dest_IATA: this.state.trip.destination_city.slice(0,3),
+            //     org_city: this.state.trip.origin_city.slice(4),
+            //     dest_city: this.state.trip.destination_city.slice(4)
+            // });
             // this.getGeocodingCoordinates();
             this.getAmadeus();
+        }).catch(error => {
+            this.props.history.push('/login')
+            console.log(error)
         });
     }
 
@@ -83,7 +95,7 @@ export default class Trip extends Component {
             max: 5,
             currency: 'USD'
         }).then(res => {
-            console.log(res)
+            // console.log(res)
             this.setState({
                 flights: res.data
             });
@@ -100,9 +112,9 @@ export default class Trip extends Component {
                 var results2 = results1.filter(hotel => {
                     return hotel.hotel.address.stateCode === this.state.trip.destination_state
                 })
-                console.log(res)
-                console.log(results1)
-                console.log(results2)
+                // console.log(res)
+                // console.log(results1)
+                // console.log(results2)
                 this.setState({
                     hotels: results2.slice(0,5)
                 })
@@ -114,10 +126,12 @@ export default class Trip extends Component {
         if (!this.state.flights.length) {
             var trip = <div>one moment while we search for flights</div>
         } else {
-            trip =  <div>
+            trip =  <div style={{border: '1px solid black'}}>
                         <h1>Trip to {this.state.dest_city}</h1>
                         <Flights flights={this.state.flights} />
                         <Housing hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>
+                        <Board trip_id={this.props.match.params.id} />
+                        <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city} />
                     </div> 
         }
         return (
