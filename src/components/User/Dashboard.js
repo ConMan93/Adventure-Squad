@@ -114,6 +114,7 @@ class Dashboard extends Component{
                <div>
                    <input onChange={(e)=>this.onImageChange(e.target.value)}></input> 
                    <button onClick={()=>this.handleChangeImage()}>Update Image</button>
+                   <button onClick={() => {this.setState({editing: false})}}>Cancel</button>
                </div>
                : null
                }

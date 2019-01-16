@@ -1,32 +1,162 @@
-.App {
-  text-align: center;
+/* RESET CSS */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a {
+	text-decoration: none;
+	color: white;
+}
+/* UNIVERSAL STYLES */
+* {
+	box-sizing: border-box;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* HOME PAGE */
+.homepage-component-container {
+  height: 100vh;
+  width: 100%;
+  background-image: url('./photos/photo-1534067783941-51c9c23ecefd-Edit.jpg');
+  background-size: cover;
+  background-position: bottom;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-around;
+  padding-bottom: 5%;
+  overflow: hidden;
 }
 
-.App-link {
-  color: #61dafb;
+.homepage-title {
+	font-size: 160px;
+	line-height: 17vw;
+	text-align: center;
+	margin: 0;
+	color: rgba(255, 255, 255, 0.9);
+	
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.homepage-title,
+.homepage-subtitle,
+.homepage-button-container button {
+	font-family: 'Permanent Marker', sans-serif;
+	text-shadow: 2px 2px 20px rgba(0,0,0,0.4);
+	letter-spacing: 5px;
 }
+
+.homepage-subtitle {
+	color: white;
+	font-size: 50px;
+	margin: 8% 0%;
+	text-align: left;
+	opacity: 0;
+	animation: appear 1.5s ease 500ms forwards;
+	text-shadow: 2px 2px 20px rgba(0,0,0,0.9);
+	letter-spacing: 10px;
+}
+
+.homepage-subtitles {
+	height: 100%;
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	padding-left: 50px;
+}
+
+.subtitle-1 {
+	padding-left: 15%;
+	animation-delay: 1.5s;
+}
+
+.homepage-content {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 50%;
+}
+
+.homepage-button-container {
+	width: 50%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.homepage-button-container button {
+	background: rgba(0,0,0,0.5);
+	color: white;
+	border: 2px solid white;
+	border-radius: 5px;
+	font-size: 50px;
+	padding: 10px 20px;
+	transition: all 350ms ease;
+	transform: translateX(0);
+	transform-origin: center;
+	opacity: 1;
+	/* animation: button-appear 2.5s ease 2.5s forwards; */
+}
+
+.homepage-button-container button:hover {
+	color: gray;
+	background-color: white;
+	transform: scale(1.1)
+}
+
+.homepage-button-container button:focus {
+	outline: none;
+}
+
+@keyframes appear {
+	to {
+		opacity: 1;
+		transform: translateX(50px)
+	}
+}
+
+/* @keyframes button-appear {
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+} */
