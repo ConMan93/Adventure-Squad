@@ -62,13 +62,19 @@ class Dashboard extends Component{
     }
 
     handleSearchFriends(filter){
-        this.setState({filterFriends:filter.toLowerCase()})
+        this.setState({
+            filterFriends: filter.toLowerCase()
+        })
     }
     onImageChange = (value) => {
-        this.setState({profile_img:value})
+        this.setState({
+            profile_img: value
+        })
     }
     toggleEdit = () => {
-        this.setState({editing: !this.state.editing})
+        this.setState({
+            editing: !this.state.editing
+        })
     }
 
 
@@ -128,11 +134,8 @@ class Dashboard extends Component{
                 <div>
                     My Adventures
                     {tripsDisplay}
-                    <Wizard 
-                    history={this.props.history}
-
-                    />
-
+                    <Wizard
+                    history={this.props.history} />
                 </div>
             </div>          
         )

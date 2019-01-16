@@ -5,6 +5,7 @@ import MessageForm from './MessageForm';
 import { connect } from 'react-redux';
 import { updateDiscussionBoard } from '../../../Redux/reducer';
 import Members from '../Members';
+import { withRouter } from 'react-router-dom';
 
 class Board extends Component {
 
@@ -52,4 +53,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { updateDiscussionBoard })(Board)
+export default withRouter(connect(mapStateToProps, { updateDiscussionBoard })(Board))
