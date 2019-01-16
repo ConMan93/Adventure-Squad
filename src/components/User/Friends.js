@@ -30,7 +30,7 @@ class Friends extends Component {
            return <div key={i}>
                     <Link to={`/profile/${friend.id}`}><img src={friend.profile_img} alt="profile_pic" height="60" width="60"/></Link>
                     <span>{friend.username}</span>
-                    <button onClick={()=>this.handleDeleteFriend(friend.id)}><i class="fas fa-user-minus"></i></button>
+                    <button onClick={()=>this.handleDeleteFriend(friend.id)}><i className="fas fa-user-minus"></i></button>
                  </div>
         })
         return (
