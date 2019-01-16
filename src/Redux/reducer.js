@@ -10,7 +10,8 @@ const initialState = {
     destinationState: '',
     destinationCity: '',
     originState: '',
-    originCity: ''
+    originCity: '', 
+    tripMembers: []
 }
 
 const USER_LOGGED_IN = 'USER_LOGGED_IN';
@@ -26,6 +27,7 @@ const HANDLE_CITY_CHANGE = 'HANDLE_CITY_CHANGE';
 const CLEAR_TRIP = 'CLEAR_TRIP';
 const SET_ORIGIN_CITY = 'SET_ORIGIN_CITY';
 const SET_ORIGIN_STATE = 'SET_ORIGIN_STATE';
+const SET_MEMBERS = 'SET_MEMBERS';
 
 
 export default function reducer(state = initialState, action) {
@@ -70,6 +72,9 @@ export default function reducer(state = initialState, action) {
 
         case SET_ORIGIN_STATE:
             return {...state, originState: action.payload}
+        
+        case SET_MEMBERS:
+            return {...state, tripMembers: action.payload}
 
         default:
             return state;
@@ -165,3 +170,12 @@ export function setOriginCity(city) {
         payload: city
     }
 }
+<<<<<<< HEAD
+export function setMembers(member) {
+    return {
+        type: SET_MEMBERS,
+        payload: member
+    }
+}
+=======
+>>>>>>> master

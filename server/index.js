@@ -41,6 +41,10 @@ app.post('/trip/discussion', tc.createMessage)
 app.get('/trip/:id', tc.getTrips)
 app.post('/trip/create', tc.createTrip)
 app.get('/userprofile/trips/:user_id', tc.getUserProfileTrips)
+app.post('/trip/members', tc.addMember)
+app.get('/trip/members/:trip_id', tc.getTripMembers)
+app.get('/trip/addmembers/:trip_id', tc.getMembersToAdd)
+app.delete('/trip/member/:user_id/:trip_id', tc.deleteMember)
 
 // Friends endpoints
 app.get('/friends/get', fc.getFriends)

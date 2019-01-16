@@ -14,6 +14,7 @@ import UserProfile from './components/User/UserProfile';
 import Trip from './components/Trips/Trip';
 
 
+
 class App extends Component {
 
   constructor(props) {
@@ -27,7 +28,6 @@ class App extends Component {
   componentDidMount() {
     axios.get('/auth/currentuser').then( response => {
       if (response.data) {
-        console.log(response.data)
         this.props.userLoggedIn(response.data)
       }
     })

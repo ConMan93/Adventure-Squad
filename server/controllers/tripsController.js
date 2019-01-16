@@ -143,5 +143,58 @@ module.exports = {
         } catch(error) {
             return res.status(500).send(error)
         }
+    },
+
+    addMember: async (req, res) => {
+        try {
+            const db = req.app.get('db')
+            let {user_id, trip_id} = req.body
+            let memberResponse = await db.add_trip_members([user_id, trip_id])
+            res.send(memberResponse)
+
+        } catch (error) {
+            console.log('error adding members', error)
+            res.status(500).send(error)
+        }
+        
+    },
+    getTripMembers: async (req, res) => {
+        try {
+            const db = req.app.get('db')
+            let {trip_id} = req.params
+            let tripMembers = await db.get_trip_members(trip_id)
+            res.send(tripMembers)
+
+        } catch (error) {
+            console.log('error getting trip members', error)
+            res.status(500).send(error)
+        }
+    }, 
+    deleteMember: async (req, res) => {
+        try {
+            const db = req.app.get('db')
+            let {user_id, trip_id} = req.params
+            console.log(user_id)
+            let deleteResponse = await db.delete_member_from_trip([user_id, trip_id])
+            res.send(deleteResponse)
+
+        } catch (error) {
+            console.log('error removing member', error)
+            res.status(500).send(error)
+        }
+    }, 
+    getMembersToAdd: async (req, res) => {
+        try {
+            const db = req.app.get('db')
+            let {trip_id} = req.params
+            console.log(trip_id)
+            let tripMemberResponse = await db.get_friends_to_add(trip_id)
+            console.log(tripMemberResponse)
+            res.send(tripMemberResponse)
+        } catch (error) {
+            console.log('error getting members', error)
+            res.status(500).send(error)
+        
+        }
     }
 }
