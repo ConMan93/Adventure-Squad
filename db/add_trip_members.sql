@@ -5,3 +5,4 @@ select u.*
 from users u
 JOIN trips_users tu ON tu.user_id = u.id
 WHERE tu.trip_id = $2;
+

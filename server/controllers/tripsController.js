@@ -87,7 +87,6 @@ module.exports = {
         try {
             let db = req.app.get('db')
             let id = +req.params.id
-
             let trips = await db.get_trip(id)
             return res.status(200).send(trips)
         } catch(error) {
@@ -102,10 +101,7 @@ module.exports = {
             const db = req.app.get('db')
             let user_id = req.session.user.id
             let { originCity, originState, destinationCity, destinationState, to, from } = req.body
-            console.log(req.body)
-
             let newTrip = await db.create_trip([originState, originCity, destinationState, destinationCity, from, to])
-            console.log(newTrip)
             let createdTrip = newTrip[0]
             let trip_id = createdTrip.id
 
@@ -174,7 +170,6 @@ module.exports = {
         try {
             const db = req.app.get('db')
             let {user_id, trip_id} = req.params
-            console.log(user_id)
             let deleteResponse = await db.delete_member_from_trip([user_id, trip_id])
             res.send(deleteResponse)
 
@@ -187,9 +182,7 @@ module.exports = {
         try {
             const db = req.app.get('db')
             let {trip_id} = req.params
-            console.log(trip_id)
             let tripMemberResponse = await db.get_friends_to_add(trip_id)
-            console.log(tripMemberResponse)
             res.send(tripMemberResponse)
         } catch (error) {
             console.log('error getting members', error)

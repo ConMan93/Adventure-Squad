@@ -108,7 +108,8 @@ class Dashboard extends Component{
             <div>
                 <Link to="/login">Login</Link>
                 <br/>
-               <img src={profile_img} alt="img" /><button onClick={this.toggleEdit}>Edit picture</button> 
+              
+               <img src={profile_img} alt="img" /><button onClick={this.toggleEdit}>Edit Profile Picture</button> 
                {this.state.editing ? 
                <div>
                    <input onChange={(e)=>this.onImageChange(e.target.value)}></input> 
