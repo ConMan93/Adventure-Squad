@@ -5,6 +5,7 @@ import {setFriends, displayUsers, viewProfile, setUser} from '../../Redux/reduce
 import {Link} from 'react-router-dom';
 import Friends from './Friends';
 import Wizard from '../Wizard/Wizard';
+import Header from './Header';
 
 
 class Dashboard extends Component{
@@ -22,23 +23,24 @@ class Dashboard extends Component{
         axios.get('/friends/get').then(results => {
             this.props.setFriends(results.data)
         }).catch(error => {
-            this.props.history.push('/login')
+            this.props.history.push('/')
             console.log(error)
         })
 
         axios.get(`/friends/users`).then(results => {
             this.props.displayUsers(results.data)
         }).catch(error => {
-            this.props.history.push('/login')
+            this.props.history.push('/')
             console.log(error)
         })
 
         axios.get('/dashboard/trips').then( response => {
+            console.log(response.data)
             this.setState({
                 trips: response.data
             })
         }).catch(error => {
-            this.props.history.push('/login')
+            this.props.history.push('/')
             console.log(error)
         })
     }
@@ -79,6 +81,7 @@ class Dashboard extends Component{
 
 
     render(){
+        
         let {allUsers} = this.props
         let eachUser = allUsers.filter(user => {
            return user.username.toLowerCase().charAt(0).includes(this.state.filterFriends)
@@ -106,8 +109,8 @@ class Dashboard extends Component{
         let {username, venmo, profile_img} = this.props.user
         return(
             <div>
-                <Link to="/login">Login</Link>
-                <br/>
+                <Header
+                history={this.props.history} />
               
                <img src={profile_img} alt="img" /><button onClick={this.toggleEdit}>Edit Profile Picture</button> 
                {this.state.editing ? 

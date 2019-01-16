@@ -20,7 +20,7 @@ export default class UserProfile extends Component {
                 user: response.data
             })
         }).catch(error => {
-            this.props.history.push('/login')
+            this.props.history.push('/')
             console.log(error)
         })
 
@@ -29,7 +29,7 @@ export default class UserProfile extends Component {
                 friends: response.data
             })
         }).catch(error => {
-            this.props.history.push('/login')
+            this.props.history.push('/')
             console.log(error)
         })
 
@@ -39,7 +39,7 @@ export default class UserProfile extends Component {
                 trips: response.data
             })
         }).catch(error => {
-            this.props.history.push('/login')
+            this.props.history.push('/')
             console.log(error)
         })
 

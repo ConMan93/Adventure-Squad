@@ -25,7 +25,7 @@ class LocationImage extends Component {
     }
 }
 function mapStateToProps(state){
-    let destinationCity= state
+    let { destinationCity } = state
     return{destinationCity}
 }
 export default connect(mapStateToProps)(LocationImage)

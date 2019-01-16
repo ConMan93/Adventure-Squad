@@ -70,11 +70,8 @@ export class MapContainer extends Component {
 
     }
 
-    render() {
-
-        
-
-        const nearbyFood = this.state.nearbyFoodPlaces.map((food, i) => {
+    nearbyFoodPlaces() {
+        return this.state.nearbyFoodPlaces.map((food, i) => {
             return (
                     <Marker
                         google={this.props.google}
@@ -92,25 +89,29 @@ export class MapContainer extends Component {
                     />
             )
         })
+    }
 
-        const nearbyFoodInfo = this.state.nearbyFoodPlaces.map((food, i) => {
+    nearbyFoodInfo() {
+        return this.state.nearbyFoodPlaces.map((food, i) => {
             return (
                 <InfoWindow 
                     marker={this.state.activeMarker}
                     visible={this.state.showingInfoWindow}
                     key={i}
+                    onClose={this.onMapClicked}
                 >
                     <div>
                         <h1>{this.state.selectedPlace.name}</h1>
                         <p>{this.state.selectedPlace.vicinity}</p>
                         <p>rating: </p>
-                        {/* <StarRatings rating={this.state.selectedPlace.rating} numberOfStars={5} starDimension='10px' /> */}
                     </div>
                 </InfoWindow>
             )
         })
+    }
 
-        const nearbyBarsToDisplay = this.state.nearbyBars.map((bar, i) => {
+    nearbyBars() {
+        return this.state.nearbyBars.map((bar, i) => {
             return (
                 <Marker
                     name={bar.name}
@@ -127,13 +128,16 @@ export class MapContainer extends Component {
                 />
             )
         })
+    }
 
-        const nearbyBarsInfo = this.state.nearbyBars.map((bar, i) => {
+    nearbyBarsInfo() {
+        return this.state.nearbyBars.map((bar, i) => {
             return (
                 <InfoWindow 
                     marker={this.state.activeMarker}
                     visible={this.state.showingInfoWindow}
                     key={i}
+                    onClose={this.onMapClicked}
                 >
                     <div>
                         <h1>{this.state.selectedPlace.name}</h1>
@@ -143,8 +147,10 @@ export class MapContainer extends Component {
                 </InfoWindow>
             )
         })
+    }
 
-        const nearbyStoresToDisplay = this.state.nearbyStores.map((store, i) => {
+    nearbyStores() {
+        return this.state.nearbyStores.map((store, i) => {
             return (
                     <Marker
                         google={this.props.google}
@@ -162,13 +168,16 @@ export class MapContainer extends Component {
                     />
             )
         })
+    }
 
-        const nearbyStoresInfo = this.state.nearbyStores.map((store, i) => {
+    nearbyStoresInfo() {
+        return this.state.nearbyStores.map((store, i) => {
             return (
                 <InfoWindow 
                     marker={this.state.activeMarker}
                     visible={this.state.showingInfoWindow}
                     key={i}
+                    onClose={this.onMapClicked}
                 >
                     <div>
                         <h1>{this.state.selectedPlace.name}</h1>
@@ -178,6 +187,9 @@ export class MapContainer extends Component {
                 </InfoWindow>
             )
         })
+    }
+
+    render() {
 
         return (
             <Map 
@@ -195,14 +207,14 @@ export class MapContainer extends Component {
                             scaledSize: new this.props.google.maps.Size(27, 43)
                         }} />
 
-                {nearbyFood}
-                {nearbyFoodInfo}
+                {this.nearbyFoodPlaces()}
+                {this.nearbyFoodInfo()}
 
-                {nearbyBarsToDisplay}
-                {nearbyBarsInfo}
+                {this.nearbyBars()}
+                {this.nearbyBarsInfo()}
 
-                {nearbyStoresToDisplay}
-                {nearbyStoresInfo}
+                {this.nearbyStores()}
+                {this.nearbyStoresInfo()}
 
             </Map>
         )

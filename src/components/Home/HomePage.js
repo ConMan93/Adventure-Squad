@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import Auth from './Auth';
 
 export default class HomePage extends Component {
   render() {
@@ -12,7 +12,7 @@ export default class HomePage extends Component {
               <h3 className='homepage-subtitle subtitle-1'>Simplified.</h3>
             </div>
             <div className='homepage-button-container'>
-              <Link to='/login' ><button>Login</button></Link>
+              <Auth />
             </div>
           </div>
       </div>

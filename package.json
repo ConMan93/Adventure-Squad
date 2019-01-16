@@ -13,6 +13,7 @@
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "google-maps-react": "^2.0.2",
+    "jest": "^23.6.0",
     "massive": "^5.7.2",
     "oenomaus": "^1.0.0",
     "react": "^16.7.0",
@@ -30,7 +31,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
