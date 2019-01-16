@@ -170,12 +170,9 @@ export function setOriginCity(city) {
         payload: city
     }
 }
-<<<<<<< HEAD
 export function setMembers(member) {
     return {
         type: SET_MEMBERS,
         payload: member
     }
 }
-=======
->>>>>>> master
