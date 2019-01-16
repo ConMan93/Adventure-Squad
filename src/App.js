@@ -13,8 +13,6 @@ import Dashboard from './components/User/Dashboard';
 import UserProfile from './components/User/UserProfile';
 import Trip from './components/Trips/Trip';
 
-
-
 class App extends Component {
 
   constructor(props) {

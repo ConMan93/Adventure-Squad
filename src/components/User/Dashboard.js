@@ -4,6 +4,7 @@ import axios from 'axios';
 import {setFriends, displayUsers, viewProfile, setUser} from '../../Redux/reducer';
 import {Link} from 'react-router-dom';
 import Friends from './Friends';
+import Wizard from '../Wizard/Wizard';
 
 
 class Dashboard extends Component{
@@ -101,7 +102,8 @@ class Dashboard extends Component{
             <div>
                 <Link to="/login">Login</Link>
                 <br/>
-               <img src={profile_img} alt="img" /><button onClick={this.toggleEdit}>Edit picture</button> 
+              
+               <img src={profile_img} alt="img" /><button onClick={this.toggleEdit}>Edit Profile Picture</button> 
                {this.state.editing ? 
                <div>
                    <input onChange={(e)=>this.onImageChange(e.target.value)}></input> 
@@ -125,6 +127,11 @@ class Dashboard extends Component{
                 <div>
                     My Adventures
                     {tripsDisplay}
+                    <Wizard 
+                    history={this.props.history}
+
+                    />
+
                 </div>
             </div>          
         )
