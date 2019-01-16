@@ -19,30 +19,27 @@ class Dashboard extends Component{
         }
     }
     componentDidMount() {  
-        let { id } = this.props.user
         axios.get('/friends/get').then(results => {
             this.props.setFriends(results.data)
+        }).catch(error => {
+            this.props.history.push('/login')
+            console.log(error)
         })
+
         axios.get(`/friends/users`).then(results => {
             this.props.displayUsers(results.data)
+        }).catch(error => {
+            this.props.history.push('/login')
+            console.log(error)
         })
-        if (id) {
-            this.loadProfile()
-        }
-    }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.user.id && this.props.user.id !== prevProps.user.id) {
-            this.loadProfile()
-        }
-    }
-
-    loadProfile = () => {
-        let { id } = this.props.user
-        axios.get(`/trips/${id}`).then( response => {
+        axios.get('/dashboard/trips').then( response => {
             this.setState({
                 trips: response.data
             })
+        }).catch(error => {
+            this.props.history.push('/login')
+            console.log(error)
         })
     }
 
@@ -81,8 +78,8 @@ class Dashboard extends Component{
            return user.username.toLowerCase().charAt(0).includes(this.state.filterFriends)
         }).map((user, i) => {
             return <div key={i}>
-                <Link to={`/profile/${user.id}`}>
                 <img src={user.profile_img} alt="img" />
+                <Link to={`/profile/${user.id}`}>
                 <p>{user.username}</p>
                 </Link>
                 <button onClick={()=>this.handleAddFriend(user.id)}>Add Friend</button>
@@ -92,9 +89,9 @@ class Dashboard extends Component{
         let tripsDisplay = this.state.trips.map((trip, i) => {
             return (
                 <div key={i}>
-                    <h2>{trip.destination_city},{trip.destination_state}</h2>
-                    <p>Leaving: {trip.leaving_date}</p>
-                    <p>Returning: {trip.returning_date}</p>
+                    <h2><Link to={`/trip/${trip.id}`}>{trip.destination_city},{trip.destination_state}</Link></h2>
+                    <p>Leaving: {trip.leaving_date.slice(0, 10)}</p>
+                    <p>Returning: {trip.returning_date.slice(0, 10)}</p>
                 </div>
             )
         })

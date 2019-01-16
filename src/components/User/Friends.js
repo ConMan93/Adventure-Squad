@@ -19,7 +19,6 @@ class Friends extends Component {
         axios.delete(`/friends/delete/${id}`).then(results => {
             this.props.setFriends(results.data)
             axios.get(`/friends/users`).then(results => {
-                console.log(this.props.displayUsers(results.data))
                 this.props.displayUsers(results.data)
             }) 
         })
