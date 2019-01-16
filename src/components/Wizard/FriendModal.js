@@ -1,6 +1,5 @@
 import React,  {Component} from 'react';
 import Modal from 'react-modal';
-import Members from '../Trips/Members';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {setMembers, setFriends} from '../../Redux/reducer';

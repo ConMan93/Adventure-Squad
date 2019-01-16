@@ -12,7 +12,7 @@ class Calendar extends Component {
             from: undefined,
             to: undefined,
         }
-        this.handleDayClick=this.handleDayClick.bind(this);
+    
         this.handleResetClick=this.handleResetClick.bind(this);
     }
     handleDayClick(day){
