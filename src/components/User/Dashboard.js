@@ -4,6 +4,7 @@ import axios from 'axios';
 import {setFriends, displayUsers, viewProfile, setUser} from '../../Redux/reducer';
 import {Link} from 'react-router-dom';
 import Friends from './Friends';
+import Wizard from '../Wizard/Wizard';
 
 
 class Dashboard extends Component{
@@ -131,6 +132,8 @@ class Dashboard extends Component{
                 <div>
                     My Adventures
                     {tripsDisplay}
+                    <Wizard
+                    history={this.props.history} />
                 </div>
             </div>          
         )
