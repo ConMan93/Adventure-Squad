@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import Flights from './Flights';
 import Housing from './Housing';
+import FriendModal from '../Wizard/FriendModal';
+import Members from './Members'
 import MapContainer from './MapContainer';
 import Board from './DiscussionBoard/Board';
 
@@ -20,15 +22,17 @@ export default class Trip extends Component {
             dest_IATA: '',
             dest_city: '',
             flights: [],
-            hotels: []
+            hotels: [],
+            loading: false
         }
     }
     
-    componentDidMount = () => {
+    handleGetFlight = () => {
+        this.setState({
+            loading: true
+        })
         const url = this.props.location.pathname;
-        console.log(url);
         axios.get(url).then(res => {
-            console.log(res);
             this.setState({
                 trip: res.data[0]
             }, () => {
@@ -95,7 +99,6 @@ export default class Trip extends Component {
             max: 5,
             currency: 'USD'
         }).then(res => {
-            // console.log(res)
             this.setState({
                 flights: res.data
             });
@@ -112,9 +115,6 @@ export default class Trip extends Component {
                 var results2 = results1.filter(hotel => {
                     return hotel.hotel.address.stateCode === this.state.trip.destination_state
                 })
-                // console.log(res)
-                // console.log(results1)
-                // console.log(results2)
                 this.setState({
                     hotels: results2.slice(0,5)
                 })
@@ -128,6 +128,7 @@ export default class Trip extends Component {
         } else {
             trip =  <div style={{border: '1px solid black'}}>
                         <h1>Trip to {this.state.dest_city}</h1>
+                     
                         <Flights flights={this.state.flights} />
                         <Housing hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>
                         <Board trip_id={this.props.match.params.id} />
@@ -136,7 +137,17 @@ export default class Trip extends Component {
         }
         return (
             <div>
-                {trip}
+                <button onClick={this.handleGetFlight}>Find Fight and Accomodations</button>
+                <FriendModal
+                trip_id={this.props.match.params.id}
+                />
+                {this.state.loading ?
+                trip
+                :
+                null}
+                <Members
+                trip_id={this.props.match.params.id}
+                />
             </div>
         )
     }

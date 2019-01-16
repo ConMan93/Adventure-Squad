@@ -54,7 +54,7 @@ class StepOne extends Component {
     return (
       <div>
         <Calendar />
-        <p>Coming From:</p>
+        <p>Leaving From:</p>
         <select onChange={e => this.props.setOriginState(e.target.value)}>
             <option value='' >Select State</option>
             {stateOptions}

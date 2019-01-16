@@ -40,8 +40,7 @@ class Board extends Component {
             trip_id={this.props.trip_id}
             />
             {discussionBoard}
-            <Members 
-            trip_id={this.props.match.params.id} />
+          
         </div>
         )
     }
