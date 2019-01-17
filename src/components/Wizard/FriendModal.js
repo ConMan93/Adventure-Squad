@@ -65,7 +65,7 @@ class FriendModal extends Component {
            return <div key={"friend"+i}>
                     <Link to={`/profile/${friend.id}`}><img src={friend.profile_img} alt="profile_pic" height="40" width="40"/>
                     <span>{friend.username}</span></Link>
-                    <button onClick={()=>this.handleAddMember(friend.id)}><i class="fas fa-plus"></i></button>
+                    <button onClick={()=>this.handleAddMember(friend.id)}><i className="fas fa-plus"></i></button>
                  </div>
         })
         return (

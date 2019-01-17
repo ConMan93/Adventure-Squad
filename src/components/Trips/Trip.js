@@ -23,11 +23,12 @@ export default class Trip extends Component {
             dest_city: '',
             flights: [],
             hotels: [],
-            loading: false
+            loading: false,
+            loadMap: false
         }
     }
-    
-    handleGetFlight = () => {
+
+    componentDidMount() {
         this.setState({
             loading: true
         })
@@ -40,47 +41,12 @@ export default class Trip extends Component {
                     org_IATA: this.state.trip.origin_city.slice(0,3),
                     dest_IATA: this.state.trip.destination_city.slice(0,3),
                     org_city: this.state.trip.origin_city.slice(4),
-                    dest_city: this.state.trip.destination_city.slice(4)
+                    dest_city: this.state.trip.destination_city.slice(4),
+                    loadMap: true
                 });
             });
-            // this.setState({
-            //     org_IATA: this.state.trip.origin_city.slice(0,3),
-            //     dest_IATA: this.state.trip.destination_city.slice(0,3),
-            //     org_city: this.state.trip.origin_city.slice(4),
-            //     dest_city: this.state.trip.destination_city.slice(4)
-            // });
-            // this.getGeocodingCoordinates();
-            this.getAmadeus();
-        }).catch(error => {
-            this.props.history.push('/login')
-            console.log(error)
-        });
+        })
     }
-
-    // getGeocodingCoordinates = () => {
-    //     const {org_city, dest_city} = this.state;
-    //     const {origin_state, destination_state} = this.state.trip;
-    //     console.log('getting in function')
-    //     console.log(org_city, dest_city, origin_state, destination_state)
-    //     // console.log(IATAArray)
-    //     axios.get(`http://geoservices.tamu.edu/Services/Geocode/WebService/GeocoderWebServiceHttpNonParsed_V04_01.aspx?apiKey=${process.env.REACT_APP_GEOSERVICES_KEY}=&version=4.01&city=${org_city}&state=${origin_state}`).then(res => {
-    //         console.log(res)
-    //         let arr = res.data.split(',')
-    //         this.setState({
-    //             org_lat: arr[3],
-    //             org_lng: arr[4]
-    //         })
-    //         console.log('done2', this.state.org_lat, this.state.org_lng)
-    //     })
-    //     axios.get(`http://geoservices.tamu.edu/Services/Geocode/WebService/GeocoderWebServiceHttpNonParsed_V04_01.aspx?apiKey=${process.env.REACT_APP_GEOSERVICES_KEY}=&version=4.01&city=${dest_city}&state=${destination_state}`).then(res => {
-    //         let arr = res.data.split(',')
-    //         this.setState({
-    //             dest_lat: arr[3],
-    //             dest_lng: arr[4]
-    //         })
-    //         console.log('done1', this.state.dest_lat, this.state.dest_lng)
-    //     })
-    // }
 
     getAmadeus = () => {
         var Amadeus = require('amadeus');
@@ -126,18 +92,17 @@ export default class Trip extends Component {
         if (!this.state.flights.length) {
             var trip = <div>one moment while we search for flights</div>
         } else {
-            trip =  <div style={{border: '1px solid black'}}>
-                        <h1>Trip to {this.state.dest_city}</h1>
-                     
+            trip =  <div>
                         <Flights flights={this.state.flights} />
                         <Housing hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>
                         <Board trip_id={this.props.match.params.id} />
-                        <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city} />
+                        {/* <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city} /> */}
                     </div> 
         }
         return (
             <div>
-                <button onClick={this.handleGetFlight}>Find Fight and Accomodations</button>
+                <h1>Trip to {this.state.dest_city}</h1>
+                <button onClick={this.getAmadeus}>Find Flight and Accomodations</button>
                 <FriendModal
                 trip_id={this.props.match.params.id}
                 />
@@ -148,6 +113,10 @@ export default class Trip extends Component {
                 <Members
                 trip_id={this.props.match.params.id}
                 />
+                {this.state.loadMap ?
+                <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city} />
+                :
+                null}
             </div>
         )
     }
