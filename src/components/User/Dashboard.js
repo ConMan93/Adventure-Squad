@@ -84,7 +84,7 @@ class Dashboard extends Component{
         
         let {allUsers} = this.props
         let eachUser = allUsers.filter(user => {
-           return user.username.toLowerCase().charAt(0).includes(this.state.filterFriends)
+           return user.username.toLowerCase().includes(this.state.filterFriends)
         }).map((user, i) => {
             return <div key={i} className='dashboard-search-friend'>
                         <Link to={`/profile/${user.id}`}>

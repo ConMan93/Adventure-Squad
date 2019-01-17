@@ -146,6 +146,8 @@ module.exports = {
             const db = req.app.get('db')
             let {user_id, trip_id} = req.body
             let memberResponse = await db.add_trip_members([user_id, trip_id])
+            console.log(memberResponse)
+            await db.create_trips_users({user_id, trip_id})
             res.send(memberResponse)
 
         } catch (error) {
