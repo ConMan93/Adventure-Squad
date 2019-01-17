@@ -65,7 +65,8 @@ class Wizard extends Component {
           contentLabel="Example Modal"
         >
         <button onClick={this.closeModal}>X</button>
-        <StepOne />
+        <StepOne
+        createTrip={this.createTrip} />
         {
         this.props.originState && this.props.originCity && this.props.destinationState && this.props.destinationCity && this.props.from && this.props.to ?
         <button onClick={this.createTrip}>submit</button>

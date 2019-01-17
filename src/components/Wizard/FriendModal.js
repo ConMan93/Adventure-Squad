@@ -50,6 +50,7 @@ class FriendModal extends Component {
         });
     }
     handleAddMember(user_id){
+        console.log(user_id)
         let trip_id = +this.props.trip_id
         axios.post('/trip/members', {user_id, trip_id}).then(results => {
             this.props.setMembers(results.data)

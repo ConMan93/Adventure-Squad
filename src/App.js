@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { userLoggedIn } from './Redux/reducer';
 
 //Components
-import Auth from './components/Home/Auth';
+// import Auth from './components/Home/Auth';
 import HomePage from './components/Home/HomePage';
 import Dashboard from './components/User/Dashboard';
 import UserProfile from './components/User/UserProfile';
@@ -47,7 +47,7 @@ class App extends Component {
           <div>
             <Switch>
               <Route exact path='/' component={HomePage} />
-              <Route path='/login' component={Auth} />
+              {/* <Route path='/login' component={Auth} /> */}
               <Route path='/trip/:id' component={Trip} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path='/profile/:id' component={UserProfile} />
