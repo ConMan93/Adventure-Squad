@@ -12,7 +12,7 @@ class Dashboard extends Component{
         super()
         this.state= {
             filterFriends: "",
-            adventures: [],
+            // adventures: [],
             trips: [],
             profile_img: '',
             editing: false
@@ -81,7 +81,7 @@ class Dashboard extends Component{
     render(){
         let {allUsers} = this.props
         let eachUser = allUsers.filter(user => {
-           return user.username.toLowerCase().charAt(0).includes(this.state.filterFriends)
+           return user.username.toLowerCase().includes(this.state.filterFriends)
         }).map((user, i) => {
             return <div key={i}>
                 <img src={user.profile_img} alt="img" />

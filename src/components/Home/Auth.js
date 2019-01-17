@@ -50,7 +50,7 @@ class Auth extends Component {
             })
         })
     }
-
+    
     loginUser = () => {
         axios.post('/auth/login', this.state).then( response => {
             this.props.userLoggedIn(response.data)

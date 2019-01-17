@@ -4,11 +4,7 @@ import Message from './Message';
 import MessageForm from './MessageForm';
 import { connect } from 'react-redux';
 import { updateDiscussionBoard } from '../../../Redux/reducer';
-<<<<<<< HEAD
-=======
-import Members from '../Members';
 import { withRouter } from 'react-router-dom';
->>>>>>> master
 
 class Board extends Component {
 

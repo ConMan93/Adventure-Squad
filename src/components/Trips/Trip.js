@@ -43,45 +43,13 @@ export default class Trip extends Component {
                     dest_city: this.state.trip.destination_city.slice(4)
                 });
             });
-            // this.setState({
-            //     org_IATA: this.state.trip.origin_city.slice(0,3),
-            //     dest_IATA: this.state.trip.destination_city.slice(0,3),
-            //     org_city: this.state.trip.origin_city.slice(4),
-            //     dest_city: this.state.trip.destination_city.slice(4)
-            // });
-            // this.getGeocodingCoordinates();
+
             this.getAmadeus();
         }).catch(error => {
             this.props.history.push('/login')
             console.log(error)
         });
     }
-
-    // getGeocodingCoordinates = () => {
-    //     const {org_city, dest_city} = this.state;
-    //     const {origin_state, destination_state} = this.state.trip;
-    //     console.log('getting in function')
-    //     console.log(org_city, dest_city, origin_state, destination_state)
-    //     // console.log(IATAArray)
-    //     axios.get(`http://geoservices.tamu.edu/Services/Geocode/WebService/GeocoderWebServiceHttpNonParsed_V04_01.aspx?apiKey=${process.env.REACT_APP_GEOSERVICES_KEY}=&version=4.01&city=${org_city}&state=${origin_state}`).then(res => {
-    //         console.log(res)
-    //         let arr = res.data.split(',')
-    //         this.setState({
-    //             org_lat: arr[3],
-    //             org_lng: arr[4]
-    //         })
-    //         console.log('done2', this.state.org_lat, this.state.org_lng)
-    //     })
-    //     axios.get(`http://geoservices.tamu.edu/Services/Geocode/WebService/GeocoderWebServiceHttpNonParsed_V04_01.aspx?apiKey=${process.env.REACT_APP_GEOSERVICES_KEY}=&version=4.01&city=${dest_city}&state=${destination_state}`).then(res => {
-    //         let arr = res.data.split(',')
-    //         this.setState({
-    //             dest_lat: arr[3],
-    //             dest_lng: arr[4]
-    //         })
-    //         console.log('done1', this.state.dest_lat, this.state.dest_lng)
-    //     })
-    // }
-
     getAmadeus = () => {
         var Amadeus = require('amadeus');
         var amadeus = new Amadeus({
@@ -90,7 +58,6 @@ export default class Trip extends Component {
         })
         var leaving_date = this.state.trip.leaving_date.slice(0,10);
         var returning_date = this.state.trip.returning_date.slice(0,10);
-        console.log(leaving_date, returning_date);
         amadeus.shopping.flightOffers.get({
             origin: this.state.org_IATA,
             destination: this.state.dest_IATA,
