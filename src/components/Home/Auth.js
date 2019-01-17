@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { userLoggedIn } from '../../Redux/reducer';
-// import LogoutButton from './LogoutButton';
 import Modal from 'react-modal';
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 
- const customStyles = {
+const customStyles = {
     content: {
         top: '50%',
         left: '50%',
@@ -17,7 +16,7 @@ import {withRouter} from 'react-router-dom'
     }
 };
 
-Modal.setAppElement('#root') 
+Modal.setAppElement('#root')
 
 class Auth extends Component {
 
@@ -82,6 +81,7 @@ class Auth extends Component {
             })
             this.props.history.push('/dashboard');
         }).catch( error => {
+            console.log(error)
             this.setState({
                 errorMessage: error.response.data
             })
