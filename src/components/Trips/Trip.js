@@ -68,7 +68,6 @@ export default class Trip extends Component {
             this.props.history.push('/')
         })
     }
-
     getAmadeus = () => {
         
         var Amadeus = require('amadeus');
@@ -78,7 +77,6 @@ export default class Trip extends Component {
         })
         var leaving_date = this.state.trip.leaving_date.slice(0,10);
         var returning_date = this.state.trip.returning_date.slice(0,10);
-        console.log(leaving_date, returning_date);
         amadeus.shopping.flightOffers.get({
             origin: this.state.org_IATA,
             destination: this.state.dest_IATA,

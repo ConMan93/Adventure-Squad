@@ -13,7 +13,7 @@ class Dashboard extends Component{
         super()
         this.state= {
             filterFriends: "",
-            adventures: [],
+            // adventures: [],
             trips: [],
             profile_img: '',
             editing: false
