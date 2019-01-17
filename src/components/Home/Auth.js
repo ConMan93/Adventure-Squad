@@ -57,7 +57,7 @@ class Auth extends Component {
         this.setState({
             modalIsOpen: false
         });
-    }
+    } 
 
     handleKeyPress = e => {
         if (e.key === 'Enter') {
@@ -67,8 +67,7 @@ class Auth extends Component {
                 this.registerUser()
             }
         }
-    }
-
+    } 
 
     registerUser = () => {
         axios.post('/auth/register', this.state).then( response => {
@@ -80,7 +79,7 @@ class Auth extends Component {
                 password: '',
                 confirmPassword: ''
             })
-            this.props.history.push('/dashboard')
+            this.props.history.push('/dashboard');
         }).catch( error => {
             console.log(error)
             this.setState({
@@ -105,36 +104,40 @@ class Auth extends Component {
     return (
         <div>
             
-              <button onClick={this.openModal}>Login</button>
-        
-            <Modal
-            isOpen={this.state.modalIsOpen}
-            onRequestClose={this.closeModal}
-            style={customStyles}
-            contentLabel="Example Modal"
-            >
-                <div>
-                    <button onClick={this.closeModal}>X</button>
-                    {this.state.login ? 
-                    <div>login
-                        <input placeholder='email' name='email' onChange={this.handleChange} value={this.state.email} onKeyPress={this.handleKeyPress} />
-                        <input placeholder='password' name='password' type='password' onChange={this.handleChange} value={this.state.password} onKeyPress={this.handleKeyPress} />
-                        <button onClick={this.loginUser} >Log In</button>
-                        <p>Need an account? <button onClick={this.loginViewVisible}>Register!</button></p>
-                    </div>
-                    :
-                    <div>Register
-                        <input placeholder='email' name='email' onChange={this.handleChange} value={this.state.email} />
-                        <input placeholder='username' name='username' onChange={this.handleChange} value={this.state.username} />
-                        <input placeholder='venmo' name='venmo' onChange={this.handleChange} value={this.state.venmo} />
-                        <input placeholder='password' name='password' type='password' onChange={this.handleChange} value={this.state.password} onKeyPress={this.handleKeyPress} />
-                        <input placeholder='confirmPassword' name='confirmPassword' type='password' onChange={this.handleChange} value={this.state.confirmPassword} onKeyPress={this.handleKeyPress} />
-                        <button onClick={this.registerUser} >Register</button>
-                        <p>Already have an account? <button onClick={this.loginViewVisible}>Log In!</button></p>
-                    </div>}
-                </div>
-            </Modal>
-        </div>
+        <button onClick={this.openModal}>Login</button>
+  
+      <Modal
+      isOpen={this.state.modalIsOpen}
+      onRequestClose={this.closeModal}
+      style={customStyles}
+      contentLabel="Example Modal"
+      >
+          <div className='auth-modal'>
+              <button className='auth-close-button' onClick={this.closeModal}>X</button>
+              {this.state.login ? 
+              <div className='login-container'>
+                  <h1>Login</h1>
+                  <input placeholder='email' name='email' onChange={this.handleChange} value={this.state.email} onKeyPress={this.handleKeyPress} />
+                  <input placeholder='password' name='password' type='password' onChange={this.handleChange} value={this.state.password} onKeyPress={this.handleKeyPress} />
+                  <button onClick={this.loginUser} >Log In</button>
+                  <h1>Need an account?</h1>
+                  <button onClick={this.loginViewVisible}>Register!</button>
+              </div>
+              :
+              <div className='login-container register-container'>
+                  <h1>Register</h1>
+                  <input placeholder='email' name='email' onChange={this.handleChange} value={this.state.email} />
+                  <input placeholder='username' name='username' onChange={this.handleChange} value={this.state.username} />
+                  <input placeholder='venmo' name='venmo' onChange={this.handleChange} value={this.state.venmo} />
+                  <input placeholder='password' name='password' type='password' onChange={this.handleChange} value={this.state.password} onKeyPress={this.handleKeyPress} />
+                  <input placeholder='confirmPassword' name='confirmPassword' type='password' onChange={this.handleChange} value={this.state.confirmPassword} onKeyPress={this.handleKeyPress} />
+                  <button onClick={this.registerUser} >Register</button>
+                  <h1>Already have an account?</h1>
+                  <button onClick={this.loginViewVisible}>Log In!</button>
+              </div>}
+          </div>
+      </Modal>
+  </div> 
     )
   }
 }
