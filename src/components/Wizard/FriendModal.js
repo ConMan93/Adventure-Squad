@@ -6,8 +6,6 @@ import {Link} from 'react-router-dom';
 import {setMembers, setFriends} from '../../Redux/reducer';
 import axios from 'axios'
 
-console.log('aloha')
-
 const customStyles = {
     content: {
         top: '50%',
