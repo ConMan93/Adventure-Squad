@@ -34,6 +34,7 @@ class Dashboard extends Component{
         })
 
         axios.get('/dashboard/trips').then( response => {
+            console.log(response)
             this.setState({
                 trips: response.data
             })
@@ -81,7 +82,7 @@ class Dashboard extends Component{
     render(){
         let {allUsers} = this.props
         let eachUser = allUsers.filter(user => {
-           return user.username.toLowerCase().charAt(0).includes(this.state.filterFriends)
+           return user.username.toLowerCase().includes(this.state.filterFriends)
         }).map((user, i) => {
             return <div key={i} className='dashboard-search-friend'>
                         <Link to={`/profile/${user.id}`}>
@@ -96,11 +97,11 @@ class Dashboard extends Component{
 
         let tripsDisplay = this.state.trips.map((trip, i) => {
             return (
-                <div key={i}>
-                    <h2><Link to={`/trip/${trip.id}`}>{trip.destination_city},{trip.destination_state}</Link></h2>
-                    <p>Leaving: {trip.leaving_date.slice(0, 10)}</p>
-                    <p>Returning: {trip.returning_date.slice(0, 10)}</p>
-                </div>
+                <Link to={`/trip/${trip.id}`}><div className='dashboard-adventure' key={i}>
+                    <h4>{trip.leaving_date.slice(5, 10)}</h4>
+                    <h2>{trip.destination_city.slice(4)}, {trip.destination_state}</h2>
+                    <h4>{trip.returning_date.slice(5, 10)}</h4>
+                </div></Link>
             )
         })
 
@@ -127,7 +128,7 @@ class Dashboard extends Component{
                         </div>
                         }
                     </div>
-                    <h1 className='dashboard-header-name'>{username}</h1>
+                    <div className='dashboard-header-name-container'><h1>{username}</h1></div>
                     <div className='dashboard-header-venmo-container'><h2>{venmo}</h2></div>
                </div> 
                 
@@ -148,7 +149,9 @@ class Dashboard extends Component{
                     </div>
                     <div className='dashboard-adventures'>
                         <h6>My Adventures</h6>
-                        {tripsDisplay}
+                        <div className='dashboard-adventure-list'>
+                            {tripsDisplay}
+                        </div>
                         <Wizard
                         history={this.props.history} />
                     </div>
