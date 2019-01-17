@@ -192,7 +192,8 @@ a {
 .login-container input {
 	font-family: 'Comfortaa', sans-serif;
 	font-size: 3vh;
-	padding: 10px 0;
+	padding: 10px 5px;
+	border-radius: 5px;
 }
 
 .login-container button {
@@ -215,7 +216,7 @@ a {
 
 .register-container input {
 	margin-bottom: 3vh;
-	padding: 5px 0;
+	padding: 5px 5px;
 }
 
 .register-container h1 {
@@ -269,18 +270,18 @@ a {
 	padding: 20px;
 	color: #ff8421;
 	display: flex;
-	justify-content: flex-start;
+	justify-content: space-between;
 }
 
 .dashboard-header img {
 	border-radius: 15px;
-	height: 80%;
+	height: 100%;
 }
 
 .dashboard-header-image {
 	display: flex;
 	flex-direction: column;
-	width: 10%;
+	width: 15%;
 }
 
 .dashboard-header-image:hover > i {
@@ -288,10 +289,12 @@ a {
 }
 
 .dashboard-header-image i {
+	color: white;
 	margin-top: -5vh;
 	margin-left: 1vh;
 	opacity: 0;
 	transition: all 350ms ease;
+	/* mix-blend-mode: exclusion; */
 }
 
 .dashboard-header-image div {
@@ -331,7 +334,12 @@ a {
 	opacity: 0;
 }
 
-.dashboard-header-name {
+.dashboard-header-name-container {
+	display: flex;
+	align-items: center;
+}
+
+.dashboard-header-name-container h1 {
 	font-size: 6vw;
 	margin-left: 5%;
 }
@@ -339,7 +347,6 @@ a {
 .dashboard-header-venmo-container {
 	display: flex;
 	align-items: center;
-	margin-left: 15%;
 }
 
 .dashboard-header-venmo-container h2 {
@@ -356,6 +363,45 @@ a {
 
 .dashboard-adventures {
 	width: 30%
+}
+
+.dashboard-adventures a {
+	color: #333;
+}
+
+.dashboard-adventure-list {
+	height: 50vh; 
+	overflow: scroll;
+	padding: 20px;
+}
+
+.dashboard-adventure {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 15%;
+	font-size: 2.5vh;
+	border: 1px solid #333;
+	color: #333;
+	border-radius: 10px;
+	padding: 15px;
+	transition: all 350ms ease;
+	margin-bottom: 5%;
+}
+
+.dashboard-adventure:hover {
+	background-color: #333;
+	color: #ff8421;
+	transform: scale(1.1)
+}
+
+.new-trip-button-container {
+	display: flex;
+	justify-content: center;
+}
+
+.new-trip-button {
+	font-size: 3vh;
 }
 
 .dashboard-friends {
@@ -410,12 +456,23 @@ a {
 }
 
 .dashboard-search-friend {
-	width: 40%;
+	width: 27%;
 	margin-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.dashboard-search-friend a {
+	width: 80%;
 }
 
 .dashboard-search-friend img {
 	width: 100%;
+	border-radius: 10px;
+	margin-bottom: 5px;
 }
 
 .dashboard-component-container button {
