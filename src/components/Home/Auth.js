@@ -2,8 +2,21 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { userLoggedIn } from '../../Redux/reducer';
-// import LogoutButton from './LogoutButton';
-import { Link } from 'react-router-dom';
+import Modal from 'react-modal';
+import { withRouter } from 'react-router-dom';
+
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)'
+    }
+};
+
+Modal.setAppElement('#root')
 
 class Auth extends Component {
 
@@ -34,6 +47,28 @@ class Auth extends Component {
         })
     }
 
+    openModal = () => {
+        this.setState({
+            modalIsOpen: true
+        })
+    }
+    
+    closeModal = () => {
+        this.setState({
+            modalIsOpen: false
+        });
+    } 
+
+    handleKeyPress = e => {
+        if (e.key === 'Enter') {
+            if(this.state.login) {
+                this.loginUser()
+            } else {
+                this.registerUser()
+            }
+        }
+    } 
+
     registerUser = () => {
         axios.post('/auth/register', this.state).then( response => {
             this.props.userLoggedIn(response.data)
@@ -44,7 +79,9 @@ class Auth extends Component {
                 password: '',
                 confirmPassword: ''
             })
+            this.props.history.push('/dashboard');
         }).catch( error => {
+            console.log(error)
             this.setState({
                 errorMessage: error.response.data
             })
@@ -56,6 +93,7 @@ class Auth extends Component {
             this.props.userLoggedIn(response.data)
             this.props.history.push('/dashboard')
         }).catch( error => {
+            console.log(error)
             this.setState({
                 errorMessage: error.response.data
             })
@@ -64,27 +102,42 @@ class Auth extends Component {
 
   render() {
     return (
-      <div>
-        <Link to='/'>Home</Link>
-        {this.state.login ? 
-        <div>login
-            <input placeholder='email' name='email' onChange={this.handleChange} value={this.state.email} />
-            <input placeholder='password' name='password' type='password' onChange={this.handleChange} value={this.state.password} />
-            <button onClick={this.loginUser} >Log In</button>
-            <p>Need an account? <button onClick={this.loginViewVisible}>Register!</button></p>
-        </div>
-        :
-        <div>Register
-            <input placeholder='email' name='email' onChange={this.handleChange} value={this.state.email} />
-            <input placeholder='username' name='username' onChange={this.handleChange} value={this.state.username} />
-            <input placeholder='venmo' name='venmo' onChange={this.handleChange} value={this.state.venmo} />
-            <input placeholder='password' name='password' type='password' onChange={this.handleChange} value={this.state.password} />
-            <input placeholder='confirmPassword' name='confirmPassword' type='password' onChange={this.handleChange} value={this.state.confirmPassword} />
-            <button onClick={this.registerUser} >Register</button>
-            <p>Already have an account? <button onClick={this.loginViewVisible}>Log In!</button></p>
-        </div>}
-        {/* <LogoutButton /> */}
-      </div>
+        <div>
+            
+        <button onClick={this.openModal}>Login</button>
+  
+      <Modal
+      isOpen={this.state.modalIsOpen}
+      onRequestClose={this.closeModal}
+      style={customStyles}
+      contentLabel="Example Modal"
+      >
+          <div className='auth-modal'>
+              <button className='auth-close-button' onClick={this.closeModal}>X</button>
+              {this.state.login ? 
+              <div className='login-container'>
+                  <h1>Login</h1>
+                  <input placeholder='email' name='email' onChange={this.handleChange} value={this.state.email} onKeyPress={this.handleKeyPress} />
+                  <input placeholder='password' name='password' type='password' onChange={this.handleChange} value={this.state.password} onKeyPress={this.handleKeyPress} />
+                  <button onClick={this.loginUser} >Log In</button>
+                  <h1>Need an account?</h1>
+                  <button onClick={this.loginViewVisible}>Register!</button>
+              </div>
+              :
+              <div className='login-container register-container'>
+                  <h1>Register</h1>
+                  <input placeholder='email' name='email' onChange={this.handleChange} value={this.state.email} />
+                  <input placeholder='username' name='username' onChange={this.handleChange} value={this.state.username} />
+                  <input placeholder='venmo' name='venmo' onChange={this.handleChange} value={this.state.venmo} />
+                  <input placeholder='password' name='password' type='password' onChange={this.handleChange} value={this.state.password} onKeyPress={this.handleKeyPress} />
+                  <input placeholder='confirmPassword' name='confirmPassword' type='password' onChange={this.handleChange} value={this.state.confirmPassword} onKeyPress={this.handleKeyPress} />
+                  <button onClick={this.registerUser} >Register</button>
+                  <h1>Already have an account?</h1>
+                  <button onClick={this.loginViewVisible}>Log In!</button>
+              </div>}
+          </div>
+      </Modal>
+  </div> 
     )
   }
 }
@@ -95,4 +148,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {userLoggedIn})(Auth)
+export default withRouter(connect(mapStateToProps, {userLoggedIn})(Auth))

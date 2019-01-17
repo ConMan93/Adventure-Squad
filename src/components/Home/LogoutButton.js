@@ -8,7 +8,7 @@ class LogoutButton extends Component {
     handleLogout = () => {
         axios.get('/auth/logout').then( response => {
             this.props.userLoggedOut()
-            this.props.history.push('/login')
+            this.props.history.push('/')
         })
     }
 

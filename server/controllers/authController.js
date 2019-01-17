@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const validator = require('../../test/validator');
 
 module.exports = {
 
@@ -38,19 +39,19 @@ module.exports = {
             let { username, email, password, confirmPassword, venmo} = req.body;
             email = email.toLowerCase();
 
-            if (username.length < 4) {
+            if (validator.usernameValidator(username)) {
                 return res.status(409).send('Username must be 4 or more characters long')
             }
 
-            if (!email.includes('@') || !email.includes('.')) {
+            if (validator.emailValidator(email)) {
                 return res.status(409).send('Email must be in format "youremail@email.com/net/etc.')
             }
 
-            if (password.length < 5) {
+            if (validator.passwordValidator(password)) {
                 return res.status(409).send('Password must be at least 5 characters long')
             }
 
-            if (confirmPassword !== password) {
+            if (validator.confirmPasswordValidator(password, confirmPassword)) {
                 return res.status(409).send('Passwords must match')
             }
 
