@@ -90,13 +90,9 @@ module.exports = {
     changeImage: async (req, res) => {
         try{
             const db = req.app.get('db')
-            let {profile_img, id} = req.body
-            console.log(req.body)
-    
+            let {profile_img, id} = req.body    
             let updatedImg = await db.add_pic([profile_img, id])
-            console.log(updatedImg)
             req.session.user = {...req.session.user, ...updatedImg[0]}
-            console.log(req.session.user)
             res.send(req.session.user)
         } catch (error) {
             console.log('error updating image', error)
