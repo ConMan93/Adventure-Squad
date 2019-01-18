@@ -46,6 +46,7 @@ a {
 	text-decoration: none;
 }
 /* UNIVERSAL STYLES */
+
 * {
 	box-sizing: border-box;
 }
@@ -55,6 +56,7 @@ a {
 }
 
 /* HOME PAGE */
+
 .homepage-component-container {
   height: 100vh;
   width: 100%;
@@ -75,7 +77,6 @@ a {
 	padding-right: 15%;
 	margin: 0;
 	color: white;
-	text-shadow: 0px 2px 20px rgba(0,0,0,0.2);
 	
 }
 
@@ -84,6 +85,7 @@ a {
 .homepage-button-container button {
 	font-family: 'Permanent Marker', sans-serif;
 	letter-spacing: 5px;
+	text-shadow: 0px 0px 10px white;
 }
 
 .homepage-subtitle {
@@ -151,7 +153,8 @@ a {
 	outline: none;
 }
 
-.auth-modal {
+.auth-modal,
+.wizard-modal-container {
 	height: 80vh;
 	width: 40vw;
 	display: flex;
@@ -160,12 +163,14 @@ a {
 	padding: 0 10px;
 }
 
-.auth-close-button {
+.auth-close-button,
+.wizard-close-button {
 	width: 5vw;
 	height: 5vw;
 	border: none;
 	background: none;
 	color: #ff8421;
+	text-shadow: 0px 0px 10px #ff8421;
 	font-size: 4vw;
 	font-family: 'Comfortaa', sans-serif;
 }
@@ -182,8 +187,9 @@ a {
 }
 
 .login-container h1 {
-	font-family: 'Permanent Marker';
+	font-family: 'Comfortaa', sans-serif;
 	color: #ff8421;
+	text-shadow: 0px 0px 10px #ff8421;
 	font-size: 5vh;
 	text-align: right;
 	margin: 5vh 0;
@@ -200,12 +206,15 @@ a {
 	background: none;
 	border: 2px solid #ff8421;
 	color: #ff8421;
+	text-shadow: 0px 0px 10px #ff8421;
 	font-family: 'Comfortaa', sans-serif;
 	font-size: 3vh;
 	width: 30%;
 	padding: 20px 0;
 	border-radius: 5px;
 	transition: all 350ms ease;
+	box-shadow: 0px 0px 10px #ff8421;
+	transform-origin: left;
 }
 
 .login-container button:hover {
@@ -215,7 +224,7 @@ a {
 }
 
 .register-container input {
-	margin-bottom: 3vh;
+	margin-bottom: 2vh;
 	padding: 5px 5px;
 }
 
@@ -225,6 +234,7 @@ a {
 }
 
 .register-container button {
+	margin: 2vh 0;
 	padding: 10px 0;
 }
 
@@ -253,6 +263,7 @@ a {
 } */
 
 /*  DASHBOARD  */
+
 .dashboard-component-container {
 	background-color: #eee;
 	display: flex;
@@ -269,6 +280,7 @@ a {
 	/* box-shadow: 0px 5px 10px rgba(0,0,0,0.5); */
 	padding: 20px;
 	color: #ff8421;
+	text-shadow: 0px 0px 10px #ff8421;
 	display: flex;
 	justify-content: space-between;
 }
@@ -298,7 +310,7 @@ a {
 }
 
 .dashboard-header-image div {
-	margin-top: 5vh;
+	margin-top: 2vh;
 	min-height: 15vh;
 	padding: 10px;
 	border-radius: 5px;
@@ -314,11 +326,12 @@ a {
 	z-index: 10;
 }
 
-.dashboard-header-edit button {
+.dashboard-component-container .dashboard-header-edit button {
 	background: none;
 	background-color: #333;
 	font-family: 'Comfortaa', sans-serif;
 	color: #ff8421;
+	text-shadow: 0px 0px 10px #ff8421;
 	border: none;
 	margin-right: 10px;
 	padding: 5px;
@@ -362,7 +375,8 @@ a {
 }
 
 .dashboard-adventures {
-	width: 30%
+	width: 30%;
+	overflow-x: visible;
 }
 
 .dashboard-adventures a {
@@ -370,8 +384,8 @@ a {
 }
 
 .dashboard-adventure-list {
-	height: 50vh; 
-	overflow: scroll;
+	height: 50vh;
+	overflow-y: scroll;
 	padding: 20px;
 }
 
@@ -380,6 +394,7 @@ a {
 	justify-content: space-between;
 	align-items: center;
 	height: 15%;
+	width: 95%;
 	font-size: 2.5vh;
 	border: 1px solid #333;
 	color: #333;
@@ -392,7 +407,9 @@ a {
 .dashboard-adventure:hover {
 	background-color: #333;
 	color: #ff8421;
-	transform: scale(1.1)
+	text-shadow: 0px 0px 10px #ff8421;
+	transform: scale(1.1);
+	z-index: 30;
 }
 
 .new-trip-button-container {
@@ -424,6 +441,10 @@ a {
 
 .dashboard-friends > div > div > div > a > img {
 	border-radius: 5px;
+}
+
+.dashboard-friends > div > div > div > span {
+	font-size: 2vh;
 }
 
 .dashboard-search {
@@ -500,3 +521,151 @@ a {
 	margin-bottom: 5vh;
 	text-align: center;
 }
+
+.wizard-modal-container {
+	width: 50vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.wizard-submit-button {
+	width: 25vw;
+	background: none;
+	border: 1px solid #ff8421;
+	font-family: 'Comfortaa', sans-serif;
+	color: #ff8421;
+	text-shadow: 0px 0px 10px #ff8421;
+	font-size: 5vh;
+	border-radius: 10px;
+	transition: all 350ms ease;
+	padding: 20px 0;
+	margin-top: 5%;
+	box-shadow: 0px 0px 10px #ff8421;
+}
+
+.wizard-submit-button:hover {
+	color: #333;
+	background-color: #ff8421;
+	transform: scale(1.1);
+}
+
+.wizard-close-button {
+	text-shadow: 0px 0px 10px #ff8421;
+}
+
+.wizard-options-container {
+	width: 80%;
+	height: 80%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.wizard-places-container {
+	width: 100%;
+	height: 30%;
+	color: #ff8421;
+	font-family: 'Comfortaa', sans-serif;
+	font-size: 3vh;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	text-shadow: 0px 0px 10px #ff8421;
+}
+
+.wizard-origin-container,
+.wizard-destination-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	height: 100%;
+	width: 40%;
+}
+
+.wizard-origin-container select,
+.wizard-destination-container select {
+	width: 100%;
+	font-family: 'Comfortaa', sans-serif;
+	padding: 10px;
+	border-radius: 5px;
+	margin-top: 20px;
+	font-size: 2vh;
+}
+
+.wizard-calendar-container {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row-reverse;
+	align-items: center;
+}
+
+.wizard-calendar-instructions {
+	font-family: 'Comfortaa', sans-serif;
+	font-size: 3vh;
+	color: #ff8421;
+	text-shadow: 0px 0px 10px #ff8421;
+	text-align: left;
+	padding-left: 10px;
+	line-height: 4vh;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.wizard-calendar-instructions h2 {
+	text-align: right;
+}
+
+.wizard-calendar-reset-button {
+	background: none;
+	border: 1px solid #ff8421;
+	font-family: 'Comfortaa', sans-serif;
+	font-size: 3vh;
+	padding: 10px;
+	color: #ff8421;
+	border-radius: 5px;
+	text-shadow: 0px 0px 10px #ff8421;
+	box-shadow: 0px 0px 10px #ff8421;
+	transition: all 350ms ease;
+}
+
+.wizard-calendar-reset-button:hover {
+	color: #333;
+	background-color: #ff8421;
+	transform: scale(1.1);
+}
+
+.DayPicker-Month {
+	color: #ff8421;
+	text-shadow: 0px 0px 10px #ff8421;
+	font-family: 'Comfortaa', sans-serif;
+	font-size: 2vh;
+}
+.DayPicker-Weekday {
+	color: #ff8421 !important;
+}
+
+.DayPicker-Day--today {
+	color: white !important;
+	text-shadow: 0px 0px 10px #fff;
+}
+
+.DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end) {
+	color: #333 !important;
+	text-shadow: none;
+}
+
+.DayPicker-Day--start,
+.DayPicker-Day--end {
+	background-color: #ff8421 !important;
+	color: #333 !important;
+	text-shadow: none;
+}
+
+/* TRIP PAGE */
+

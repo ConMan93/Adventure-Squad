@@ -30,17 +30,20 @@ class Calendar extends Component {
         const modifiers = { start: from, end: to}
     
     return(
-        <div>
-            <p>
-                {!from && !to && 'Please select the first day'}
-                {from && !to && 'Please select the last day'}
-                {from && to && 
-                    `Selected from ${from.toLocaleDateString()} to ${to.toLocaleDateString()} ${to.getTime()/86400000-from.getTime()/86400000} ` } 
-                {from && to && 
-                    (
-                        <button className="link"onClick={this.handleResetClick}>Reset</button>
-                    )}
-            </p>
+        <div className='wizard-calendar-container'>
+            <div className='wizard-calendar-instructions'>
+                <h1>
+                    {!from && !to && 'Please select the first day'}
+                    {from && !to && 'Please select the last day'}
+                    {from && to && 
+                        `Selected from ${from.toLocaleDateString()} to ${to.toLocaleDateString()}` } 
+                </h1>
+                <h2>{from && to && `${to.getTime()/86400000-from.getTime()/86400000} Days`}</h2>
+                    {from && to && 
+                        (
+                            <button className="wizard-calendar-reset-button" onClick={this.handleResetClick}>Reset</button>
+                        )}
+            </div>
             <DayPicker
                 className="Selectable"
                 selectedDays={[from, {from, to}]}

@@ -132,7 +132,7 @@ class Auth extends Component {
                   <input placeholder='password' name='password' type='password' onChange={this.handleChange} value={this.state.password} onKeyPress={this.handleKeyPress} />
                   <input placeholder='confirmPassword' name='confirmPassword' type='password' onChange={this.handleChange} value={this.state.confirmPassword} onKeyPress={this.handleKeyPress} />
                   <button onClick={this.registerUser} >Register</button>
-                  <h1>Already have an account?</h1>
+                  <h1>Already Registered?</h1>
                   <button onClick={this.loginViewVisible}>Log In!</button>
               </div>}
           </div>

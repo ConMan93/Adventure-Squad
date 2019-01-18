@@ -109,8 +109,7 @@ module.exports = {
         {
             state: 'IL',
             cities: [
-                "ORD-Chicago O'Hare",
-                'MDW-Chicago Midway'
+                "ORD-Chicago",
             ]
         },
         {

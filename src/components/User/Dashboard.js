@@ -99,9 +99,9 @@ class Dashboard extends Component{
 
         let tripsDisplay = this.state.trips.map((trip, i) => {
             return (
-                <Link to={`/trip/${trip.id}`}><div className='dashboard-adventure' key={i}>
+                <Link to={`/trip/${trip.id}`} key={i}><div className='dashboard-adventure'>
                     <h4>{trip.leaving_date.slice(5, 10)}</h4>
-                    <h2>{trip.destination_city.slice(4)}, {trip.destination_state}</h2>
+                    <h2>{trip.destination_city.slice(4)}{/*}, {trip.destination_state}*/}</h2>
                     <h4>{trip.returning_date.slice(5, 10)}</h4>
                 </div></Link>
             )
