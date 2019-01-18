@@ -35,5 +35,6 @@
 --     id serial primary key,
 --     user_id integer references users,
 --     trip_id integer references trips,
---     message text
+--     message text,
+--     date text
 -- );

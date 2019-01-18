@@ -27,6 +27,7 @@ class Board extends Component {
                 key={'note' + note.id}
                 message={note.message}
                 user_id={note.user_id}
+                date={note.date}
                 id={note.id}
                 displayUpdatedDiscussionFn={this.displayUpdatedDiscussion}
             />)

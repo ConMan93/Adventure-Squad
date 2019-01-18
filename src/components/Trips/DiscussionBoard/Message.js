@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { updateDiscussionBoard } from '../../../Redux/reducer';
+import Moment from 'react-moment';
 
 class Message extends Component {
 
@@ -51,7 +52,7 @@ class Message extends Component {
     }
 
   render() {
-      
+      const dateToFormat = this.props.date
     return (
       <div style={{border: '1px solid black'}}>
         <h2>{this.state.author.username}</h2>
@@ -61,16 +62,30 @@ class Message extends Component {
         :
         <p>{this.state.message}</p>}
 
-        {this.state.editing ?
+        {this.state.author.id === this.props.user.id ?  
+        this.state.editing ?
         <button onClick={this.udpateMessage}>save</button>
         :
-        <button onClick={this.handleEditClick}>edit</button>}
-        
-        <button onClick={this.deleteMessage}>delete</button>
+        <button onClick={this.handleEditClick}>edit</button>
+        :
+        null}
+        {this.state.author.id === this.props.user.id ?
+            <button onClick={this.deleteMessage}>delete</button>
+            :
+            null
+        }
+
+        <Moment date={dateToFormat} format='ddd MMM DD, YYYY hh:mm A' />
+       
       </div>
     )
   }
 }
 
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    }
+}
 
-export default connect(null, { updateDiscussionBoard })(Message)
+export default connect(mapStateToProps, { updateDiscussionBoard })(Message)
