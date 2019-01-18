@@ -31,7 +31,8 @@ class MessageForm extends Component {
     postMessage = () => {
         let { message } = this.state
         let trip_id = +this.props.trip_id
-        axios.post('/trip/discussion', { message, trip_id }).then( response => {
+        let date = new Date()
+        axios.post('/trip/discussion', { message, trip_id, date }).then( response => {
             this.props.updateDiscussionBoard(response.data)
             this.setState({
                 newMessage: false,

@@ -42,24 +42,10 @@ export default class Trip extends Component {
                     dest_city: this.state.trip.destination_city.slice(4),
                     loadMap: true,
                 }, () => {
-                    let date = new Date()
-                    let leavingDateYear = this.state.trip.leaving_date.slice(0, 4)
-                    let currentYear = date.getFullYear()
-                    let leavingDateMonth = this.state.trip.leaving_date.slice(5, 7)
-                    let currentMonth = date.getMonth() + 1
-                    let leavingDateDay = this.state.trip.leaving_date.slice(8, 10)
-                    let currentDay = date.getDate()
-                    if (currentDay > +leavingDateDay) {
-                        console.log('muppet')
-                        if (currentMonth >= +leavingDateMonth) {
-                            console.log('you smell')
-                            if (currentYear >= +leavingDateYear) {
-                                console.log('so bad')
-                                this.setState({
-                                    pastTrip: true
-                                })
-                            }
-                        }
+                    if (new Date(this.state.trip.leaving_date).getTime() - new Date().getTime() < 0) {
+                        this.setState({
+                            pastTrip: true
+                        })
                     }
                 });
             });
@@ -116,8 +102,6 @@ export default class Trip extends Component {
 
     render() {
 
-        console.log(this.state)
-
         if (this.state.loading) {
             var trip = <div>one moment while we search for flights</div>
         } else {
@@ -138,7 +122,8 @@ export default class Trip extends Component {
                     trip_id={this.props.match.params.id}
                     />
                 </div>}
-                {this.state.loading ?
+
+               {this.state.loading ? 
                 null
                 :
                 trip}
@@ -147,7 +132,7 @@ export default class Trip extends Component {
                 />
                 <Board trip_id={this.props.match.params.id} />
                 {this.state.loadMap ?
-                <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city} />
+                <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city.slice(4)} />
                 :
                 null}
             </div>

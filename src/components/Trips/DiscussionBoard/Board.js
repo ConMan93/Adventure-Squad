@@ -4,7 +4,6 @@ import Message from './Message';
 import MessageForm from './MessageForm';
 import { connect } from 'react-redux';
 import { updateDiscussionBoard } from '../../../Redux/reducer';
-import Members from '../Members';
 import { withRouter } from 'react-router-dom';
 
 class Board extends Component {
@@ -28,6 +27,7 @@ class Board extends Component {
                 key={'note' + note.id}
                 message={note.message}
                 user_id={note.user_id}
+                date={note.date}
                 id={note.id}
                 displayUpdatedDiscussionFn={this.displayUpdatedDiscussion}
             />)

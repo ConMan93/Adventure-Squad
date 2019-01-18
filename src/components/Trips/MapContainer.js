@@ -198,7 +198,7 @@ export class MapContainer extends Component {
             initialCenter={{lat: 40.7618, lng: -111.8907}}
             onClick={this.onMapClicked}
             onReady={this.fetchPlaces}
-            style={{width: '50%', height: '50%'}}
+            style={{width: '40%', height: '50%'}}
             center={{lat: this.state.lat, lng: this.state.lng}}>
 
                 <Marker onClick={this.onMarkerClick}
