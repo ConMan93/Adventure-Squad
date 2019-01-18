@@ -6,6 +6,7 @@ import FriendModal from '../Wizard/FriendModal';
 import Members from './Members'
 import MapContainer from './MapContainer';
 import Board from './DiscussionBoard/Board';
+import LocationImage from './LocationImage';
 
 export default class Trip extends Component {
     constructor() {
@@ -95,28 +96,42 @@ export default class Trip extends Component {
             trip =  <div>
                         <Flights flights={this.state.flights} />
                         <Housing hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>
-                        <Board trip_id={this.props.match.params.id} />
+                        
                         {/* <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city} /> */}
                     </div> 
         }
+        if (this.state.dest_city) {
+            var locationImage = <LocationImage dest_city={this.state.dest_city} destination_state={this.state.trip.destination_state}/>
+        } else {
+            locationImage = null;
+        }
         return (
-            <div>
-                <h1>Trip to {this.state.dest_city}</h1>
-                <button onClick={this.getAmadeus}>Find Flight and Accomodations</button>
-                <FriendModal
-                trip_id={this.props.match.params.id}
-                />
-                {this.state.loading ?
-                trip
-                :
-                null}
-                <Members
-                trip_id={this.props.match.params.id}
-                />
-                {this.state.loadMap ?
-                <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city} />
-                :
-                null}
+            <div className='trip-component-container'>
+                <div className='trip-discussion-container'>
+                <Board trip_id={this.props.match.params.id} />
+                </div>
+                <div className='trip-content-container'>
+                    {locationImage}
+                    <div className='trip-columns'>
+                        <div className='trip-left-column'>
+                            <button onClick={this.getAmadeus}>Find Flight and Accomodations</button>
+                            {this.state.loading ?
+                            trip
+                            :
+                            null}
+                        </div>
+                        <div className='trip-right-column'>
+                            
+                            <Members
+                            trip_id={this.props.match.params.id}
+                            />
+                            {this.state.loadMap ?
+                            <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city}/>
+                            :
+                            null}
+                        </div>
+                    </div>
+                </div>       
             </div>
         )
     }

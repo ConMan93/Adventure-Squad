@@ -53,20 +53,20 @@ class Calendar extends Component {
              <Helmet>
                  <style>{`
                  .Selectable .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
-                    background-color: #f0f8ff !important;
-                    color: #4a90e2;
+                    background-color: #ff9a49 !important;
+                    color: #333;
                   }
                   .Selectable .DayPicker-Day {
                     border-radius: 0 !important;
                   }
-                //   .Selectable .DayPicker-Day--start {
-                //     border-top-left-radius: 50% !important;
-                //     border-bottom-left-radius: 50% !important;
-                //   }
-                //   .Selectable .DayPicker-Day--end {
-                //     border-top-right-radius: 50% !important;
-                //     border-bottom-right-radius: 50% !important;
-                //   }
+                  .Selectable .DayPicker-Day--start {
+                    border-top-left-radius: 10px !important;
+                    border-bottom-left-radius: 10px !important;
+                  }
+                  .Selectable .DayPicker-Day--end {
+                    border-top-right-radius: 10px !important;
+                    border-bottom-right-radius: 10px !important;
+                  }
                  `}</style>
              </Helmet>
         </div>

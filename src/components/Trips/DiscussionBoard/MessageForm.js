@@ -50,9 +50,8 @@ class MessageForm extends Component {
   render() {
 
     return (
-      <div>
-        Message Form
-        <button onClick={this.handleClick}>Create New Message</button>
+      <div className='message-form-container'>
+        <button onClick={this.handleClick}>New Message</button>
         {this.state.newMessage ?
         <div>
             <textarea value={this.state.message} onChange={this.handleChange} name='message' />

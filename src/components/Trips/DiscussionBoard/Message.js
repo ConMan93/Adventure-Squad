@@ -53,20 +53,21 @@ class Message extends Component {
   render() {
       
     return (
-      <div style={{border: '1px solid black'}}>
+      <div className='trip-discussion-message'>
         <h2>{this.state.author.username}</h2>
 
         {this.state.editing ?
         <textarea value={this.state.message} name='message' onChange={this.handleChange} />
         :
         <p>{this.state.message}</p>}
-
-        {this.state.editing ?
-        <button onClick={this.udpateMessage}>save</button>
-        :
-        <button onClick={this.handleEditClick}>edit</button>}
-        
-        <button onClick={this.deleteMessage}>delete</button>
+        <div className='trip-message-buttons'>
+            {this.state.editing ?
+            <button onClick={this.udpateMessage}>save</button>
+            :
+            <button onClick={this.handleEditClick}>edit</button>}
+            
+            <button onClick={this.deleteMessage}>delete</button>
+        </div>
       </div>
     )
   }
