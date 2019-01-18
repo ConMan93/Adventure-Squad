@@ -3,6 +3,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {setMembers, setFriends} from '../../Redux/reducer';
 import {Link} from 'react-router-dom';
+import FriendModal from '../Wizard/FriendModal';
 
 
 class Members extends Component {
@@ -37,6 +38,7 @@ handleDeleteMember(user_id){
                 <h2> My Adventure Squad:
                     {displayTripMembers}
                 </h2>
+                <FriendModal trip_id={this.props.trip_id}/>
             </div>
         )
     }

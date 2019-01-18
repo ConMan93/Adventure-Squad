@@ -63,29 +63,35 @@ class StepOne extends Component {
     }
 
     return (
-      <div>
+      <div className='wizard-options-container'>
         <Calendar />
-        <p>Leaving From:</p>
-        <select onChange={e => this.props.setOriginState(e.target.value)}>
-            <option value='' >Select State</option>
-            {stateOptions}
-        </select>
-        <select onChange={e => this.props.setOriginCity(e.target.value)}>
-            <option value='' >Select City</option>
-            {originCitiesOptions}
-        </select>
-        <p>Going To:</p>
-        <select onChange={e => this.props.handleDestinationChange(e.target.value)} value={this.props.destinationState}>
-            <option value='' >Select State</option>
-            {stateOptions}
-        </select>
-        <select onChange={e => this.props.handleCityChange(e.target.value)} value={this.props.destinationCity}>
-            <option value='' >Select City</option>
-            {citiesOptions}
-        </select>
-        {this.props.originState && this.props.originCity && this.props.from && this.props.to ?
-        <button onClick={this.fuckIt}>F**k it</button>
-        : null}
+        <div className='wizard-places-container'>
+            <div className='wizard-origin-container'>
+                <h5>Leaving From:</h5>
+                <select onChange={e => this.props.setOriginState(e.target.value)}>
+                    <option value='' >Select State</option>
+                    {stateOptions}
+                </select>
+                <select onChange={e => this.props.setOriginCity(e.target.value)}>
+                    <option value='' >Select City</option>
+                    {originCitiesOptions}
+                </select>
+            </div>
+            <div className='wizard-destination-container'>
+                <h5>Going To:</h5>
+                <select onChange={e => this.props.handleDestinationChange(e.target.value)}>
+                    <option value='' >Select State</option>
+                    {stateOptions}
+                </select>
+                <select onChange={e => this.props.handleCityChange(e.target.value)}>
+                    <option value='' >Select City</option>
+                    {citiesOptions}
+                </select>
+                {this.props.originState && this.props.originCity && this.props.from && this.props.to ?
+                <button onClick={this.fuckIt}>F**k it</button>
+                : null}
+            </div>
+        </div>
       </div>
     )
   }

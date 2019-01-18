@@ -39,7 +39,7 @@ export class MapContainer extends Component {
     fetchPlaces = (mapProps, map) => {
         
         const geocoder = new mapProps.google.maps.Geocoder()
-        geocoder.geocode( { 'address': `${this.props.state}, ${this.props.city}`}, (results, status) => {
+        geocoder.geocode( { 'address': `${this.props.state}, ${this.props.city.slice(4)}`}, (results, status) => {
             if (status === "OK") {
                 this.setState({
                     lat: results[0].geometry.location.lat(),
@@ -192,13 +192,14 @@ export class MapContainer extends Component {
     render() {
 
         return (
+            <div className='map-container-div'>
             <Map 
             google={this.props.google} 
             zoom={14} 
             initialCenter={{lat: 40.7618, lng: -111.8907}}
             onClick={this.onMapClicked}
             onReady={this.fetchPlaces}
-            style={{width: '40%', height: '50%'}}
+            style={{width: '100%', height: '100%'}}
             center={{lat: this.state.lat, lng: this.state.lng}}>
 
                 <Marker onClick={this.onMarkerClick}
@@ -218,6 +219,7 @@ export class MapContainer extends Component {
                 {this.nearbyStoresInfo()}
 
             </Map>
+            </div>
         )
     }
 }

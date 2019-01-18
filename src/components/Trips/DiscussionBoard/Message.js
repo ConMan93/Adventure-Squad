@@ -54,7 +54,7 @@ class Message extends Component {
   render() {
       const dateToFormat = this.props.date
     return (
-      <div style={{border: '1px solid black'}}>
+      <div className='trip-discussion-message'>
         <h2>{this.state.author.username}</h2>
 
         {this.state.editing ?
