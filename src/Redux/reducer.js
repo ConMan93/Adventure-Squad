@@ -11,7 +11,8 @@ const initialState = {
     destinationCity: '',
     originState: '',
     originCity: '', 
-    tripMembers: []
+    tripMembers: [],
+    trips: []
 }
 
 const USER_LOGGED_IN = 'USER_LOGGED_IN';
@@ -28,10 +29,11 @@ const CLEAR_TRIP = 'CLEAR_TRIP';
 const SET_ORIGIN_CITY = 'SET_ORIGIN_CITY';
 const SET_ORIGIN_STATE = 'SET_ORIGIN_STATE';
 const SET_MEMBERS = 'SET_MEMBERS';
+const SET_TRIPS = 'SET_TRIPS';
+export let types = {SET_FRIENDS, SET_ORIGIN_CITY, SET_MEMBERS, DISPLAY_USERS, UPDATE_DISCUSSION_BOARD}
 
 
 export default function reducer(state = initialState, action) {
-
     switch(action.type) {
 
         case USER_LOGGED_IN:
@@ -75,6 +77,9 @@ export default function reducer(state = initialState, action) {
         
         case SET_MEMBERS:
             return {...state, tripMembers: action.payload}
+
+        case SET_TRIPS:
+            return {...state, trips: action.payload}
 
         default:
             return state;
@@ -174,5 +179,12 @@ export function setMembers(member) {
     return {
         type: SET_MEMBERS,
         payload: member
+    }
+}
+
+export function setTrips(trips) {
+    return {
+        type: SET_TRIPS,
+        payload: trips
     }
 }

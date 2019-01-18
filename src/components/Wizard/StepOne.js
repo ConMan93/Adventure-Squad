@@ -14,6 +14,17 @@ class StepOne extends Component {
         }
     }
 
+    fuckIt = async () => {
+        let number = Math.floor(Math.random() * 50)
+        let randomState = this.state.states.cityArray[number].state
+        let randomCity = this.state.states.cityArray[number].cities[Math.floor(Math.random() * this.state.states.cityArray[number].cities.length)]
+        console.log(randomState)
+        console.log(randomCity)
+        this.props.handleDestinationChange(randomState)
+        await this.props.handleCityChange(randomCity)
+        this.props.createTrip()
+    }
+
     
   render() {
 
@@ -76,6 +87,9 @@ class StepOne extends Component {
                     <option value='' >Select City</option>
                     {citiesOptions}
                 </select>
+                {this.props.originState && this.props.originCity && this.props.from && this.props.to ?
+                <button onClick={this.fuckIt}>F**k it</button>
+                : null}
             </div>
         </div>
       </div>

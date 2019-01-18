@@ -66,7 +66,7 @@ class Wizard extends Component {
         >
         <button className='wizard-close-button' onClick={this.closeModal}>X</button>
         <div className='wizard-modal-container'>
-        <StepOne />
+        <StepOne createTrip={this.createTrip}/>
         {
         this.props.originState && this.props.originCity && this.props.destinationState && this.props.destinationCity && this.props.from && this.props.to ?
         <button onClick={this.createTrip} className='wizard-submit-button'>submit</button>

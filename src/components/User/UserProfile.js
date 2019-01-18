@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { setTrips } from '../../Redux/reducer';
+import UserMap from './UserMap';
+import Moment from 'react-moment';
 
-export default class UserProfile extends Component {
+class UserProfile extends Component {
 
     constructor(props) {
         super(props);
@@ -9,7 +13,8 @@ export default class UserProfile extends Component {
         this.state = {
             user: {},
             friends: [],
-            trips: []
+            trips: [],
+            loadMap: false
         }
     }
 
@@ -34,9 +39,13 @@ export default class UserProfile extends Component {
         })
 
         axios.get(`/userprofile/trips/${id}`).then( response => {
-            console.log(response.data)
+            this.props.setTrips(response.data)
             this.setState({
                 trips: response.data
+            }, () => {
+                this.setState({
+                    loadMap: true
+                })
             })
         }).catch(error => {
             this.props.history.push('/')
@@ -49,7 +58,7 @@ export default class UserProfile extends Component {
 
       let friends = this.state.friends.map((friend, i) => {
           return (
-              <div key={i}>
+              <div key={'friend' + i}>
                   <p>{friend.username}</p>
                   <img src={friend.profile_img} alt='' style={{height: '50px', width: '50px'}} />
               </div>
@@ -60,8 +69,8 @@ export default class UserProfile extends Component {
           return (
               <div key={'trip' + i} style={{border: '1px solid black'}}>
                   <p>Trip to {trip.destination_city.slice(4)}, {trip.destination_state}</p>
-                  <p>from : {trip.leaving_date.slice(0, 10)}</p>
-                  <p>from : {trip.returning_date.slice(0, 10)}</p>
+                  <p>from : <Moment date={trip.leaving_date} format='ddd MMM DD, YYYY' /></p>
+                  <p>to : <Moment date={trip.returning_date} format='ddd MMM DD, YYYY' /></p>
               </div>
         )
       })
@@ -73,7 +82,13 @@ export default class UserProfile extends Component {
         <p>{`${this.state.user.username}'s friends`}</p>
         <div>{friends}</div>
         {usersTrips}
+        {this.state.loadMap ?
+        <UserMap />
+        :
+        null}
       </div>
     )
   }
 }
+
+export default connect(null, { setTrips })(UserProfile)

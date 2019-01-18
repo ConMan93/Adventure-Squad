@@ -69,10 +69,10 @@ module.exports = {
 
         try {
             let db = req.app.get('db')
-            let { message, trip_id } = req.body
+            let { message, trip_id, date } = req.body
             let user_id = req.session.user.id 
 
-            await db.create_new_message({user_id, trip_id, message})
+            await db.create_new_message({user_id, trip_id, message, date})
             let tripDiscussion = await db.get_trip_discussion(trip_id)
             return res.send(tripDiscussion)
 
@@ -101,6 +101,7 @@ module.exports = {
             const db = req.app.get('db')
             let user_id = req.session.user.id
             let { originCity, originState, destinationCity, destinationState, to, from } = req.body
+            console.log(1111)
             let newTrip = await db.create_trip([originState, originCity, destinationState, destinationCity, from, to])
             let createdTrip = newTrip[0]
             let trip_id = createdTrip.id
@@ -146,6 +147,7 @@ module.exports = {
             const db = req.app.get('db')
             let {user_id, trip_id} = req.body
             let memberResponse = await db.add_trip_members([user_id, trip_id])
+
             res.send(memberResponse)
 
         } catch (error) {

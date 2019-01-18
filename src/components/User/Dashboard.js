@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import {setFriends, displayUsers, viewProfile, setUser} from '../../Redux/reducer';
+import {setFriends, displayUsers, viewProfile, setUser, setTrips} from '../../Redux/reducer';
 import {Link} from 'react-router-dom';
 import Friends from './Friends';
 import Wizard from '../Wizard/Wizard';
-import Header from './Header';
+import UserMap from './UserMap';
 
 
 class Dashboard extends Component{
@@ -13,10 +13,11 @@ class Dashboard extends Component{
         super()
         this.state= {
             filterFriends: "",
-            adventures: [],
+            // adventures: [],
             trips: [],
             profile_img: '',
-            editing: false
+            editing: false,
+            loadMap: false
         }
     }
     componentDidMount() {  
@@ -35,9 +36,13 @@ class Dashboard extends Component{
         })
 
         axios.get('/dashboard/trips').then( response => {
-            console.log(response.data)
+            this.props.setTrips(response.data)
             this.setState({
                 trips: response.data
+            }, () => {
+                this.setState({
+                    loadMap: true
+                })
             })
         }).catch(error => {
             this.props.history.push('/')
@@ -158,6 +163,10 @@ class Dashboard extends Component{
                         history={this.props.history} />
                     </div>
                 </div>
+                {this.state.loadMap ?
+                <UserMap />
+                :
+                null}
             </div>          
         )
     }
@@ -172,4 +181,4 @@ function mapStateToProps(state){
         isAuthenticated
     }
 }
-export default connect(mapStateToProps, {setFriends, displayUsers, viewProfile, setUser})(Dashboard)
+export default connect(mapStateToProps, {setFriends, displayUsers, viewProfile, setUser, setTrips})(Dashboard)

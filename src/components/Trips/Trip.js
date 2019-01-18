@@ -24,15 +24,13 @@ export default class Trip extends Component {
             dest_city: '',
             flights: [],
             hotels: [],
-            loading: false,
-            loadMap: false
+            loading: true,
+            loadMap: false,
+            pastTrip: false
         }
     }
 
     componentDidMount() {
-        this.setState({
-            loading: true
-        })
         const url = this.props.location.pathname;
         axios.get(url).then(res => {
             this.setState({
@@ -43,13 +41,22 @@ export default class Trip extends Component {
                     dest_IATA: this.state.trip.destination_city.slice(0,3),
                     org_city: this.state.trip.origin_city.slice(4),
                     dest_city: this.state.trip.destination_city.slice(4),
-                    loadMap: true
+                    loadMap: true,
+                }, () => {
+                    if (new Date(this.state.trip.leaving_date).getTime() - new Date().getTime() < 0) {
+                        this.setState({
+                            pastTrip: true
+                        })
+                    }
                 });
             });
+        }).catch(error => {
+            console.log(error)
+            this.props.history.push('/')
         })
     }
-
     getAmadeus = () => {
+        
         var Amadeus = require('amadeus');
         var amadeus = new Amadeus({
             clientId: process.env.REACT_APP_AMADEUS_KEY,
@@ -57,7 +64,6 @@ export default class Trip extends Component {
         })
         var leaving_date = this.state.trip.leaving_date.slice(0,10);
         var returning_date = this.state.trip.returning_date.slice(0,10);
-        console.log(leaving_date, returning_date);
         amadeus.shopping.flightOffers.get({
             origin: this.state.org_IATA,
             destination: this.state.dest_IATA,
@@ -83,21 +89,24 @@ export default class Trip extends Component {
                     return hotel.hotel.address.stateCode === this.state.trip.destination_state
                 })
                 this.setState({
-                    hotels: results2.slice(0,5)
+                    hotels: results2.slice(0,5),
+                }, () => {
+                    this.setState({
+                        loading: false
+                    })
                 })
             })
         })
     }
 
     render() {
-        if (!this.state.flights.length) {
+
+        if (this.state.loading) {
             var trip = <div>one moment while we search for flights</div>
         } else {
             trip =  <div>
                         <Flights flights={this.state.flights} />
                         <Housing hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>
-                        
-                        {/* <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city} /> */}
                     </div> 
         }
         if (this.state.dest_city) {
