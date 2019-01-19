@@ -64,14 +64,15 @@ class Wizard extends Component {
           style={customStyles}
           contentLabel="Example Modal"
         >
-        <button onClick={this.closeModal}>X</button>
-        <StepOne
-        createTrip={this.createTrip} />
+        <button className='wizard-close-button' onClick={this.closeModal}>X</button>
+        <div className='wizard-modal-container'>
+        <StepOne createTrip={this.createTrip}/>
         {
         this.props.originState && this.props.originCity && this.props.destinationState && this.props.destinationCity && this.props.from && this.props.to ?
-        <button onClick={this.createTrip}>submit</button>
+        <button onClick={this.createTrip} className='wizard-submit-button'>submit</button>
         : null
         }
+        </div>
         </Modal>
       </div>
     )

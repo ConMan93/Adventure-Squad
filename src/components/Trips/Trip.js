@@ -6,6 +6,7 @@ import FriendModal from '../Wizard/FriendModal';
 import Members from './Members'
 import MapContainer from './MapContainer';
 import Board from './DiscussionBoard/Board';
+import LocationImage from './LocationImage';
 
 export default class Trip extends Component {
     constructor() {
@@ -42,24 +43,10 @@ export default class Trip extends Component {
                     dest_city: this.state.trip.destination_city.slice(4),
                     loadMap: true,
                 }, () => {
-                    let date = new Date()
-                    let leavingDateYear = this.state.trip.leaving_date.slice(0, 4)
-                    let currentYear = date.getFullYear()
-                    let leavingDateMonth = this.state.trip.leaving_date.slice(5, 7)
-                    let currentMonth = date.getMonth() + 1
-                    let leavingDateDay = this.state.trip.leaving_date.slice(8, 10)
-                    let currentDay = date.getDate()
-                    if (currentDay > +leavingDateDay) {
-                        console.log('muppet')
-                        if (currentMonth >= +leavingDateMonth) {
-                            console.log('you smell')
-                            if (currentYear >= +leavingDateYear) {
-                                console.log('so bad')
-                                this.setState({
-                                    pastTrip: true
-                                })
-                            }
-                        }
+                    if (new Date(this.state.trip.leaving_date).getTime() - new Date().getTime() < 0) {
+                        this.setState({
+                            pastTrip: true
+                        })
                     }
                 });
             });
@@ -114,8 +101,6 @@ export default class Trip extends Component {
 
     render() {
 
-        console.log(this.state)
-
         if (this.state.loading) {
             var trip = <div>one moment while we search for flights</div>
         } else {
@@ -124,30 +109,38 @@ export default class Trip extends Component {
                         <Housing hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>
                     </div> 
         }
+        if (this.state.dest_city) {
+            var locationImage = <LocationImage dest_city={this.state.dest_city} destination_state={this.state.trip.destination_state}/>
+        } else {
+            locationImage = null;
+        }
         return (
-            <div>
-                <h1>Trip to {this.state.dest_city}, {this.state.trip.destination_state}</h1>
-                {this.state.pastTrip ?
-                null
-                :
-                <div>
-                    <button onClick={this.getAmadeus}>Find Flight and Accomodations</button>
-                    <FriendModal
-                    trip_id={this.props.match.params.id}
-                    />
-                </div>}
-                {this.state.loading ?
-                null
-                :
-                trip}
-                <Members
-                trip_id={this.props.match.params.id}
-                />
+            <div className='trip-component-container'>
+                <div className='trip-discussion-container'>
                 <Board trip_id={this.props.match.params.id} />
-                {this.state.loadMap ?
-                <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city} />
-                :
-                null}
+                </div>
+                <div className='trip-content-container'>
+                    {locationImage}
+                    <div className='trip-columns'>
+                        <div className='trip-left-column'>
+                            <button onClick={this.getAmadeus}>Find Flight and Accomodations</button>
+                            {this.state.loading ?
+                            trip
+                            :
+                            null}
+                        </div>
+                        <div className='trip-right-column'>
+                            
+                            <Members
+                            trip_id={this.props.match.params.id}
+                            />
+                            {this.state.loadMap ?
+                            <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city}/>
+                            :
+                            null}
+                        </div>
+                    </div>
+                </div>       
             </div>
         )
     }

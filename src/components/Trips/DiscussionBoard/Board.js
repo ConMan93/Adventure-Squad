@@ -27,19 +27,22 @@ class Board extends Component {
                 key={'note' + note.id}
                 message={note.message}
                 user_id={note.user_id}
+                date={note.date}
                 id={note.id}
                 displayUpdatedDiscussionFn={this.displayUpdatedDiscussion}
             />)
         })
 
         return (
-        <div>
-            Discussion!
+        <div className='trip-discussion'>
+            <h1>Discussion</h1>
+            <div className='trip-discussion-messages'>
+                {discussionBoard}
+            </div>
             <MessageForm 
             displayUpdatedDiscussionFn={this.displayUpdatedDiscussion}
             trip_id={this.props.trip_id}
             />
-            {discussionBoard}
           
         </div>
         )
