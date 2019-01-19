@@ -1,8 +1,54 @@
-import React from 'react';
+import React, {Component} from 'react';
+// import moment from 'moment';
+import {connect} from 'react-redux';
+import {setAirline} from '../../Redux/reducer';
 
-export default function Flight (props) {
+class Flight extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+// Alaska Airlines     
+            AS:  "https://www.alaskaair.com/",
+// America West Airlines  
+            HP: " https://www.onetravel.com/",
+// American Airlines   
+            AA: "https://www.aa.com/",
+// Air One 
+            AP:  "https://www.alternativeairlines.com/air-one",
+// Delta Air Lines 
+            DL:  "https://www.delta.com/",
+// Hawaiian Airlines   
+            HA: " https://www.hawaiianairlines.com/",
+// Northwest Airlines  
+            NW: " http://www.northwestairlines.us/",
+// Southwest Airlines  
+            WN: " https://www.southwest.com/",
+// United Airlines 
+            UA: " https://www.united.com/en/us/",
+// JetBlue 
+            B6:  "https://www.jetblue.com/",
+// Frontier 
+            F9: "https://www.flyfrontier.com/"
+        }
+
+        this.handleAirlineResponse=this.handleAirlineResponse.bind(this)
+
+    }
     
-    const {price, leavingStops, leavingSegments, returningStops, returningSegments} = props;
+    // handleAirlineResponse(e){
+    //     const {price, leavingStops, leavingSegments, returningStops, returningSegments} = this.props;
+    //     console.log("hello",leavingSegments)
+    //     const {carrierCode} = leavingSegments[0].flightSegment
+    //     const key = `${carrierCode}`
+
+    //     this.setState({[key]:e.target.value  })
+    //     console.log(key, e.target.value)
+    // }
+    
+    render () {
+    
+
+    const {price, leavingStops, leavingSegments, returningStops, returningSegments} = this.props;
 
     var leaving;
     var returning;
@@ -15,15 +61,17 @@ export default function Flight (props) {
         const {departure, arrival, carrierCode} = leavingSegments[0].flightSegment;
 
         //formatting departure date
-        let departureDate = `${new Date(departure.at).getMonth()+1}/${new Date(departure.at).getDate()} ${new Date(departure.at).getHours()}:${new Date(departure.at).getMinutes()}`
-        
+        let hours = new Date(departure.at)
+        let departureDate = new Intl.DateTimeFormat('en-US', {month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(hours)
+
         //fomatting arrival date
-        let arrivalDate = `${new Date(arrival.at).getMonth()+1}/${new Date(arrival.at).getDate()} ${new Date(arrival.at).getHours()}:${new Date(arrival.at).getMinutes()}`
+        let date = new Date(arrival.at)
+        let arrivalDate = new Intl.DateTimeFormat('en-US', {month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(date)
 
         leaving = <div>
-                    <h1>Direct Flight on {carrierCode}</h1>
-                    <h1>Departing From {departure.iataCode} at {departureDate}</h1>
-                    <h1>Arriving At {arrival.iataCode} at {arrivalDate}</h1>
+                    <h1>Airline: {carrierCode}</h1>
+                    <h1>Departing from {departure.iataCode} on {departureDate}</h1>
+                    <h1>Arriving to {arrival.iataCode} on {arrivalDate}</h1>
                     <h1>Flight will take {duration}</h1>
                     </div>
 
@@ -32,10 +80,12 @@ export default function Flight (props) {
             const {departure, arrival, carrierCode} = segment.flightSegment;
 
             //formatting departure date
-            let departureDate = `${new Date(departure.at).getMonth()+1}/${new Date(departure.at).getDate()} ${new Date(departure.at).getHours()}:${new Date(departure.at).getMinutes()}`
-            
-            //fomatting arrival date
-            let arrivalDate = `${new Date(arrival.at).getMonth()+1}/${new Date(arrival.at).getDate()} ${new Date(arrival.at).getHours()}:${new Date(arrival.at).getMinutes()}`
+            let hours = new Date(departure.at)
+            let departureDate = new Intl.DateTimeFormat('en-US', {month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(hours)
+
+             //fomatting arrival date
+            let date = new Date(arrival.at)
+            let arrivalDate = new Intl.DateTimeFormat('en-US', {month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(date)
 
             //formatting leg duration
             let durationArr = segment.flightSegment.duration.slice(3).split(/[A-Z]/gi);
@@ -43,10 +93,10 @@ export default function Flight (props) {
 
             return (
                 <div>
-                    <h1>Leg: Flown on {carrierCode}</h1>
-                    <h1>Departing From {departure.iataCode} at {departureDate}</h1>
-                    <h1>Arriving At {arrival.iataCode} at {arrivalDate}</h1>
-                    <h1>Leg will take {duration}</h1>
+                    <h1>Airline: {carrierCode}</h1>
+                    <h1>Departing from {departure.iataCode} on {departureDate}</h1>
+                    <h1>Arriving to {arrival.iataCode} on {arrivalDate}</h1>
+                    <h1>Flight time {duration}</h1>
                 </div>
             )
         });
@@ -63,26 +113,30 @@ export default function Flight (props) {
        const {departure, arrival, carrierCode} = returningSegments[0].flightSegment;
 
        //formatting departure date
-       let departureDate = `${new Date(departure.at).getMonth()+1}/${new Date(departure.at).getDate()} ${new Date(departure.at).getHours()}:${new Date(departure.at).getMinutes()}`
-       
-       //fomatting arrival date
-       let arrivalDate = `${new Date(arrival.at).getMonth()+1}/${new Date(arrival.at).getDate()} ${new Date(arrival.at).getHours()}:${new Date(arrival.at).getMinutes()}`
+       let hours = new Date(departure.at)
+       let departureDate = new Intl.DateTimeFormat('en-US', {month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(hours)
+
+        //fomatting arrival date
+       let date = new Date(arrival.at)
+       let arrivalDate = new Intl.DateTimeFormat('en-US', {month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(date)
 
        leaving = <div>
-                   <h1>Direct Flight on {carrierCode}</h1>
-                   <h1>Departing From {departure.iataCode} at {departureDate}</h1>
-                   <h1>Arriving At {arrival.iataCode} at {arrivalDate}</h1>
-                   <h1>Flight will take {duration}</h1>
+                   <h1>Direct flight on {carrierCode}</h1>
+                   <h1>Departing from {departure.iataCode} on {departureDate}</h1>
+                   <h1>Arriving at {arrival.iataCode} on {arrivalDate}</h1>
+                   <h1>Total flight time is {duration}</h1>
                    </div>
     } else {
         let segments = returningSegments.map(segment => {
             const {departure, arrival, carrierCode} = segment.flightSegment;
 
-            //formatting departure date
-            let departureDate = `${new Date(departure.at).getMonth()+1}/${new Date(departure.at).getDate()} ${new Date(departure.at).getHours()}:${new Date(departure.at).getMinutes()}`
-            
+           //formatting departure date
+           let hours = new Date(departure.at)
+           let departureDate = new Intl.DateTimeFormat('en-US', {month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(hours)
+
             //fomatting arrival date
-            let arrivalDate = `${new Date(arrival.at).getMonth()+1}/${new Date(arrival.at).getDate()} ${new Date(arrival.at).getHours()}:${new Date(arrival.at).getMinutes()}`
+           let date = new Date(arrival.at)
+           let arrivalDate = new Intl.DateTimeFormat('en-US', {month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(date)
 
             //formatting leg duration
             let durationArr = segment.flightSegment.duration.slice(3).split(/[A-Z]/gi);
@@ -90,10 +144,10 @@ export default function Flight (props) {
 
             return (
                 <div>
-                    <h1>Leg: Flown on {carrierCode}</h1>
-                    <h1>Departing From {departure.iataCode} at {departureDate}</h1>
-                    <h1>Arriving At {arrival.iataCode} at {arrivalDate}</h1>
-                    <h1>Leg will take {duration}</h1>
+                    <h1>Airline: {carrierCode}</h1>
+                    <h1>Departing from {departure.iataCode} on {departureDate}</h1>
+                    <h1>Arriving at {arrival.iataCode} on {arrivalDate}</h1>
+                    <h1>Flight time {duration}</h1>
                 </div>
             )
         });
@@ -113,3 +167,9 @@ export default function Flight (props) {
         </div>
     )
 }
+}
+function mapStateToProps(state){
+    let airline = state
+    return airline
+}
+export default connect(mapStateToProps, {setAirline})(Flight)
