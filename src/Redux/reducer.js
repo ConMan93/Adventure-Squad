@@ -12,7 +12,8 @@ const initialState = {
     originState: '',
     originCity: '', 
     tripMembers: [],
-    trips: []
+    trips: [],
+    housing: {}
 }
 
 const USER_LOGGED_IN = 'USER_LOGGED_IN';
@@ -31,6 +32,7 @@ const SET_ORIGIN_STATE = 'SET_ORIGIN_STATE';
 const SET_MEMBERS = 'SET_MEMBERS';
 const SET_TRIPS = 'SET_TRIPS';
 export let types = {SET_FRIENDS, SET_ORIGIN_CITY, SET_MEMBERS, DISPLAY_USERS, UPDATE_DISCUSSION_BOARD}
+const SET_HOUSING = 'SET_HOUSING';
 
 
 export default function reducer(state = initialState, action) {
@@ -80,6 +82,9 @@ export default function reducer(state = initialState, action) {
 
         case SET_TRIPS:
             return {...state, trips: action.payload}
+
+        case SET_HOUSING:
+            return {...state, housing: action.payload}
 
         default:
             return state;
@@ -186,5 +191,12 @@ export function setTrips(trips) {
     return {
         type: SET_TRIPS,
         payload: trips
+    }
+}
+
+export function setHousing(house) {
+    return {
+        type: SET_HOUSING,
+        payload: house
     }
 }

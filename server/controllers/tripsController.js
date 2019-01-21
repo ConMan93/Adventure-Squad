@@ -180,6 +180,7 @@ module.exports = {
             res.status(500).send(error)
         }
     }, 
+
     getMembersToAdd: async (req, res) => {
         try {
             const db = req.app.get('db')
@@ -190,6 +191,34 @@ module.exports = {
             console.log('error getting members', error)
             res.status(500).send(error)
         
+        }
+    },
+
+    addHousingToTrip: async (req, res) => {
+        try {
+            const db = req.app.get('db')
+            let { trip_id, name, latitude, longitude, address, phone, daily_price } = req.body
+            let currentHousing = await db.get_trip_housing(trip_id)
+            if (currentHousing[0]) {
+                let updatedHousing = await db.update_housing_info({trip_id, name, latitude, longitude, address, phone, daily_price})
+                return res.send(updatedHousing[0])
+            }
+            let tripHousing = await db.add_housing_to_trip({trip_id, name, latitude, longitude, address, phone, daily_price})
+            return res.send(tripHousing[0])
+        } catch(error) {
+            return res.status(500).send(error)
+        }
+    },
+
+    getTripHousing: async (req, res) => {
+        try {
+            const db = req.app.get('db')
+            let { trip_id } = req.params
+            let housingResponse = await db.get_trip_housing(trip_id)
+            return res.send(housingResponse)
+        } catch(error) {
+            console.log(error)
+            return res.status(500).send(error)
         }
     }
 }

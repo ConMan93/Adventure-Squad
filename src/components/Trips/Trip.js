@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import Flights from './Flights';
 import Housing from './Housing';
-import FriendModal from '../Wizard/FriendModal';
 import Members from './Members'
 import MapContainer from './MapContainer';
 import Board from './DiscussionBoard/Board';
 import LocationImage from './LocationImage';
+import { setHousing } from '../../Redux/reducer';
+import { connect } from 'react-redux';
 
-export default class Trip extends Component {
+class Trip extends Component {
     constructor() {
         super()
         this.state = {
@@ -25,8 +26,10 @@ export default class Trip extends Component {
             flights: [],
             hotels: [],
             loading: true,
+            loadingHousing: true,
             loadMap: false,
-            pastTrip: false
+            pastTrip: false,
+            housing: []
         }
     }
 
@@ -54,8 +57,20 @@ export default class Trip extends Component {
             console.log(error)
             this.props.history.push('/')
         })
+
+        axios.get(`/trip/housing/${this.props.match.params.id}`).then(response => {
+            console.log(response)
+            this.props.setHousing(response.data[0])
+            this.setState({
+                housing: response.data[0]
+            })
+        }).catch(error => {
+            console.log(error)
+            this.props.history.push('/')
+        })
+
     }
-    getAmadeus = () => {
+    getAmadeusFlights = () => {
         
         var Amadeus = require('amadeus');
         var amadeus = new Amadeus({
@@ -74,27 +89,39 @@ export default class Trip extends Component {
         }).then(res => {
             console.log(res.data)
             this.setState({
-                flights: res.data
+                flights: res.data,
+                loading: false
             });
-            amadeus.shopping.hotelOffers.get({
-                cityCode: this.state.dest_IATA,
-                checkInDate: leaving_date,
-                checkOutDate: returning_date,
-                radius: 20,
-                radiusUnit: 'MILE'
-            }).then(res => {
-                var results1 = res.data.filter(hotel => {
-                    return hotel.hotel.rating >= 3
-                })
-                var results2 = results1.filter(hotel => {
-                    return hotel.hotel.address.stateCode === this.state.trip.destination_state
-                })
+        })
+    }
+
+    getAmadeusHotels = () => {
+
+        var Amadeus = require('amadeus');
+        var amadeus = new Amadeus({
+            clientId: process.env.REACT_APP_AMADEUS_KEY,
+            clientSecret: process.env.REACT_APP_AMADEUS_SECRET
+        })
+        var leaving_date = this.state.trip.leaving_date.slice(0,10);
+        var returning_date = this.state.trip.returning_date.slice(0,10);
+        amadeus.shopping.hotelOffers.get({
+            cityCode: this.state.dest_IATA,
+            checkInDate: leaving_date,
+            checkOutDate: returning_date,
+            radius: 20,
+            radiusUnit: 'MILE'
+        }).then(res => {
+            var results1 = res.data.filter(hotel => {
+                return hotel.hotel.rating >= 3
+            })
+            var results2 = results1.filter(hotel => {
+                return hotel.hotel.address.stateCode === this.state.trip.destination_state
+            })
+            this.setState({
+                hotels: results2.slice(0,5),
+            }, () => {
                 this.setState({
-                    hotels: results2.slice(0,5),
-                }, () => {
-                    this.setState({
-                        loading: false
-                    })
+                    loadingHousing: false
                 })
             })
         })
@@ -103,15 +130,21 @@ export default class Trip extends Component {
     render() {
 
         if (this.state.loading) {
-            var trip = <div>one moment while we search for flights</div>
+            var flights = <div>one moment while we search for flights</div>
         } else {
-            trip =  <div>
-                        <Flights 
-                        trip={this.state.trip}
-                        flights={this.state.flights} />
-                        <Housing hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>
+            flights =  <div>
+                        <Flights flights={this.state.flights} />
                     </div> 
         }
+
+        if (this.state.loadingHousing) {
+            var housing = <div>One moment while we search for places to stay</div>
+        } else {
+            housing = <div>
+                <Housing trip_id={this.props.match.params.id} hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>
+            </div>
+        }
+
         if (this.state.dest_city) {
             var locationImage = <LocationImage dest_city={this.state.dest_city} destination_state={this.state.trip.destination_state}/>
         } else {
@@ -120,21 +153,25 @@ export default class Trip extends Component {
         return (
             <div className='trip-component-container'>
                 <div className='trip-discussion-container'>
-                <Board trip_id={this.props.match.params.id} />
+                    <Board trip_id={this.props.match.params.id} />
                 </div>
                 <div className='trip-content-container'>
                     {locationImage}
                     <div className='trip-columns'>
                         <div className='trip-left-column'>
-                            <button onClick={this.getAmadeus}>Find Flight and Accomodations</button>
-                            {trip}
+                            <button onClick={this.getAmadeusFlights}>Find Flights</button>
+                            {flights}
+                            <button onClick={this.getAmadeusHotels}>Find Housing</button>
+                            {housing}
+                            
                         </div>
                         <div className='trip-right-column'>
                             <Members
                             trip_id={this.props.match.params.id}
                             />
                             {this.state.loadMap ?
-                            <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city}/>
+                            <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city}
+                             />
                             :
                             null}
                         </div>
@@ -144,3 +181,5 @@ export default class Trip extends Component {
         )
     }
 }
+
+export default connect(null, { setHousing })(Trip)
