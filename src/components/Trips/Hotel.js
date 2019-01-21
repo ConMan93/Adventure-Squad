@@ -3,11 +3,11 @@ import React from 'react';
 export default function Hotel (props) {
     const {base, name, rating, contact} = props;
     if(rating === "4"){
-            var ratingString = `${ "⭐️⭐️⭐️⭐️"}`
+        var ratingString = `${ "⭐️⭐️⭐️⭐️"}`
     } else if(rating === "3"){
-        var ratingString = `${ "⭐️⭐⭐️"}`
+         ratingString = `${ "⭐️⭐⭐️"}`
     } else if(rating === "2"){
-        var ratingString = `${ "⭐️⭐️"}`
+         ratingString = `${ "⭐️⭐️"}`
     } else {
         ratingString = 'No rating available'
     }
@@ -24,7 +24,7 @@ export default function Hotel (props) {
             <h1>{name}</h1>
             <h1>{ratingString}</h1>
             <h1>{`${"$"}${base} per night`}</h1>
-            {/* <h1>{phoneNum}</h1> I don't think we need phone #*/ }
+            <h1>{phoneNum}</h1>
         </div>
     )
 }
