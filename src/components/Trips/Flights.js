@@ -28,7 +28,7 @@ export default class extends Component {
 
 
             return (
-                <Flight price={price} leavingStops={leavingStops} returningStops={returningStops} leavingSegments={leavingSegments} returningSegments={returningSegments}/>
+                <Flight trip={this.props.trip} price={price} leavingStops={leavingStops} returningStops={returningStops} leavingSegments={leavingSegments} returningSegments={returningSegments}/>
             )
         })
         return (

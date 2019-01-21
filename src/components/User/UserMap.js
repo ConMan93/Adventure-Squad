@@ -78,17 +78,19 @@ class UserMap extends Component {
 
   render() {
     return (
+        <div className='user-map-container'>
         <Map 
             google={this.props.google} 
             zoom={3.7} 
             initialCenter={{lat: 39.8283, lng: -98.5795}}
             onClick={this.onMapClicked}
             onReady={this.fetchPlaces}
-            style={{width: '40%', height: '50%'}}
+            style={{width: '100%', height: '100%'}}
         >
         
             {this.state.trips}
         </Map>
+        </div>
     )
   }
 }

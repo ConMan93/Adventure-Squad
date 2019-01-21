@@ -87,6 +87,7 @@ class Trip extends Component {
             max: 5,
             currency: 'USD'
         }).then(res => {
+            console.log(res.data)
             this.setState({
                 flights: res.data,
                 loading: false
@@ -165,7 +166,6 @@ class Trip extends Component {
                             
                         </div>
                         <div className='trip-right-column'>
-                            
                             <Members
                             trip_id={this.props.match.params.id}
                             />

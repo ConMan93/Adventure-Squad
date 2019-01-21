@@ -15,9 +15,8 @@ class Calendar extends Component {
     
         this.handleResetClick=this.handleResetClick.bind(this);
     }
-    handleDayClick(day){
+    handleDayClick = (day) => {
         const range = DateUtils.addDayToRange(day, this.state);
-        console.log("dates", this.props.setDates())
         this.props.setDates(range)
         this.setState(range);
     }
@@ -29,7 +28,6 @@ class Calendar extends Component {
     render(){
         const {to, from} = this.state
         const modifiers = { start: from, end: to}
-    
     return(
         <div className='wizard-calendar-container'>
             <div className='wizard-calendar-instructions'>

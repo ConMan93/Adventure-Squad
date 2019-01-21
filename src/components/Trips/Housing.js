@@ -34,6 +34,7 @@ class Housing extends Component {
 
         if (this.props.hotels.length) {
         var hotels = this.props.hotels.map(hotel => {
+            console.log(hotel)
             var price = +hotel.offers[0].price.total / ((new Date(checkout).getTime()- new Date(checkin).getTime())/86400000)
             var price1 = price.toString().slice(0,6);
             const {name, rating, contact} = hotel.hotel;

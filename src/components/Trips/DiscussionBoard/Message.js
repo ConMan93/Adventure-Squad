@@ -62,6 +62,8 @@ class Message extends Component {
         :
         <p>{this.state.message}</p>}
 
+        <div><Moment date={dateToFormat} format='ddd MMM DD, YYYY hh:mm A' /></div>
+
         {this.state.author.id === this.props.user.id ?  
         this.state.editing ?
         <button onClick={this.udpateMessage}>save</button>
@@ -73,10 +75,7 @@ class Message extends Component {
             <button onClick={this.deleteMessage}>delete</button>
             :
             null
-        }
-
-        <Moment date={dateToFormat} format='ddd MMM DD, YYYY hh:mm A' />
-       
+        }  
       </div>
     )
   }
