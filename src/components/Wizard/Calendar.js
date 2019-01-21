@@ -28,7 +28,6 @@ class Calendar extends Component {
     render(){
         const {to, from} = this.state
         const modifiers = { start: from, end: to}
-    
     return(
         <div className='wizard-calendar-container'>
             <div className='wizard-calendar-instructions'>

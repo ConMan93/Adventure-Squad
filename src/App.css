@@ -721,7 +721,7 @@ a {
 .trip-component-container {
 	display: flex;
 	height: 100vh;
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 
 .trip-content-container {
@@ -873,7 +873,7 @@ a {
 	display: flex;
 	justify-content: space-between;
 	height: 85vh;
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 
 .trip-columns > div {
