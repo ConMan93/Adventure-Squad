@@ -130,7 +130,6 @@ export default class Trip extends Component {
                             null}
                         </div>
                         <div className='trip-right-column'>
-                            
                             <Members
                             trip_id={this.props.match.params.id}
                             />

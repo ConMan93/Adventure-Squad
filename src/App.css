@@ -85,7 +85,7 @@ a {
 .homepage-button-container button {
 	font-family: 'Permanent Marker', sans-serif;
 	letter-spacing: 5px;
-	text-shadow: 0px 0px 10px white;
+	text-shadow: 0px 0px 5px white;
 }
 
 .homepage-subtitle {
@@ -285,6 +285,26 @@ a {
 	justify-content: space-between;
 }
 
+.dashboard-logout-button {
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.dashboard-logout-button button {
+	color: #ff8421 !important;
+	text-shadow: 0px 0px 10px #ff8421;
+	font-size: 3vh;
+	border: 1px solid #ff8421 !important;
+	transition: all 350ms ease;
+}
+
+.dashboard-logout-button button:hover {
+	color: #333 !important;
+	background-color: #ff8421 !important;
+	transform: scale(1.1)
+}
+
 .dashboard-header img {
 	border-radius: 15px;
 	height: 100%;
@@ -375,7 +395,7 @@ a {
 }
 
 .dashboard-adventures {
-	width: 30%;
+	width: 60%;
 	overflow-x: visible;
 }
 
@@ -387,14 +407,16 @@ a {
 	height: 50vh;
 	overflow-y: scroll;
 	padding: 20px;
+	margin-right: 5vw;
 }
 
 .dashboard-adventure {
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	height: 15%;
-	width: 95%;
+	height: 25%;
+	width: 100%;
 	font-size: 2.5vh;
 	border: 1px solid #333;
 	color: #333;
@@ -412,6 +434,15 @@ a {
 	z-index: 30;
 }
 
+.dashboard-adventures-content {
+	display: flex;
+}
+
+.user-map-container > div {
+	width: 35% !important;
+	height: 50% !important;
+}
+
 .new-trip-button-container {
 	display: flex;
 	justify-content: center;
@@ -422,11 +453,19 @@ a {
 }
 
 .dashboard-friends {
-	width: 30%;
+	width: 100%;
+	height: 50%;
+	overflow: hidden;
+}
+
+.dashboard-friends-search-container {
+	width: 35%;
+	display: flex;
+	flex-direction: column-reverse;
 }
 
 .dashboard-friends >div >div {
-	height: 55vh;
+	height: 25vh;
 	overflow-y: scroll;
 }
 
@@ -448,8 +487,8 @@ a {
 }
 
 .dashboard-search {
-	width: 30%;
-	height: 100%;
+	width: 100%;
+	height: 50%;
 	overflow: hidden;
 }
 
@@ -468,15 +507,16 @@ a {
 }
 
 .dashboard-search-list {
-	height: 75%;
+	height: 50%;
 	padding: 20px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
-	overflow-y: scroll;
+	overflow-x: scroll;
 }
 
 .dashboard-search-friend {
+	height: 100%;
 	width: 27%;
 	margin-bottom: 20px;
 	display: flex;
@@ -518,7 +558,7 @@ a {
 	font-size: 4vh;
 	padding: 5px;
 	color: #333;
-	margin-bottom: 5vh;
+	margin-bottom: 2vh;
 	text-align: center;
 }
 
@@ -714,6 +754,8 @@ a {
 	font-size: 2vh;
 	color: #ff8421;
 	text-shadow: 0px 0px 10px #ff8421;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #ff8421;
 }
 
 .trip-discussion-message h2 {
@@ -740,6 +782,15 @@ a {
 	color: #333;
 	background-color: #ff8421;
 	transform: scale(1.1);
+}
+
+.trip-discussion-message > div {
+	width: 100%;
+	margin-top: 10px;
+	display: flex;
+	justify-content: center;
+	letter-spacing: 1px;
+	color: white;
 }
 
 .trip-message-buttons {
@@ -794,7 +845,7 @@ a {
 }
 
 .message-form-container > div > textarea {
-	width: 100%;
+	width: 90%;
 	margin-bottom: 20px;
 	font-family: 'Comfortaa', sans-serif;
 	font-size: 2vh;
@@ -827,16 +878,88 @@ a {
 
 .trip-columns > div {
 	width: 48%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 20px;
 }
 
 .map-container-div {
 	width: 40vw;
 	height: 60vh;
 	display: flex;
-	justify-content: center;
 }
 
 .map-container-div > div {
-	width: 30% !important;
+	width: 35% !important;
 	height: 60% !important;
+}
+
+.trip-members {
+	overflow-x: scroll;
+}
+
+.trip-members-container {
+	display: flex;
+	justify-content: flex-start;
+	width: 200%;
+}
+
+.trip-right-column h2 {
+	font-family: 'Permanent Marker', sans-serif;
+	color: #ff8421;
+	font-size: 4vh;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.trip-member {
+	height: 10vh;
+	width: 10vh;
+	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	overflow: hidden;
+	margin: 0 1%;
+}
+
+.trip-member a {
+	font-family: 'Comfortaa', sans-serif;
+	color: white;
+	text-shadow: 0px 0px 5px black;
+	text-align: center;
+}
+
+.trip-member button {
+	color: white;
+	font-family: 'Comfortaa', sans-serif;
+	background: rgba(0,0,0,0.5);
+	border: none;
+	font-size: 2vh;
+	transition: all 350ms ease;
+}
+
+.friend-modal-container {
+	height: 10vh;
+	width: 10vh;
+}
+
+.friend-modal-container button {
+	height: 100%;
+	font-family: 'Comfortaa', sans-serif;
+	font-size: 2vh;
+	color: #ff8421;
+	background: #333;
+	border: 1px solid #ff8421;
+	padding: 5px;
+	border-radius: 5px;
+	text-shadow: 0px 0px 10px #ff8421;
+	box-shadow: 0px 0px 10px #ff8421;
+	transition: all 350ms ease;	
+}
+
+.friend-modal-container button:hover {
+	color: #333;
+	background-color: #ff8421;
 }

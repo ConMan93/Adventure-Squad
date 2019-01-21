@@ -83,8 +83,8 @@ export class MapContainer extends Component {
                         vicinity={food.vicinity}
                         rating={food.rating}
                         icon={{
-                            url: 'http://www.clker.com/cliparts/I/l/L/S/W/9/map-marker-hi.png',
-                            scaledSize: new this.props.google.maps.Size(27, 43)
+                            url: 'https://redsedona.com/wp-content/uploads/restaurant-icon.png',
+                            scaledSize: new this.props.google.maps.Size(27, 27)
                         }}
                     />
             )
@@ -122,8 +122,8 @@ export class MapContainer extends Component {
                     vicinity={bar.vicinity}
                     rating={bar.rating}
                     icon={{
-                        url: 'http://www.clker.com/cliparts/8/6/U/z/k/o/google-maps-marker-for-residencelamontagne-hi.png',
-                        scaledSize: new this.props.google.maps.Size(27, 43)
+                        url: 'https://downtownlex.com/wp-content/uploads/2018/11/map-icon-nightlife.png',
+                        scaledSize: new this.props.google.maps.Size(27, 27)
                     }}
                 />
             )
@@ -162,8 +162,8 @@ export class MapContainer extends Component {
                         vicinity={store.vicinity}
                         rating={store.rating}
                         icon={{
-                            url: 'http://www.clker.com/cliparts/o/t/F/J/B/k/google-maps-hi.png',
-                            scaledSize: new this.props.google.maps.Size(27, 43)
+                            url: 'https://cdn0.iconfinder.com/data/icons/citycons/150/Citycons_bag-512.png',
+                            scaledSize: new this.props.google.maps.Size(27, 27)
                         }}
                     />
             )
@@ -195,7 +195,7 @@ export class MapContainer extends Component {
             <div className='map-container-div'>
             <Map 
             google={this.props.google} 
-            zoom={14} 
+            zoom={15} 
             initialCenter={{lat: 40.7618, lng: -111.8907}}
             onClick={this.onMapClicked}
             onReady={this.fetchPlaces}

@@ -26,19 +26,21 @@ handleDeleteMember(user_id){
         let {tripMembers} = this.props
  
         let displayTripMembers = tripMembers.map((member, i) => {
-            return <div key={"member"+i}>
-                    <Link to={`/profile/${member.id}`}><img src={member.profile_img} alt="profile_pic" height="60" width="60"/>
+            return <div className='trip-member' key={"member"+i} style={{backgroundImage: `url(${member.profile_img})`}}>
+                    <Link to={`/profile/${member.id}`}>
                     <div>{member.username}</div></Link>
-                    <button onClick={()=>this.handleDeleteMember(member.id)}><i className="fas fa-user-times"></i></button>
+                    <button onClick={()=>this.handleDeleteMember(member.id)}><i className="fas fa-user-minus"></i></button>
                 </div>
         })
         return (
             <div>
-            
-                <h2> My Adventure Squad:
-                    {displayTripMembers}
-                </h2>
-                <FriendModal trip_id={this.props.trip_id}/>
+                <h2> Our Adventure Squad:</h2>
+                <div className='trip-members'>
+                <div className='trip-members-container'>
+                        {displayTripMembers}
+                    <FriendModal trip_id={this.props.trip_id}/>
+                    </div>
+                </div>
             </div>
         )
     }

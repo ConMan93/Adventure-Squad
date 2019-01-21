@@ -68,7 +68,7 @@ class FriendModal extends Component {
                  </div>
         })
         return (
-            <div>
+            <div className='friend-modal-container'>
                 <button onClick={this.openModal}>Add Your Squad</button>
                 <Modal
                 isOpen={this.state.modalIsOpen}
