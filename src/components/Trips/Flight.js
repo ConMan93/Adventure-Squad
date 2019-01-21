@@ -1,52 +1,59 @@
 import React, {Component} from 'react';
 // import moment from 'moment';
-import {connect} from 'react-redux';
-import {setAirline} from '../../Redux/reducer';
 
 class Flight extends Component {
     constructor(props) {
         super(props)
         this.state = {
-// Alaska Airlines     
-            AS:  "https://www.alaskaair.com/",
-// America West Airlines  
-            HP: " https://www.onetravel.com/",
-// American Airlines   
-            AA: "https://www.aa.com/",
-// Air One 
-            AP:  "https://www.alternativeairlines.com/air-one",
-// Delta Air Lines 
-            DL:  "https://www.delta.com/",
-// Hawaiian Airlines   
-            HA: " https://www.hawaiianairlines.com/",
-// Northwest Airlines  
-            NW: " http://www.northwestairlines.us/",
-// Southwest Airlines  
-            WN: " https://www.southwest.com/",
-// United Airlines 
-            UA: " https://www.united.com/en/us/",
-// JetBlue 
-            B6:  "https://www.jetblue.com/",
-// Frontier 
-            F9: "https://www.flyfrontier.com/"
+            selectedFlight: {},
+            AS: {link: "https://www.alaskaair.com/",
+                airline: "Alaska Airlines"},
+
+            // HP: {link: "https://www.onetravel.com/",
+            //     airline: "America West Airlines"},
+
+            AA: {link: "https://www.aa.com/",
+                airline: "American Airlines"},
+
+            // AP: {link: "https://www.alternativeairlines.com/air-one",
+            //     airline: "Air One"},
+
+            DL:  {link: `https://www.delta.com/flight-search/search?action=findFlights&tripType=ROUND_TRIP&priceSchedule=PRICE&originCity=${this.props.trip.origin_city.slice(0, 3)}&destinationCity=${this.props.trip.destination_city.slice(0, 3)}&departureDate=${this.props.trip.leaving_date.slice(0, 10)}&departureTime=AT&returnDate=${this.props.trip.returning_date.slice(0, 10)}&returnTime=AT&paxCount=1&searchByCabin=true&cabinFareClass=BE&deltaOnlySearch=false&deltaOnly=off&Go=Find%20Flights&meetingEventCode=&refundableFlightsOnly=false&compareAirport=false&awardTravel=false&datesFlexible=false&flexAirport=false&paxCounts[0]=1`,
+                airline: "Delta Airlines"},
+
+            HA: {link: "https://www.hawaiianairlines.com/",
+                airline: "Hawaiian Airlines"},
+
+            // NW: {link: "http://www.northwestairlines.us/",
+            //     airline: "Northwest Airlines"},
+
+            WN: {link: `https://www.southwest.com/air/booking/select.html?originationAirportCode=${this.props.trip.origin_city.slice(0, 3)}&destinationAirportCode=${this.props.trip.destination_city.slice(0, 3)}&returnAirportCode=&departureDate=${this.props.trip.leaving_date.slice(0, 10)}&departureTimeOfDay=ALL_DAY&returnDate=${this.props.trip.returning_date.slice(0, 10)}&returnTimeOfDay=ALL_DAY&adultPassengersCount=1&seniorPassengersCount=0&fareType=USD&passengerType=ADULT&tripType=roundtrip&promoCode=&reset=true&redirectToVision=true&int=HOMEQBOMAIR&leapfrogRequest=true`,
+                airline: "Southwest Airlines"},
+
+            UA: {link: `https://www.united.com/ual/en/US/flight-search/book-a-flight/results/rev?f=${this.props.trip.origin_city.slice(0, 3)}&t=${this.props.trip.destination_city.slice(0, 3)}&d=${this.props.trip.leaving_date.slice(0, 10)}&r=${this.props.trip.returning_date.slice(0, 10)}&sc=7,7&px=1&taxng=1&idx=1`,
+                airline: "United Airlines"},
+
+            B6:  {link: "https://www.jetblue.com/",
+                airline: "JetBlue"},
+
+            F9: {link: "https://www.flyfrontier.com/",
+                airline: "Frontier"}
         }
 
-        this.handleAirlineResponse=this.handleAirlineResponse.bind(this)
 
     }
     
-    // handleAirlineResponse(e){
-    //     const {price, leavingStops, leavingSegments, returningStops, returningSegments} = this.props;
-    //     console.log("hello",leavingSegments)
-    //     const {carrierCode} = leavingSegments[0].flightSegment
-    //     const key = `${carrierCode}`
+    handleAirlineResponse(obj){
+        console.log(obj.carrierCode, obj.departure, obj.arrival, obj.duration, obj.departureDate, obj.arrivalDate)
+        console.log(this.state[obj.carrierCode])
 
-    //     this.setState({[key]:e.target.value  })
-    //     console.log(key, e.target.value)
-    // }
+        this.setState({
+            selectedFlight: obj
+        })
+    }
     
     render () {
-    
+    console.log(this.state.selectedFlight)
 
     const {price, leavingStops, leavingSegments, returningStops, returningSegments} = this.props;
 
@@ -68,15 +75,16 @@ class Flight extends Component {
         let date = new Date(arrival.at)
         let arrivalDate = new Intl.DateTimeFormat('en-US', {month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(date)
 
-        leaving = <div>
-                    <h1>Airline: {carrierCode}</h1>
-                    <h1>Departing from {departure.iataCode} on {departureDate}</h1>
-                    <h1>Arriving to {arrival.iataCode} on {arrivalDate}</h1>
-                    <h1>Flight will take {duration}</h1>
+        leaving = 
+                <div style={{border: '1px solid green'}} onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
+                        <a href={`${this.state[carrierCode].link}`} target='_blank' >{this.state[carrierCode].airline}</a>
+                        <h1>Departing from {departure.iataCode} on {departureDate}</h1>
+                        <h1>Arriving to {arrival.iataCode} on {arrivalDate}</h1>
+                        <h1>Flight will take {duration}</h1>
                     </div>
 
     } else {
-        let segments = leavingSegments.map(segment => {
+        let segments = leavingSegments.map((segment, i) => {
             const {departure, arrival, carrierCode} = segment.flightSegment;
 
             //formatting departure date
@@ -91,16 +99,24 @@ class Flight extends Component {
             let durationArr = segment.flightSegment.duration.slice(3).split(/[A-Z]/gi);
             let duration = `${durationArr[0]} Hours, ${durationArr[1]} Minute(s)`;
 
-            return (
-                <div>
-                    <h1>Airline: {carrierCode}</h1>
+            if (i > 0) {
+                return (<div  onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
+                    {/* <a href={`${this.state[carrierCode].link}`} target='_blank' >{this.state[carrierCode].airline}</a> */}
                     <h1>Departing from {departure.iataCode} on {departureDate}</h1>
-                    <h1>Arriving to {arrival.iataCode} on {arrivalDate}</h1>
+                    <h1>Arriving at {arrival.iataCode} on {arrivalDate}</h1>
+                    <h1>Flight time {duration}</h1>
+                </div>)
+            } else {
+            return (
+                <div onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
+                    <a href={`${this.state[carrierCode].link}`} target='_blank' >{this.state[carrierCode].airline}</a>
+                    <h1>Departing from {departure.iataCode} on {departureDate}</h1>
+                    <h1>Arriving at {arrival.iataCode} on {arrivalDate}</h1>
                     <h1>Flight time {duration}</h1>
                 </div>
-            )
+            )}
         });
-        leaving = <div>
+        leaving = <div style={{border: '1px solid purple'}} >
                     {segments}
                 </div>
     };
@@ -120,14 +136,15 @@ class Flight extends Component {
        let date = new Date(arrival.at)
        let arrivalDate = new Intl.DateTimeFormat('en-US', {month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(date)
 
-       leaving = <div>
-                   <h1>Direct flight on {carrierCode}</h1>
+       returning = 
+                <div style={{border: '1px solid yellow'}} onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
+                   <a href={`${this.state[carrierCode].link}`} target='_blank' >{this.state[carrierCode].airline}</a>
                    <h1>Departing from {departure.iataCode} on {departureDate}</h1>
                    <h1>Arriving at {arrival.iataCode} on {arrivalDate}</h1>
                    <h1>Total flight time is {duration}</h1>
-                   </div>
+                 </div>
     } else {
-        let segments = returningSegments.map(segment => {
+        let segments = returningSegments.map((segment, i) => {
             const {departure, arrival, carrierCode} = segment.flightSegment;
 
            //formatting departure date
@@ -142,16 +159,24 @@ class Flight extends Component {
             let durationArr = segment.flightSegment.duration.slice(3).split(/[A-Z]/gi);
             let duration = `${durationArr[0]} Hours, ${durationArr[1]} Minute(s)`;
 
+            if (i > 0) {
+                return (<div onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
+                    {/* <a href={`${this.state[carrierCode].link}`} target='_blank' >{this.state[carrierCode].airline}</a> */}
+                    <h1>Departing from {departure.iataCode} on {departureDate}</h1>
+                    <h1>Arriving at {arrival.iataCode} on {arrivalDate}</h1>
+                    <h1>Flight time {duration}</h1>
+                </div>)
+            } else {
             return (
-                <div>
-                    <h1>Airline: {carrierCode}</h1>
+                <div onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
+                    <a href={`${this.state[carrierCode].link}`} target='_blank' >{this.state[carrierCode].airline}</a>
                     <h1>Departing from {departure.iataCode} on {departureDate}</h1>
                     <h1>Arriving at {arrival.iataCode} on {arrivalDate}</h1>
                     <h1>Flight time {duration}</h1>
                 </div>
-            )
+            )}
         });
-        returning = <div>
+        returning = <div style={{border: '1px solid orange'}}>
                         {segments}
                     </div>
 
@@ -168,8 +193,6 @@ class Flight extends Component {
     )
 }
 }
-function mapStateToProps(state){
-    let airline = state
-    return airline
-}
-export default connect(mapStateToProps, {setAirline})(Flight)
+
+
+export default Flight

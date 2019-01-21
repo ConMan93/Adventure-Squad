@@ -17,6 +17,7 @@ export default function Hotel (props) {
     } else {
         phoneNum = 'No Phone Number Listed'
     }
+    // console.log(props)
     return (
         <div>
             <h1>Hotels</h1>

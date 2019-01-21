@@ -72,6 +72,7 @@ export default class Trip extends Component {
             max: 5,
             currency: 'USD'
         }).then(res => {
+            console.log(res.data)
             this.setState({
                 flights: res.data
             });
@@ -105,7 +106,9 @@ export default class Trip extends Component {
             var trip = <div>one moment while we search for flights</div>
         } else {
             trip =  <div>
-                        <Flights flights={this.state.flights} />
+                        <Flights 
+                        trip={this.state.trip}
+                        flights={this.state.flights} />
                         <Housing hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>
                     </div> 
         }
@@ -124,10 +127,7 @@ export default class Trip extends Component {
                     <div className='trip-columns'>
                         <div className='trip-left-column'>
                             <button onClick={this.getAmadeus}>Find Flight and Accomodations</button>
-                            {this.state.loading ?
-                            trip
-                            :
-                            null}
+                            {trip}
                         </div>
                         <div className='trip-right-column'>
                             
