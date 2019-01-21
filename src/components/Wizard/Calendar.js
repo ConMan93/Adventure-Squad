@@ -15,7 +15,7 @@ class Calendar extends Component {
     
         this.handleResetClick=this.handleResetClick.bind(this);
     }
-    handleDayClick =(day) => {
+    handleDayClick = (day) => {
         const range = DateUtils.addDayToRange(day, this.state);
         this.props.setDates(range)
         this.setState(range);
