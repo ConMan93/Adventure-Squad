@@ -23,8 +23,11 @@ export default function Hotel (props) {
             <h1>Hotels</h1>
             <h1>{name}</h1>
             <h1>{ratingString}</h1>
+            <h1>{base} / night</h1>
+            <h1>{phoneNum}</h1>
             <h1>{`${"$"}${base} per night`}</h1>
             <h1>{phoneNum}</h1>
+            <button onClick={() => props.addHousingToTrip(props)}>Save Hotel</button>
         </div>
     )
 }

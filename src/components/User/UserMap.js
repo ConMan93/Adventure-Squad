@@ -87,6 +87,7 @@ class UserMap extends Component {
             onReady={this.fetchPlaces}
             style={{width: '100%', height: '100%'}}
         >
+        
             {this.state.trips}
         </Map>
         </div>
