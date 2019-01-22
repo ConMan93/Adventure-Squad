@@ -3,7 +3,6 @@ import Hotel from './Hotel';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { setHousing } from '../../Redux/reducer';
-// var airbnb = require('airapi')
 
 class Housing extends Component {
     constructor(props) {
@@ -24,7 +23,7 @@ class Housing extends Component {
         let { name, address, latitude, longitude } = hotel
         let daily_price = +hotel.base 
         axios.post('/trip/housing', {trip_id, phone, name, address, latitude, longitude, daily_price}).then( response => {
-            console.log(response)
+            this.props.setHousing(response.data)
         })
     }
 
@@ -34,7 +33,6 @@ class Housing extends Component {
 
         if (this.props.hotels.length) {
         var hotels = this.props.hotels.map(hotel => {
-            console.log(hotel)
             var price = +hotel.offers[0].price.total / ((new Date(checkout).getTime()- new Date(checkin).getTime())/86400000)
             var price1 = price.toString().slice(0,6);
             const {name, rating, contact} = hotel.hotel;
@@ -44,7 +42,6 @@ class Housing extends Component {
         }
         return (
             <div>
-                {/* <button onClick={this.getListings}>Get Listings</button> */}
                 {hotels}
                 <a href={link} target='_blank' rel="noopener noreferrer">Search Airbnb Listings</a>
             </div>

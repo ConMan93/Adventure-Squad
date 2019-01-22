@@ -30,6 +30,7 @@ class Board extends Component {
                 date={note.date}
                 id={note.id}
                 displayUpdatedDiscussionFn={this.displayUpdatedDiscussion}
+                trip_id={this.props.trip_id}
             />)
         })
 

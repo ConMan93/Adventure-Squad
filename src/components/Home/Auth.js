@@ -55,7 +55,8 @@ class Auth extends Component {
     
     closeModal = () => {
         this.setState({
-            modalIsOpen: false
+            modalIsOpen: false,
+            errorMessage: ''
         });
     } 
 
@@ -119,6 +120,10 @@ class Auth extends Component {
                   <h1>Login</h1>
                   <input placeholder='email' name='email' onChange={this.handleChange} value={this.state.email} onKeyPress={this.handleKeyPress} />
                   <input placeholder='password' name='password' type='password' onChange={this.handleChange} value={this.state.password} onKeyPress={this.handleKeyPress} />
+                  {this.state.errorMessage ?
+                  <p className='login-error-message'>{this.state.errorMessage}</p>
+                    :
+                    null}
                   <button onClick={this.loginUser} >Log In</button>
                   <h1>Need an account?</h1>
                   <button onClick={this.loginViewVisible}>Register!</button>
@@ -128,9 +133,13 @@ class Auth extends Component {
                   <h1>Register</h1>
                   <input placeholder='email' name='email' onChange={this.handleChange} value={this.state.email} />
                   <input placeholder='username' name='username' onChange={this.handleChange} value={this.state.username} />
-                  <input placeholder='venmo' name='venmo' onChange={this.handleChange} value={this.state.venmo} />
+                  <input placeholder='venmo (optional)' name='venmo' onChange={this.handleChange} value={this.state.venmo} />
                   <input placeholder='password' name='password' type='password' onChange={this.handleChange} value={this.state.password} onKeyPress={this.handleKeyPress} />
                   <input placeholder='confirmPassword' name='confirmPassword' type='password' onChange={this.handleChange} value={this.state.confirmPassword} onKeyPress={this.handleKeyPress} />
+                  {this.state.errorMessage ?
+                  <p className='login-error-message'>{this.state.errorMessage}</p>
+                    :
+                    null}
                   <button onClick={this.registerUser} >Register</button>
                   <h1>Already Registered?</h1>
                   <button onClick={this.loginViewVisible}>Log In!</button>

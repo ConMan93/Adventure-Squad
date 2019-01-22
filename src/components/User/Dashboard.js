@@ -14,7 +14,6 @@ class Dashboard extends Component{
         super()
         this.state= {
             filterFriends: "",
-            // adventures: [],
             trips: [],
             profile_img: '',
             editing: false,
@@ -37,10 +36,10 @@ class Dashboard extends Component{
         })
 
         axios.get('/dashboard/trips').then( response => {
-            this.props.setTrips(response.data)
             this.setState({
                 trips: response.data
             }, () => {
+                this.props.setTrips(response.data)
                 this.setState({
                     loadMap: true
                 })
@@ -117,7 +116,6 @@ class Dashboard extends Component{
         return(
             <div className='dashboard-component-container'>
                 <div className='dashboard-header'>
-                    {/* <Link to="/login">Login</Link> */}
                     <div className='dashboard-header-image'>
                         <img src={profile_img} alt="img" />
                         <i onClick={this.toggleEdit} className='fas fa-edit fa-2x'/>
@@ -128,7 +126,8 @@ class Dashboard extends Component{
                             <button onClick={()=>this.handleChangeImage()}>Update Image</button>
                             <button onClick={() => {this.setState({editing: false})}}>Cancel</button>
                         </div>
-                      : <div className='dashboard-header-edit dashboard-header-edit-hidden'>
+                        : 
+                        <div className='dashboard-header-edit dashboard-header-edit-hidden'>
                             <input placeholder='Enter Image URL Here' onChange={(e)=>this.onImageChange(e.target.value)}></input> 
                             <button onClick={()=>this.handleChangeImage()}>Update Image</button>
                             <button onClick={() => {this.setState({editing: false})}}>Cancel</button>

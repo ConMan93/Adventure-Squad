@@ -13,7 +13,6 @@ class Trip extends Component {
     constructor() {
         super()
         this.state = {
-            // tripID: this.props.tripID,
             trip: {},
             org_lat: '',
             org_lng: '',
@@ -59,11 +58,12 @@ class Trip extends Component {
         })
 
         axios.get(`/trip/housing/${this.props.match.params.id}`).then(response => {
-            console.log(response)
-            this.props.setHousing(response.data[0])
-            this.setState({
-                housing: response.data[0]
-            })
+            if (response.data[0]) {
+                this.props.setHousing(response.data[0])
+                this.setState({
+                    housing: response.data[0]
+                })
+            }
         }).catch(error => {
             console.log(error)
             this.props.history.push('/')
@@ -87,7 +87,6 @@ class Trip extends Component {
             max: 5,
             currency: 'USD'
         }).then(res => {
-            console.log(res.data)
             this.setState({
                 flights: res.data,
                 loading: false
@@ -133,7 +132,7 @@ class Trip extends Component {
             var flights = <div>one moment while we search for flights</div>
         } else {
             flights =  <div>
-                        <Flights flights={this.state.flights} />
+                        <Flights flights={this.state.flights} trip={this.state.trip} />
                     </div> 
         }
 
@@ -150,6 +149,7 @@ class Trip extends Component {
         } else {
             locationImage = null;
         }
+        
         return (
             <div className='trip-component-container'>
                 <div className='trip-discussion-container'>
