@@ -14,7 +14,7 @@ class LogoutButton extends Component {
 
     render() {
         return (
-            <div>
+            <div className='dashboard-logout-button'>
                 {this.props.isAuthenticated ?
                 <button onClick={this.handleLogout}>Log Out</button>
                 :

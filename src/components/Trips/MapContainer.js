@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 export class MapContainer extends Component {
 
@@ -45,15 +46,15 @@ export class MapContainer extends Component {
                     lat: results[0].geometry.location.lat(),
                     lng: results[0].geometry.location.lng()
                 }, () => {
-                    axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat},${this.state.lng}&rankby=distance&keyword=food&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`).then( response => {
+                    axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.housing.latitude || this.state.lat},${this.props.housing.longitude || this.state.lng}&rankby=distance&keyword=food&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`).then( response => {
                         this.setState({
                             nearbyFoodPlaces: response.data.results
                         }, () => {
-                            axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat},${this.state.lng}&rankby=distance&keyword=bar&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`).then( response => {
+                            axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.housing.latitude || this.state.lat},${this.props.housing.longitude || this.state.lng}&rankby=distance&keyword=bar&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`).then( response => {
                                 this.setState({
                                     nearbyBars: response.data.results
                                 }, () => {
-                                    axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat},${this.state.lng}&rankby=distance&type=clothing_store&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`).then( response => {
+                                    axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.housing.latitude || this.state.lat},${this.props.housing.longitude || this.state.lng}&rankby=distance&type=clothing_store&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`).then( response => {
                                         this.setState({
                                             nearbyStores: response.data.results
                                         })
@@ -83,8 +84,8 @@ export class MapContainer extends Component {
                         vicinity={food.vicinity}
                         rating={food.rating}
                         icon={{
-                            url: 'http://www.clker.com/cliparts/I/l/L/S/W/9/map-marker-hi.png',
-                            scaledSize: new this.props.google.maps.Size(27, 43)
+                            url: 'https://redsedona.com/wp-content/uploads/restaurant-icon.png',
+                            scaledSize: new this.props.google.maps.Size(27, 27)
                         }}
                     />
             )
@@ -122,8 +123,8 @@ export class MapContainer extends Component {
                     vicinity={bar.vicinity}
                     rating={bar.rating}
                     icon={{
-                        url: 'http://www.clker.com/cliparts/8/6/U/z/k/o/google-maps-marker-for-residencelamontagne-hi.png',
-                        scaledSize: new this.props.google.maps.Size(27, 43)
+                        url: 'https://downtownlex.com/wp-content/uploads/2018/11/map-icon-nightlife.png',
+                        scaledSize: new this.props.google.maps.Size(27, 27)
                     }}
                 />
             )
@@ -162,8 +163,8 @@ export class MapContainer extends Component {
                         vicinity={store.vicinity}
                         rating={store.rating}
                         icon={{
-                            url: 'http://www.clker.com/cliparts/o/t/F/J/B/k/google-maps-hi.png',
-                            scaledSize: new this.props.google.maps.Size(27, 43)
+                            url: 'https://cdn0.iconfinder.com/data/icons/citycons/150/Citycons_bag-512.png',
+                            scaledSize: new this.props.google.maps.Size(27, 27)
                         }}
                     />
             )
@@ -190,40 +191,45 @@ export class MapContainer extends Component {
     }
 
     render() {
-
+console.log(this.props)
         return (
             <div className='map-container-div'>
-            <Map 
-            google={this.props.google} 
-            zoom={14} 
-            initialCenter={{lat: 40.7618, lng: -111.8907}}
-            onClick={this.onMapClicked}
-            onReady={this.fetchPlaces}
-            style={{width: '100%', height: '100%'}}
-            center={{lat: this.state.lat, lng: this.state.lng}}>
+                <Map 
+                google={this.props.google} 
+                zoom={14} 
+                initialCenter={{lat: 40.7618, lng: -111.8907}}
+                onClick={this.onMapClicked}
+                onReady={this.fetchPlaces}
+                style={{width: '100%', height: '100%'}}
+                center={{lat: +this.props.housing.latitude || this.state.lat, lng: +this.props.housing.longitude || this.state.lng}}>
 
-                <Marker onClick={this.onMarkerClick}
-                        name={'Your destination'}
-                        icon={{
-                            url: 'http://www.clker.com/cliparts/e/3/F/I/0/A/google-maps-marker-for-residencelamontagne-hi.png',
-                            scaledSize: new this.props.google.maps.Size(27, 43)
-                        }} />
+                    <Marker onClick={this.onMarkerClick}
+                            name={this.props.housing.name}
+                            icon={{
+                                url: 'http://www.clker.com/cliparts/e/3/F/I/0/A/google-maps-marker-for-residencelamontagne-hi.png',
+                                scaledSize: new this.props.google.maps.Size(27, 43)
+                    }} />
 
-                {this.nearbyFoodPlaces()}
-                {this.nearbyFoodInfo()}
-
-                {this.nearbyBars()}
-                {this.nearbyBarsInfo()}
-
-                {this.nearbyStores()}
-                {this.nearbyStoresInfo()}
-
-            </Map>
+                        {this.nearbyFoodPlaces()}
+                        {this.nearbyFoodInfo()}
+        
+                        {this.nearbyBars()}
+                        {this.nearbyBarsInfo()}
+        
+                        {this.nearbyStores()}
+                        {this.nearbyStoresInfo()}
+            
+                </Map>
             </div>
         )
     }
 }
 
-export default GoogleApiWrapper({
+function mapStateToProps(state) {
+    return {
+        housing: state.housing
+    }
+}
+export default connect(mapStateToProps)(GoogleApiWrapper({
     apiKey: (process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
-})(MapContainer)
+})(MapContainer))

@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 import Friends from './Friends';
 import Wizard from '../Wizard/Wizard';
 import UserMap from './UserMap';
+import LogoutButton from '../Home/LogoutButton';
 
 
 class Dashboard extends Component{
@@ -105,9 +106,8 @@ class Dashboard extends Component{
         let tripsDisplay = this.state.trips.map((trip, i) => {
             return (
                 <Link to={`/trip/${trip.id}`} key={i}><div className='dashboard-adventure'>
-                    <h4>{trip.leaving_date.slice(5, 10)}</h4>
                     <h2>{trip.destination_city.slice(4)}{/*}, {trip.destination_state}*/}</h2>
-                    <h4>{trip.returning_date.slice(5, 10)}</h4>
+                    <h4>{trip.leaving_date.slice(5, 10)} - {trip.returning_date.slice(5, 10)}</h4>
                 </div></Link>
             )
         })
@@ -137,36 +137,42 @@ class Dashboard extends Component{
                     </div>
                     <div className='dashboard-header-name-container'><h1>{username}</h1></div>
                     <div className='dashboard-header-venmo-container'><h2>{venmo}</h2></div>
+                    <LogoutButton history={this.props.history}/>
                </div> 
                 
                 <div className='dashboard-content'>
-                    <div className='dashboard-search'>
-                        <h6>Search for Friends</h6>
-                        <div className='dashboard-searchbar'>
-                            <input onChange={(e) => this.handleSearchFriends(e.target.value)} type="text" placeholder="enter username"></input>
-                            <span><i className="fas fa-search fa-2x"></i></span>
+                    <div className='dashboard-friends-search-container'>
+                        <div className='dashboard-search'>
+                            <h6>Search for Friends</h6>
+                            <div className='dashboard-searchbar'>
+                                <input onChange={(e) => this.handleSearchFriends(e.target.value)} type="text" placeholder="enter username"></input>
+                                <span><i className="fas fa-search fa-2x"></i></span>
+                            </div>
+                            <div className='dashboard-search-list'>
+                                {eachUser}
+                            </div>
                         </div>
-                        <div className='dashboard-search-list'>
-                            {eachUser}
+                        <div className='dashboard-friends'>
+                            <h6>My Friends</h6>
+                            <Friends/>
                         </div>
-                    </div>
-                    <div className='dashboard-friends'>
-                        <h6>My Friends</h6>
-                        <Friends/>
                     </div>
                     <div className='dashboard-adventures'>
                         <h6>My Adventures</h6>
-                        <div className='dashboard-adventure-list'>
-                            {tripsDisplay}
+                        <div className='dashboard-adventures-content'>
+                            <div className='dashboard-adventure-list'>
+                                {tripsDisplay}
+                            </div>
+                            {this.state.loadMap ?
+                            <UserMap />
+                            :
+                            null}
                         </div>
                         <Wizard
                         history={this.props.history} />
                     </div>
                 </div>
-                {this.state.loadMap ?
-                <UserMap />
-                :
-                null}
+                
             </div>          
         )
     }

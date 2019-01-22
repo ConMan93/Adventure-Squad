@@ -32,7 +32,6 @@ app.get('/auth/currentuser', ac.currentUser)
 app.use(checkForSession)
 // Trips Endpoints
 app.get('/trip/discussion/:trip_id', tc.getTripDiscussion)
-// app.get('/trip/discussion', tc.getTripDiscussion)
 app.get('/dashboard/trips', tc.getLoggedInUsersTrips)
 app.get('/trip/discussionauthor/:userid', tc.getDiscussionAuthor)
 app.put('/trip/discussion/:id', tc.updateDiscussion)
@@ -45,6 +44,8 @@ app.post('/trip/members', tc.addMember)
 app.get('/trip/members/:trip_id', tc.getTripMembers)
 app.get('/trip/addmembers/:trip_id', tc.getMembersToAdd)
 app.delete('/trip/member/:user_id/:trip_id', tc.deleteMember)
+app.post('/trip/housing', tc.addHousingToTrip)
+app.get('/trip/housing/:trip_id', tc.getTripHousing)
 
 // Friends endpoints
 app.get('/friends/get', fc.getFriends)
