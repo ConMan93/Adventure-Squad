@@ -61,11 +61,10 @@ class FriendModal extends Component {
     render(){
         let {friends} = this.props
         let displayFriends = friends.map((friend, i) => {
-           return <div key={"friend"+i}>
-                    <Link to={`/profile/${friend.id}`}><img src={friend.profile_img} alt="profile_pic" height="40" width="40"/>
-                    <span>{friend.username}</span></Link>
-                    <button onClick={()=>this.handleAddMember(friend.id)}><i className="fas fa-plus"></i></button>
-                 </div>
+           return <div key={"friend"+i} className='friend-modal-friend' style={{backgroundImage: `url(${friend.profile_img})`}}>         
+                    <Link to={`/profile/${friend.id}`}><h1>{friend.username}</h1></Link>
+                    <button onClick={()=>this.handleAddMember(friend.id)} className='friend-modal-button'>+</button>
+                  </div>
         })
         return (
             <div className='friend-modal-container'>
@@ -76,11 +75,14 @@ class FriendModal extends Component {
                 style={customStyles}
                 contentLabel="Example Modal"
                 >
-                <button onClick={this.closeModal} >close</button>
-                <h1> Add Squad Members:
-                    {displayFriends}
-                </h1>
-                <button onClick={this.closeModal} ><i className="far fa-check-circle"></i></button>
+                <button onClick={this.closeModal} className='friend-modal-button' >X</button>
+                <h1 className='friend-modal-title' >Add Squad Members:</h1>
+                <div className='friend-modal-list-container'>
+                    <div className='friend-modal-list'>
+                        {displayFriends}
+                    </div>
+                </div>
+                <button onClick={this.closeModal} className='friend-modal-button'>Done</button>
             
                 </Modal>
             </div>
