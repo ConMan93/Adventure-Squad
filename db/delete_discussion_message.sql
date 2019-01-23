@@ -1,5 +1,7 @@
 DELETE FROM discussion
-WHERE id = $1;
+WHERE id = ${id};
 
 SELECT *
-FROM discussion;
+FROM discussion
+WHERE trip_id = ${trip_id}
+ORDER BY id;

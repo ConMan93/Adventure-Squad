@@ -734,7 +734,7 @@ body,
 .trip-component-container {
 	display: flex;
 	height: 100vh;
-	/* overflow: hidden; */
+	overflow: hidden;
 }
 
 .trip-content-container {
@@ -886,7 +886,7 @@ body,
 	display: flex;
 	justify-content: space-between;
 	height: 85vh;
-	/* overflow: hidden; */
+	overflow: hidden;
 }
 
 .trip-columns > div {
@@ -896,6 +896,138 @@ body,
 	justify-content: space-between;
 	padding: 20px;
 }
+
+.trip-column-flights-container,
+.trip-column-housing-container {
+	height: 50%;
+	overflow-y: scroll;
+}
+
+.trip-column-flights-container button {
+	background: none;
+	border: 1px solid #ff8421;
+	color: #ff8421;
+	font-family: 'Comfortaa', sans-serif;
+	font-size: 3vh;
+	padding: 20px;
+	border-radius: 5px;
+	transition: all 350ms ease;
+	width: 50%;
+	margin: 25%;
+}
+
+.trip-column-flights-container button:hover {
+	background-color: #ff8421;
+	color: #333;
+	box-shadow: 0px 0px 10px #ff8421;
+	transform: scale(1.1);
+}
+
+.trip-column-flights-container button:active {
+	transform: scale(0.9);
+}
+
+.flights-loading-animation {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.flights-loading-animation i {
+	color: #ff8421;
+	margin: 0 5%;
+	opacity: 0;
+	animation: flight-loading 2s infinite
+}
+
+.fa-plane {
+	position: relative;
+	top: -30px;
+	animation-delay: 500ms !important;
+}
+
+.fa-plane-arrival {
+	animation-delay: 1s !important;
+}
+
+@keyframes flight-loading {
+	50% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0
+	}
+}
+
+.trips-flight {
+	background-color: #333;
+	border-radius: 10px;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+.trips-flight > h2 {
+	font-family: 'Comfortaa', sans-serif;
+	text-align: center;
+	color: #eee;
+	margin: 1% 0;
+	font-size: 2vh;
+}
+
+.trips-flight-leaving,
+.trips-flight-returning {
+	border: 1px solid #eee;
+	border-radius: 10px;
+	margin-bottom: 15px;
+}
+
+.trips-flight-leaving >div >div,
+.trips-flight-returning >div >div {
+	display: flex;
+	width: 90%;
+	margin-left: 5%;
+	justify-content: space-between;
+	text-align: center;
+	font-family: 'Comfortaa', sans-serif;
+	color: #eee;
+	padding: 5px 0;
+}
+
+.trips-flight-leaving .fa-plane,
+.trips-flight-returning .fa-plane {
+	top: 15px;
+}
+
+.trips-flight-leaving i,
+.trips-flight-returning i {
+	color: #eee;
+}
+
+.trips-flight-leaving h1,
+.trips-flight-returning h1 {
+	margin-top: 10px;
+}
+
+.trips-flight-leaving a,
+.trips-flight-returning a {
+	color: #ff8421;
+	font-family: 'Comfortaa', sans-serif;
+	font-size: 2.5vh;
+	display: block;
+	text-align: center;
+	margin: 1%;
+	transition: all 350ms ease;
+}
+
+.trips-flight-leaving a:hover,
+.trips-flight-returning a:hover {
+	transform: scale(1.1);
+	color: #dd741d
+}
+
 
 .map-container-div {
 	width: 35vw;
@@ -978,6 +1110,16 @@ body,
 	background-color: #ff8421;
 }
 
+.login-error-message {
+	text-align: center;
+	color: #ff8421;
+	text-shadow: 0px 0px 10px #ff8421;
+	font-size: 26px;
+}
+
+button {
+	outline: none;
+}
 .friend-modal-button,
 .friend-modal-title {
 	color: #ff8421;

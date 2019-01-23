@@ -13,7 +13,6 @@ class Trip extends Component {
     constructor() {
         super()
         this.state = {
-            // tripID: this.props.tripID,
             trip: {},
             org_lat: '',
             org_lng: '',
@@ -25,8 +24,9 @@ class Trip extends Component {
             dest_city: '',
             flights: [],
             hotels: [],
-            loading: false,
-            loadingHousing: true,
+            loading: true,
+            loadingFlights: 0,
+            loadingHousing: false,
             loadMap: false,
             pastTrip: false,
             housing: []
@@ -45,6 +45,7 @@ class Trip extends Component {
                     org_city: this.state.trip.origin_city.slice(4),
                     dest_city: this.state.trip.destination_city.slice(4),
                     loadMap: true,
+                    loading: false
                 }, () => {
                     if (new Date(this.state.trip.leaving_date).getTime() - new Date().getTime() < 0) {
                         this.setState({
@@ -60,19 +61,19 @@ class Trip extends Component {
 
         axios.get(`/trip/housing/${this.props.match.params.id}`).then(response => {
             if (response.data[0]) {
-            this.props.setHousing(response.data[0])
-        
-            this.setState({
-                housing: response.data[0]
-            })}
+                this.props.setHousing(response.data[0])
+                this.setState({
+                    housing: response.data[0]
+                })
+            }
         }).catch(error => {
             console.log(error)
             this.props.history.push('/')
         }) 
-
     }
+    
     getAmadeusFlights = () => {
-        this.setState({loading: true});
+        this.setState({loadingFlights: 1});
         var Amadeus = require('amadeus');
         var amadeus = new Amadeus({
             clientId: process.env.REACT_APP_AMADEUS_KEY,
@@ -90,13 +91,17 @@ class Trip extends Component {
         }).then(res => {
             this.setState({
                 flights: res.data,
-                loading: false
+                loadingFlights: 2
             });
         })
     }
 
     getAmadeusHotels = () => {
-        this.setState({loadingHousing: true})
+
+        this.setState({
+            loadingHousing: true
+        })
+
         var Amadeus = require('amadeus');
         var amadeus = new Amadeus({
             clientId: process.env.REACT_APP_AMADEUS_KEY,
@@ -129,20 +134,18 @@ class Trip extends Component {
 
     render() {
 
-        if (this.state.loading) {
-            var flights = <div>one moment while we search for flights</div>
+        if (this.state.loadingFlights===0) {
+            var flights = <button onClick={this.getAmadeusFlights}>Find Flights</button>
+        } else if (this.state.loadingFlights===1) {
+            flights = <div className='flights-loading-animation'>
+                        <i className='fas fa-2x fa-plane-departure'></i>
+                        <i className='fas fa-2x fa-plane'></i>
+                        <i className='fas fa-2x fa-plane-arrival'></i>
+                      </div>
         } else {
             flights =  <div>
                         <Flights flights={this.state.flights} trip={this.state.trip} />
-                    </div> 
-        }
-
-        if (this.state.loadingHousing) {
-            var housing = <div>One moment while we search for places to stay</div>
-        } else {
-            housing = <div>
-                <Housing trip_id={this.props.match.params.id} hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>
-            </div>
+                       </div> 
         }
 
         if (this.state.dest_city) {
@@ -150,6 +153,7 @@ class Trip extends Component {
         } else {
             locationImage = null;
         }
+        
         return (
             <div className='trip-component-container'>
                 <div className='trip-discussion-container'>
@@ -159,14 +163,20 @@ class Trip extends Component {
                     {locationImage}
                     <div className='trip-columns'>
                         <div className='trip-left-column'>
-                            <div className='trip-flights-container'>
-                                <button onClick={this.getAmadeusFlights}>Find Flights</button>
+                            <div className='trip-column-flights-container'>
                                 {flights}
                             </div>
-                            <div className='trip-housing-container'>
+                            <div className='trip-column-housing-container'>
                                 <button onClick={this.getAmadeusHotels}>Find Housing</button>
-                                {housing}
+                                {this.state.loading ?
+                                null
+                                :
+                                this.state.loadingHousing ?
+                                <div><p>.</p><p>.</p><p>.</p></div>
+                                :
+                                <Housing trip_id={this.props.match.params.id} hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>}
                             </div>
+                            
                         </div>
                         <div className='trip-right-column'>
                             <Members

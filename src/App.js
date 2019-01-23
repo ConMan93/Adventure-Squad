@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import { userLoggedIn } from './Redux/reducer';
 
 //Components
-// import Auth from './components/Home/Auth';
 import HomePage from './components/Home/HomePage';
 import Dashboard from './components/User/Dashboard';
 import UserProfile from './components/User/UserProfile';

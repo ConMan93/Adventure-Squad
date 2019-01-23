@@ -33,6 +33,9 @@ class UserMap extends Component {
 
     fetchPlaces = (mapProps, map) => {
         this.props.trips.forEach((trip, i) => {
+            if (i > 9) {
+                return
+            }
             const geocoder = new mapProps.google.maps.Geocoder()
             geocoder.geocode( { 'address': `${trip.destination_state}, ${trip.destination_city.slice(4)}`}, (results, status) => {
                 if (status === "OK") {

@@ -46,7 +46,7 @@ class Message extends Component {
     }
 
     deleteMessage = () => {
-        axios.delete(`/trip/discussion/${this.props.id}`).then( response => {
+        axios.delete(`/trip/discussion/${this.props.id}/${this.props.trip_id}`).then( response => {
             this.props.updateDiscussionBoard(response.data)
         })
     }

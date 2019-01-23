@@ -5,9 +5,9 @@ export default function Hotel (props) {
     if(rating === "4"){
         var ratingString = `${ "⭐️⭐️⭐️⭐️"}`
     } else if(rating === "3"){
-         ratingString = `${ "⭐️⭐⭐️"}`
+        ratingString = `${ "⭐️⭐⭐️"}`
     } else if(rating === "2"){
-         ratingString = `${ "⭐️⭐️"}`
+        ratingString = `${ "⭐️⭐️"}`
     } else {
         ratingString = 'No rating available'
     }
