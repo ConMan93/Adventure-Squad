@@ -25,7 +25,7 @@ class Trip extends Component {
             dest_city: '',
             flights: [],
             hotels: [],
-            loading: true,
+            loading: false,
             loadingHousing: true,
             loadMap: false,
             pastTrip: false,
@@ -73,7 +73,7 @@ class Trip extends Component {
 
     }
     getAmadeusFlights = () => {
-        
+        this.setState({loading: true});
         var Amadeus = require('amadeus');
         var amadeus = new Amadeus({
             clientId: process.env.REACT_APP_AMADEUS_KEY,
@@ -98,7 +98,7 @@ class Trip extends Component {
     }
 
     getAmadeusHotels = () => {
-
+        this.setState({loadingHousing: true})
         var Amadeus = require('amadeus');
         var amadeus = new Amadeus({
             clientId: process.env.REACT_APP_AMADEUS_KEY,
@@ -135,7 +135,7 @@ class Trip extends Component {
             var flights = <div>one moment while we search for flights</div>
         } else {
             flights =  <div>
-                        <Flights flights={this.state.flights} />
+                        <Flights trip={this.state.trip} flights={this.state.flights} />
                     </div> 
         }
 
@@ -161,11 +161,14 @@ class Trip extends Component {
                     {locationImage}
                     <div className='trip-columns'>
                         <div className='trip-left-column'>
-                            <button onClick={this.getAmadeusFlights}>Find Flights</button>
-                            {flights}
-                            <button onClick={this.getAmadeusHotels}>Find Housing</button>
-                            {housing}
-                            
+                            <div className='trip-flights-container'>
+                                <button onClick={this.getAmadeusFlights}>Find Flights</button>
+                                {flights}
+                            </div>
+                            <div className='trip-housing-container'>
+                                <button onClick={this.getAmadeusHotels}>Find Housing</button>
+                                {housing}
+                            </div>
                         </div>
                         <div className='trip-right-column'>
                             <Members
