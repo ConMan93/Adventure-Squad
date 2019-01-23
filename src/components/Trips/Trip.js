@@ -29,7 +29,8 @@ class Trip extends Component {
             loadingHousing: false,
             loadMap: false,
             pastTrip: false,
-            housing: []
+            housing: [],
+            errorMessage: ''
         }
     }
 
@@ -93,6 +94,11 @@ class Trip extends Component {
                 flights: res.data,
                 loadingFlights: 2
             });
+        }).catch(error => {
+            this.setState({
+                errorMessage: error.description[0].detail,
+                loadingFlights: 4
+            })
         })
     }
 
@@ -152,6 +158,8 @@ class Trip extends Component {
                         <i className='fas fa-2x fa-plane'></i>
                         <i className='fas fa-2x fa-plane-arrival'></i>
                     </div>
+        } else if (this.state.loadingFlights === 4) {
+            flights = <h2>{this.state.errorMessage}</h2>
         } else {
             flights =  <div>
                         <Flights flights={this.state.flights} trip={this.state.trip} />
@@ -177,6 +185,11 @@ class Trip extends Component {
                                 {flights}
                             </div>
                             <div className='trip-column-housing-container'>
+                                <div>
+                                    <h2>{this.state.housing.name}</h2>
+                                    <p>{this.state.housing.address}</p>
+                                    <p>{this.state.housing.phone}</p>
+                                </div>
                                 <button onClick={this.getAmadeusHotels}>Find Housing</button>
                                 {this.state.loading ?
                                 null
@@ -184,7 +197,7 @@ class Trip extends Component {
                                 this.state.loadingHousing ?
                                 <div><p>.</p><p>.</p><p>.</p></div>
                                 :
-                                <Housing trip_id={this.props.match.params.id} hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>}
+                                <Housing resetMap={this.resetMap} trip_id={this.props.match.params.id} hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>}
                             </div>
                             
                         </div>

@@ -797,6 +797,28 @@ body,
 	transform: scale(1.1);
 }
 
+.discussion-refresh-button {
+	font-family: 'Comfortaa', sans-serif;
+	font-size: 2.5vh;
+	color: #ff8421;
+	background: none;
+	border: 1px solid #ff8421;
+	padding: 5px;
+	margin: 5% 2%;
+	border-radius: 5px;
+	text-shadow: 0px 0px 10px #ff8421;
+	box-shadow: 0px 0px 10px #ff8421;
+	transition: all 350ms ease;
+	width: 50px;
+	height: 45px;
+}
+
+.discussion-refresh-button:hover {
+	color: #333;
+	background-color: #ff8421;
+	transform: scale(1.1);
+}
+
 .trip-discussion-message > div {
 	width: 100%;
 	margin-top: 10px;
@@ -1289,4 +1311,10 @@ button {
 	border: 1px solid #333;
 	padding: 20px;
 	border-radius: 10px;
+}
+
+.fck-it-button {
+	position: absolute;
+	bottom: 50px;
+	right: 14vw;
 }
