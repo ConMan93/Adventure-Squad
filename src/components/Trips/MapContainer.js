@@ -104,7 +104,14 @@ export class MapContainer extends Component {
                     <div>
                         <h1>{this.state.selectedPlace.name}</h1>
                         <p>{this.state.selectedPlace.vicinity}</p>
-                        <p>rating: </p>
+                        {this.state.selectedPlace.rating ?
+                        <p>rating: {this.state.selectedPlace.rating}</p>
+                        :
+                        null}
+                        {this.state.selectedPlace.phone ?
+                        <p>{this.state.selectedPlace.phone}</p>
+                        :
+                        null}
                     </div>
                 </InfoWindow>
             )
@@ -143,7 +150,14 @@ export class MapContainer extends Component {
                     <div>
                         <h1>{this.state.selectedPlace.name}</h1>
                         <p>{this.state.selectedPlace.vicinity}</p>
+                        {this.state.selectedPlace.rating ?
                         <p>rating: {this.state.selectedPlace.rating}</p>
+                        :
+                        null}
+                        {this.state.selectedPlace.phone ?
+                        <p>{this.state.selectedPlace.phone}</p>
+                        :
+                        null}
                     </div>
                 </InfoWindow>
             )
@@ -183,7 +197,14 @@ export class MapContainer extends Component {
                     <div>
                         <h1>{this.state.selectedPlace.name}</h1>
                         <p>{this.state.selectedPlace.vicinity}</p>
+                        {this.state.selectedPlace.rating ?
                         <p>rating: {this.state.selectedPlace.rating}</p>
+                        :
+                        null}
+                        {this.state.selectedPlace.phone ?
+                        <p>{this.state.selectedPlace.phone}</p>
+                        :
+                        null}
                     </div>
                 </InfoWindow>
             )
@@ -205,7 +226,8 @@ export class MapContainer extends Component {
                     <Marker 
                         onClick={this.onMarkerClick}
                         name={this.props.housing.name}
-                        rating={this.props.housing.phone}
+                        // rating={this.props.housing.phone}
+                        phone={this.props.housing.phone}
                         vicinity={this.props.housing.address}
                         icon={{
                             url: 'http://www.clker.com/cliparts/e/3/F/I/0/A/google-maps-marker-for-residencelamontagne-hi.png',
