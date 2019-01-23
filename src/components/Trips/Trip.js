@@ -60,14 +60,16 @@ class Trip extends Component {
 
         axios.get(`/trip/housing/${this.props.match.params.id}`).then(response => {
             console.log(response)
-            this.props.setHousing(response.data[0])
-            this.setState({
-                housing: response.data[0]
-            })
+            if (response.data[0]) {
+                this.props.setHousing(response.data[0])
+                this.setState({
+                    housing: response.data[0]
+                })
+            }
         }).catch(error => {
             console.log(error)
             this.props.history.push('/')
-        })
+        }) 
 
     }
     getAmadeusFlights = () => {
