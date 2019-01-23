@@ -33,7 +33,6 @@ export default class extends Component {
         })
         return (
             <div>
-            <h1>Flights</h1>
             {flights}
             </div>
         )
