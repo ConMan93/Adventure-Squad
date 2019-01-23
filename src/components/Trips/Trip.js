@@ -33,7 +33,7 @@ class Trip extends Component {
         }
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         const url = this.props.location.pathname;
         axios.get(url).then(res => {
             this.setState({
@@ -132,20 +132,30 @@ class Trip extends Component {
         })
     }
 
+    resetMap = () => {
+        this.setState({
+            loadMap: false
+        }, () => {
+            this.setState({
+                loadMap: true
+            })
+        })
+    }
+
     render() {
 
-        if (this.state.loadingFlights===0) {
+        if (this.state.loadingFlights === 0) {
             var flights = <button onClick={this.getAmadeusFlights}>Find Flights</button>
-        } else if (this.state.loadingFlights===1) {
+        } else if (this.state.loadingFlights === 1) {
             flights = <div className='flights-loading-animation'>
                         <i className='fas fa-2x fa-plane-departure'></i>
                         <i className='fas fa-2x fa-plane'></i>
                         <i className='fas fa-2x fa-plane-arrival'></i>
-                      </div>
+                    </div>
         } else {
             flights =  <div>
                         <Flights flights={this.state.flights} trip={this.state.trip} />
-                       </div> 
+                    </div> 
         }
 
         if (this.state.dest_city) {
