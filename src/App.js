@@ -25,7 +25,6 @@ class App extends Component {
 
   componentDidMount() {
     axios.get('/auth/currentuser').then( response => {
-      console.log(response.data)
       if (response.data) {
         this.props.userLoggedIn(response.data)
       }
@@ -48,7 +47,6 @@ class App extends Component {
           <div>
             <Switch>
               <Route exact path='/' component={HomePage} />
-              {/* <Route path='/login' component={Auth} /> */}
               <Route path='/trip/:id' component={Trip} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path='/profile/:id' component={UserProfile} />

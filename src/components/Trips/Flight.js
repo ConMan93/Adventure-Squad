@@ -44,16 +44,12 @@ class Flight extends Component {
     }
     
     handleAirlineResponse(obj){
-        console.log(obj.carrierCode, obj.departure, obj.arrival, obj.duration, obj.departureDate, obj.arrivalDate)
-        console.log(this.state[obj.carrierCode])
-
         this.setState({
             selectedFlight: obj
         })
     }
     
     render () {
-    console.log(this.state.selectedFlight)
 
     const {price, leavingStops, leavingSegments, returningStops, returningSegments} = this.props;
 
@@ -185,7 +181,7 @@ class Flight extends Component {
     return (
         <div>
             <h1>Flight</h1>
-            <h2>{price}</h2>
+            <h2>Starting at {price}</h2>
             {leaving}
             {returning}
 
