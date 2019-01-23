@@ -26,7 +26,7 @@ class Trip extends Component {
             hotels: [],
             loading: true,
             loadingFlights: 0,
-            loadingHousing: false,
+            loadingHousing: 0,
             loadMap: false,
             pastTrip: false,
             housing: [],
@@ -105,7 +105,7 @@ class Trip extends Component {
     getAmadeusHotels = () => {
 
         this.setState({
-            loadingHousing: true
+            loadingHousing: 1
         })
 
         var Amadeus = require('amadeus');
@@ -132,7 +132,7 @@ class Trip extends Component {
                 hotels: results2.slice(0,5),
             }, () => {
                 this.setState({
-                    loadingHousing: false
+                    loadingHousing: 2
                 })
             })
         })
@@ -171,6 +171,32 @@ class Trip extends Component {
         } else {
             locationImage = null;
         }
+
+        if (this.state.housing.name) {
+            var savedHousing = <div className='trip-saved-housing'>
+                                <h1>{this.state.housing.name.toLowerCase()}</h1>
+                                <h1>{this.state.housing.address.toLowerCase()}</h1>
+                                <h1>{this.state.housing.phone}</h1>
+                                <h1>{`${"$"}${this.state.housing.daily_price} per night`}</h1>
+                               </div>
+        } else {
+            savedHousing = null
+        }
+
+        if (this.state.loadingHousing===0) {
+            var housing =   <div>
+                            {savedHousing}
+                            <button className='getHousingButton' onClick={this.getAmadeusHotels}>Find Housing</button>
+                            </div>
+        } else if (this.state.loadingHousing===1) {
+            housing = <div className='housing-loading-animation'>
+                        <i className='fas fa-2x fa-hotel'></i>
+                        <i className='fas fa-2x fa-luggage-cart'></i>
+                        <i className='fas fa-2x fa-bed'></i>
+                      </div>
+        } else if (this.state.loadingHousing===2) {
+            housing = <Housing trip_id={this.props.match.params.id} hotels={this.state.hotels} city=                {this.state.dest_city} state={this.state.trip.destination_state} checkin=                     {this.state.trip.leaving_date.slice(0,10)} checkout=                                          {this.state.trip.returning_date.slice(0,10)} resetMap={this.resetMap}/>
+        }
         
         return (
             <div className='trip-component-container'>
@@ -185,19 +211,7 @@ class Trip extends Component {
                                 {flights}
                             </div>
                             <div className='trip-column-housing-container'>
-                                <div>
-                                    <h2>{this.state.housing.name}</h2>
-                                    <p>{this.state.housing.address}</p>
-                                    <p>{this.state.housing.phone}</p>
-                                </div>
-                                <button onClick={this.getAmadeusHotels}>Find Housing</button>
-                                {this.state.loading ?
-                                null
-                                :
-                                this.state.loadingHousing ?
-                                <div><p>.</p><p>.</p><p>.</p></div>
-                                :
-                                <Housing resetMap={this.resetMap} trip_id={this.props.match.params.id} hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>}
+                               {housing}
                             </div>
                             
                         </div>

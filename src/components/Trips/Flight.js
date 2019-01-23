@@ -72,11 +72,13 @@ class Flight extends Component {
         let arrivalDate = new Intl.DateTimeFormat('en-US', {month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(date)
 
         leaving = 
-                <div onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
+                <div className='direct' onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
                         <a href={`${this.state[returningSegments[0].flightSegment.carrierCode].link}`} target='_blank' rel="noopener noreferrer" >{this.state[returningSegments[0].flightSegment.carrierCode].airline}</a>
-                        <div><i className='fas fa-2x fa-plane-departure'></i><h1>{departure.iataCode}</h1><h1>{departureDate}</h1></div>
-                        <div><h1>{duration}</h1><i className='fas fa-2x fa-plane'></i></div>
-                        <div><i className='fas fa-2x fa-plane-arrival'></i><h1>{arrival.iataCode}</h1><h1>{arrivalDate}</h1></div>
+                        <div>
+                            <div><i className='fas fa-2x fa-plane-departure'></i><h1>{departure.iataCode}</h1><h1>{departureDate}</h1></div>
+                            <div><h1>{duration}</h1><i className='fas fa-2x fa-plane'></i></div>
+                            <div><i className='fas fa-2x fa-plane-arrival'></i><h1>{arrival.iataCode}</h1><h1>{arrivalDate}</h1></div>
+                        </div>
                     </div>
 
     } else {
@@ -133,12 +135,14 @@ class Flight extends Component {
        let arrivalDate = new Intl.DateTimeFormat('en-US', {month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(date)
 
        returning = 
-                <div onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
+                <div className='direct' onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
                     <a href={`${this.state[returningSegments[0].flightSegment.carrierCode].link}`} target='_blank' rel="noopener noreferrer" >{this.state[returningSegments[0].flightSegment.carrierCode].airline}</a>
                     {/* <a href={`${this.state[carrierCode].link}`} target='_blank' rel='noopener noreferrer' >{this.state[carrierCode].airline}</a> */}
-                    <div><i className='fas fa-2x fa-plane-departure'></i><h1>{departure.iataCode}</h1><h1>{departureDate}</h1></div>
-                    <div><h1>{duration}</h1><i className='fas fa-2x fa-plane'></i></div>
-                    <div><i className='fas fa-2x fa-plane-arrival'></i><h1>{arrival.iataCode}</h1><h1>{arrivalDate}</h1></div>
+                    <div>
+                        <div><i className='fas fa-2x fa-plane-departure'></i><h1>{departure.iataCode}</h1><h1>{departureDate}</h1></div>
+                        <div><h1>{duration}</h1><i className='fas fa-2x fa-plane'></i></div>
+                        <div><i className='fas fa-2x fa-plane-arrival'></i><h1>{arrival.iataCode}</h1><h1>{arrivalDate}</h1></div>
+                    </div>
                 </div>
     } else {
         let segments = returningSegments.map((segment, i) => {
