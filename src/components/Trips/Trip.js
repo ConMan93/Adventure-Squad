@@ -25,7 +25,7 @@ class Trip extends Component {
             flights: [],
             hotels: [],
             loading: true,
-            loadingFlights: false,
+            loadingFlights: 0,
             loadingHousing: false,
             loadMap: false,
             pastTrip: false,
@@ -73,7 +73,7 @@ class Trip extends Component {
     }
     
     getAmadeusFlights = () => {
-        
+        this.setState({loadingFlights: 1});
         var Amadeus = require('amadeus');
         var amadeus = new Amadeus({
             clientId: process.env.REACT_APP_AMADEUS_KEY,
@@ -91,7 +91,7 @@ class Trip extends Component {
         }).then(res => {
             this.setState({
                 flights: res.data,
-                loadingFlights: false
+                loadingFlights: 2
             });
         })
     }
@@ -134,12 +134,18 @@ class Trip extends Component {
 
     render() {
 
-        if (this.state.loading) {
-            var flights = <div>one moment while we search for flights</div>
+        if (this.state.loadingFlights===0) {
+            var flights = <button onClick={this.getAmadeusFlights}>Find Flights</button>
+        } else if (this.state.loadingFlights===1) {
+            flights = <div className='flights-loading-animation'>
+                        <i className='fas fa-2x fa-plane-departure'></i>
+                        <i className='fas fa-2x fa-plane'></i>
+                        <i className='fas fa-2x fa-plane-arrival'></i>
+                      </div>
         } else {
             flights =  <div>
                         <Flights flights={this.state.flights} trip={this.state.trip} />
-                    </div> 
+                       </div> 
         }
 
         if (this.state.dest_city) {
@@ -157,16 +163,19 @@ class Trip extends Component {
                     {locationImage}
                     <div className='trip-columns'>
                         <div className='trip-left-column'>
-                            <button onClick={this.getAmadeusFlights}>Find Flights</button>
-                            {flights}
-                            <button onClick={this.getAmadeusHotels}>Find Housing</button>
-                            {this.state.loading ?
-                            null
-                            :
-                            this.state.loadingHousing ?
-                            <div><p>.</p><p>.</p><p>.</p></div>
-                            :
-                            <Housing trip_id={this.props.match.params.id} hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>}
+                            <div className='trip-column-flights-container'>
+                                {flights}
+                            </div>
+                            <div className='trip-column-housing-container'>
+                                <button onClick={this.getAmadeusHotels}>Find Housing</button>
+                                {this.state.loading ?
+                                null
+                                :
+                                this.state.loadingHousing ?
+                                <div><p>.</p><p>.</p><p>.</p></div>
+                                :
+                                <Housing trip_id={this.props.match.params.id} hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>}
+                            </div>
                             
                         </div>
                         <div className='trip-right-column'>
