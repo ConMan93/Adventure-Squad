@@ -69,9 +69,9 @@ class Trip extends Component {
         }).catch(error => {
             console.log(error)
             this.props.history.push('/')
-        })
-
+        }) 
     }
+    
     getAmadeusFlights = () => {
         
         var Amadeus = require('amadeus');

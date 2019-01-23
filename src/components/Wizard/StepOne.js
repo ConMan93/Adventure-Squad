@@ -18,8 +18,6 @@ class StepOne extends Component {
         let number = Math.floor(Math.random() * 50)
         let randomState = this.state.states.cityArray[number].state
         let randomCity = this.state.states.cityArray[number].cities[Math.floor(Math.random() * this.state.states.cityArray[number].cities.length)]
-        console.log(randomState)
-        console.log(randomCity)
         this.props.handleDestinationChange(randomState)
         await this.props.handleCityChange(randomCity)
         this.props.createTrip()

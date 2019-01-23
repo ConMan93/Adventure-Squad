@@ -102,13 +102,13 @@ class Flight extends Component {
                     <h1>Flight time {duration}</h1>
                 </div>)
             } else {
-            return (
-                <div key={i} onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
-                    <a href={`${this.state[carrierCode].link}`} target='_blank' rel="noopener noreferrer" >{this.state[carrierCode].airline}</a>
-                    <h1>Departing from {departure.iataCode} on {departureDate}</h1>
-                    <h1>Arriving at {arrival.iataCode} on {arrivalDate}</h1>
-                    <h1>Flight time {duration}</h1>
-                </div>
+                return (
+                    <div key={i} onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
+                        <a href={`${this.state[carrierCode].link}`} target='_blank' rel="noopener noreferrer" >{this.state[carrierCode].airline}</a>
+                        <h1>Departing from {departure.iataCode} on {departureDate}</h1>
+                        <h1>Arriving at {arrival.iataCode} on {arrivalDate}</h1>
+                        <h1>Flight time {duration}</h1>
+                    </div>
             )}
         });
         leaving = <div style={{border: '1px solid purple'}} >
@@ -137,7 +137,7 @@ class Flight extends Component {
                    <h1>Departing from {departure.iataCode} on {departureDate}</h1>
                    <h1>Arriving at {arrival.iataCode} on {arrivalDate}</h1>
                    <h1>Total flight time is {duration}</h1>
-                 </div>
+                </div>
     } else {
         let segments = returningSegments.map((segment, i) => {
             const {departure, arrival, carrierCode} = segment.flightSegment;
@@ -179,7 +179,7 @@ class Flight extends Component {
     return (
         <div>
             <h1>Flight</h1>
-            <h2>{price}</h2>
+            <h2>Starting at {price}</h2>
             {leaving}
             {returning}
 
