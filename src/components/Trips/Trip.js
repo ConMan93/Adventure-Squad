@@ -25,7 +25,8 @@ class Trip extends Component {
             flights: [],
             hotels: [],
             loading: true,
-            loadingHousing: true,
+            loadingFlights: false,
+            loadingHousing: false,
             loadMap: false,
             pastTrip: false,
             housing: []
@@ -44,6 +45,7 @@ class Trip extends Component {
                     org_city: this.state.trip.origin_city.slice(4),
                     dest_city: this.state.trip.destination_city.slice(4),
                     loadMap: true,
+                    loading: false
                 }, () => {
                     if (new Date(this.state.trip.leaving_date).getTime() - new Date().getTime() < 0) {
                         this.setState({
@@ -89,12 +91,16 @@ class Trip extends Component {
         }).then(res => {
             this.setState({
                 flights: res.data,
-                loading: false
+                loadingFlights: false
             });
         })
     }
 
     getAmadeusHotels = () => {
+
+        this.setState({
+            loadingHousing: true
+        })
 
         var Amadeus = require('amadeus');
         var amadeus = new Amadeus({
@@ -136,14 +142,6 @@ class Trip extends Component {
                     </div> 
         }
 
-        if (this.state.loadingHousing) {
-            var housing = <div>One moment while we search for places to stay</div>
-        } else {
-            housing = <div>
-                <Housing trip_id={this.props.match.params.id} hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>
-            </div>
-        }
-
         if (this.state.dest_city) {
             var locationImage = <LocationImage dest_city={this.state.dest_city} destination_state={this.state.trip.destination_state}/>
         } else {
@@ -162,7 +160,13 @@ class Trip extends Component {
                             <button onClick={this.getAmadeusFlights}>Find Flights</button>
                             {flights}
                             <button onClick={this.getAmadeusHotels}>Find Housing</button>
-                            {housing}
+                            {this.state.loading ?
+                            null
+                            :
+                            this.state.loadingHousing ?
+                            <div><p>.</p><p>.</p><p>.</p></div>
+                            :
+                            <Housing trip_id={this.props.match.params.id} hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>}
                             
                         </div>
                         <div className='trip-right-column'>

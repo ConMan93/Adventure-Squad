@@ -37,9 +37,7 @@ class Housing extends Component {
             var price1 = price.toString().slice(0,6);
             const {name, rating, contact} = hotel.hotel;
             return <Hotel base={price1} name={name} rating={rating} contact={contact} address={hotel.hotel.address.lines[0]} latitude={hotel.hotel.latitude} longitude={hotel.hotel.longitude} addHousingToTrip={this.addHousingToTrip} />
-        })} else {
-            hotels = <div>One moment while we search for hotels</div>
-        }
+        })}
         return (
             <div>
                 {hotels}
