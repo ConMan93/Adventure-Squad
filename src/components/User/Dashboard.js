@@ -94,7 +94,7 @@ class Dashboard extends Component{
         }).map((user, i) => {
             return <div key={i} className='dashboard-search-friend'>
                         <Link to={`/profile/${user.id}`}>
-                        <img src={user.profile_img} alt="img" />
+                        <img src={user.profile_img} alt="img" height='60' width='60'/>
                         </Link>
                         <div className='search-friend-info'>
                         <h1>{user.username}</h1>
@@ -111,6 +111,8 @@ class Dashboard extends Component{
                 </div></Link>
             )
         })
+
+        let searchWidth = (this.props.allUsers.length - this.state.filterFriends) * 9
 
 
         let {username, venmo, profile_img} = this.props.user
@@ -148,8 +150,10 @@ class Dashboard extends Component{
                                 <input onChange={(e) => this.handleSearchFriends(e.target.value)} type="text" placeholder="enter username"></input>
                                 <span><i className="fas fa-search fa-2x"></i></span>
                             </div>
-                            <div className='dashboard-search-list'>
+                            <div className='dashboard-search-list-container'>
+                            <div className='dashboard-search-list' style={{width: `${searchWidth}vw`}}>
                                 {eachUser}
+                            </div>
                             </div>
                         </div>
                         <div className='dashboard-friends'>
