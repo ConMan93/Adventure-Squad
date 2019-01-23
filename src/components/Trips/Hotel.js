@@ -5,9 +5,9 @@ export default function Hotel (props) {
     if(rating === "4"){
             var ratingString = `${ "⭐️⭐️⭐️⭐️"}`
     } else if(rating === "3"){
-        var ratingString = `${ "⭐️⭐⭐️"}`
+         ratingString = `${ "⭐️⭐⭐️"}`
     } else if(rating === "2"){
-        var ratingString = `${ "⭐️⭐️"}`
+         ratingString = `${ "⭐️⭐️"}`
     } else {
         ratingString = 'No rating available'
     }
@@ -17,7 +17,6 @@ export default function Hotel (props) {
     } else {
         phoneNum = 'No Phone Number Listed'
     }
-    // console.log(props)
     return (
         <div>
             <h1>Hotels</h1>

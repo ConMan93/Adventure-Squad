@@ -68,9 +68,9 @@ class UserProfile extends Component {
       let usersTrips = this.state.trips.map((trip, i) => {
           return (
               <div key={'trip' + i} style={{border: '1px solid black'}}>
-                  <p>Trip to {trip.destination_city.slice(4)}, {trip.destination_state}</p>
-                  <p>from : <Moment date={trip.leaving_date} format='ddd MMM DD, YYYY' /></p>
-                  <p>to : <Moment date={trip.returning_date} format='ddd MMM DD, YYYY' /></p>
+                  <p>{trip.destination_city.slice(4)}, {trip.destination_state}</p>
+                  <p><Moment date={trip.leaving_date} format='ddd MMM DD, YYYY' /></p>
+                  <p>to <Moment date={trip.returning_date} format='ddd MMM DD, YYYY' /></p>
               </div>
         )
       })
