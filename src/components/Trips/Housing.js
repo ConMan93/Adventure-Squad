@@ -24,6 +24,7 @@ class Housing extends Component {
         let daily_price = +hotel.base 
         axios.post('/trip/housing', {trip_id, phone, name, address, latitude, longitude, daily_price}).then( response => {
             this.props.setHousing(response.data)
+            this.props.resetMap()
         })
     }
 

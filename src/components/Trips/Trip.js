@@ -33,7 +33,7 @@ class Trip extends Component {
         }
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         const url = this.props.location.pathname;
         axios.get(url).then(res => {
             this.setState({
@@ -132,8 +132,17 @@ class Trip extends Component {
         })
     }
 
-    render() {
+    resetMap = () => {
+        this.setState({
+            loadMap: false
+        }, () => {
+            this.setState({
+                loadMap: true
+            })
+        })
+    }
 
+    render() {
         if (this.state.loading) {
             var flights = <div>one moment while we search for flights</div>
         } else {
@@ -159,6 +168,11 @@ class Trip extends Component {
                         <div className='trip-left-column'>
                             <button onClick={this.getAmadeusFlights}>Find Flights</button>
                             {flights}
+                            <div>
+                            <h6>{this.state.housing.name}</h6>
+                            <p>{this.state.housing.address}</p>
+                            <p>{this.state.housing.phone}</p>
+                            </div>
                             <button onClick={this.getAmadeusHotels}>Find Housing</button>
                             {this.state.loading ?
                             null
@@ -166,7 +180,7 @@ class Trip extends Component {
                             this.state.loadingHousing ?
                             <div><p>.</p><p>.</p><p>.</p></div>
                             :
-                            <Housing trip_id={this.props.match.params.id} hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>}
+                            <Housing resetMap={this.resetMap} trip_id={this.props.match.params.id} hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)}/>}
                             
                         </div>
                         <div className='trip-right-column'>
