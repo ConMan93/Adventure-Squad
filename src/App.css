@@ -914,11 +914,7 @@ body,
 	border-radius: 5px;
 	transition: all 350ms ease;
 	width: 50%;
-	margin: 25%;
-}
-
-.getHousingButton {
-	margin-top: 5%;
+	margin: 5% 25%;
 }
 
 .trip-column-housing-container {
