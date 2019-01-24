@@ -29,7 +29,8 @@ class Trip extends Component {
             loadingHousing: 0,
             loadMap: false,
             pastTrip: false,
-            housing: []
+            housing: [],
+            errorMessage: ''
         }
     }
 
@@ -93,6 +94,11 @@ class Trip extends Component {
                 flights: res.data,
                 loadingFlights: 2
             });
+        }).catch(error => {
+            this.setState({
+                errorMessage: error.description[0].detail,
+                loadingFlights: 4
+            })
         })
     }
 
@@ -152,6 +158,8 @@ class Trip extends Component {
                         <i className='fas fa-2x fa-plane'></i>
                         <i className='fas fa-2x fa-plane-arrival'></i>
                     </div>
+        } else if (this.state.loadingFlights === 4) {
+            flights = <h2>{this.state.errorMessage}</h2>
         } else {
             flights =  <div>
                         <Flights flights={this.state.flights} trip={this.state.trip} />
