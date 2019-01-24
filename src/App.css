@@ -391,10 +391,21 @@ body,
 .dashboard-header-venmo-container {
 	display: flex;
 	align-items: center;
-}
+	font-size: 30px;
+	font-family: 'Comfortaa', sans-serif;
+	color: #ff8421;
+	text-shadow: 0px 0px 10px #ff8421;
+	margin-right: 2%;
+	position: relative;
+	top: 25%;
 
-.dashboard-header-venmo-container h2 {
-	font-size: 70px;
+}
+.dashboard-header-venmo-container div {
+	background-image: url('./photos/VENMO.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	height: 6vh;
+	width: 7vh;
 }
 
 .dashboard-content {
