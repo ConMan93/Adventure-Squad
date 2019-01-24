@@ -55,8 +55,9 @@ module.exports = {
 
             let db = req.app.get('db')
             let id = +req.params.id
+            let trip_id = + req.params.trip_id
 
-            let newDiscussion = await db.delete_discussion_message(id)
+            let newDiscussion = await db.delete_discussion_message({id, trip_id})
             return res.send(newDiscussion)
 
         } catch(error) {
@@ -101,7 +102,6 @@ module.exports = {
             const db = req.app.get('db')
             let user_id = req.session.user.id
             let { originCity, originState, destinationCity, destinationState, to, from } = req.body
-            console.log(1111)
             let newTrip = await db.create_trip([originState, originCity, destinationState, destinationCity, from, to])
             let createdTrip = newTrip[0]
             let trip_id = createdTrip.id

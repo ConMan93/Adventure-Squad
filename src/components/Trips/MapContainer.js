@@ -104,7 +104,14 @@ export class MapContainer extends Component {
                     <div>
                         <h1>{this.state.selectedPlace.name}</h1>
                         <p>{this.state.selectedPlace.vicinity}</p>
-                        <p>rating: </p>
+                        {this.state.selectedPlace.rating ?
+                        <p>rating: {this.state.selectedPlace.rating}</p>
+                        :
+                        null}
+                        {this.state.selectedPlace.phone ?
+                        <p>{this.state.selectedPlace.phone}</p>
+                        :
+                        null}
                     </div>
                 </InfoWindow>
             )
@@ -143,7 +150,14 @@ export class MapContainer extends Component {
                     <div>
                         <h1>{this.state.selectedPlace.name}</h1>
                         <p>{this.state.selectedPlace.vicinity}</p>
+                        {this.state.selectedPlace.rating ?
                         <p>rating: {this.state.selectedPlace.rating}</p>
+                        :
+                        null}
+                        {this.state.selectedPlace.phone ?
+                        <p>{this.state.selectedPlace.phone}</p>
+                        :
+                        null}
                     </div>
                 </InfoWindow>
             )
@@ -183,7 +197,14 @@ export class MapContainer extends Component {
                     <div>
                         <h1>{this.state.selectedPlace.name}</h1>
                         <p>{this.state.selectedPlace.vicinity}</p>
+                        {this.state.selectedPlace.rating ?
                         <p>rating: {this.state.selectedPlace.rating}</p>
+                        :
+                        null}
+                        {this.state.selectedPlace.phone ?
+                        <p>{this.state.selectedPlace.phone}</p>
+                        :
+                        null}
                     </div>
                 </InfoWindow>
             )
@@ -194,20 +215,26 @@ export class MapContainer extends Component {
         return (
             <div className='map-container-div'>
                 <Map 
-                google={this.props.google} 
-                zoom={14} 
-                initialCenter={{lat: 40.7618, lng: -111.8907}}
-                onClick={this.onMapClicked}
-                onReady={this.fetchPlaces}
-                style={{width: '100%', height: '100%'}}
-                center={{lat: +this.props.housing.latitude || this.state.lat, lng: +this.props.housing.longitude || this.state.lng}}>
+                    google={this.props.google} 
+                    zoom={14} 
+                    initialCenter={{lat: 40.7618, lng: -111.8907}}
+                    onClick={this.onMapClicked}
+                    onReady={this.fetchPlaces}
+                    style={{width: '100%', height: '100%'}}
+                    center={{lat: +this.props.housing.latitude || this.state.lat, lng: +this.props.housing.longitude || this.state.lng}}>
 
-                    <Marker onClick={this.onMarkerClick}
-                            name={this.props.housing.name}
-                            icon={{
-                                url: 'http://www.clker.com/cliparts/e/3/F/I/0/A/google-maps-marker-for-residencelamontagne-hi.png',
-                                scaledSize: new this.props.google.maps.Size(27, 43)
-                    }} />
+                    <Marker 
+                        onClick={this.onMarkerClick}
+                        name={this.props.housing.name}
+                        // rating={this.props.housing.phone}
+                        phone={this.props.housing.phone}
+                        vicinity={this.props.housing.address}
+                        icon={{
+                            url: 'http://www.clker.com/cliparts/e/3/F/I/0/A/google-maps-marker-for-residencelamontagne-hi.png',
+                            scaledSize: new this.props.google.maps.Size(27, 43)
+                        }} 
+                    />
+
 
                         {this.nearbyFoodPlaces()}
                         {this.nearbyFoodInfo()}

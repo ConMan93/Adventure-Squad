@@ -745,7 +745,7 @@ body,
 .trip-component-container {
 	display: flex;
 	height: 100vh;
-	/* overflow: hidden; */
+	overflow: hidden;
 }
 
 .trip-content-container {
@@ -803,6 +803,28 @@ body,
 }
 
 .trip-discussion-message button:hover {
+	color: #333;
+	background-color: #ff8421;
+	transform: scale(1.1);
+}
+
+.discussion-refresh-button {
+	font-family: 'Comfortaa', sans-serif;
+	font-size: 2.5vh;
+	color: #ff8421;
+	background: none;
+	border: 1px solid #ff8421;
+	padding: 5px;
+	margin: 5% 2%;
+	border-radius: 5px;
+	text-shadow: 0px 0px 10px #ff8421;
+	box-shadow: 0px 0px 10px #ff8421;
+	transition: all 350ms ease;
+	width: 50px;
+	height: 45px;
+}
+
+.discussion-refresh-button:hover {
 	color: #333;
 	background-color: #ff8421;
 	transform: scale(1.1);
@@ -897,7 +919,7 @@ body,
 	display: flex;
 	justify-content: space-between;
 	height: 85vh;
-	/* overflow: hidden; */
+	overflow: hidden;
 }
 
 .trip-columns > div {
@@ -907,6 +929,222 @@ body,
 	justify-content: space-between;
 	padding: 20px;
 }
+
+.trip-column-flights-container,
+.trip-column-housing-container {
+	height: 50%;
+	overflow-y: scroll;
+}
+
+.trip-column-flights-container button,
+.getHousingButton {
+	background: none;
+	border: 1px solid #ff8421;
+	color: #ff8421;
+	font-family: 'Comfortaa', sans-serif;
+	font-size: 3vh;
+	padding: 20px;
+	border-radius: 5px;
+	transition: all 350ms ease;
+	width: 50%;
+	margin: 25%;
+}
+
+.getHousingButton {
+	margin-top: 5%;
+}
+
+.trip-column-housing-container {
+	margin: 20px 0;
+}
+
+.trip-column-flights-container button:hover,
+.trip-column-housing-container button:hover {
+	background-color: #ff8421;
+	color: #333;
+	box-shadow: 0px 0px 10px #ff8421;
+	transform: scale(1.1);
+}
+
+.trip-column-flights-container button:active,
+.trip-column-housing-container button:active {
+	transform: scale(0.9);
+}
+
+.flights-loading-animation,
+.housing-loading-animation {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.flights-loading-animation i,
+.housing-loading-animation i {
+	color: #ff8421;
+	margin: 0 5%;
+	opacity: 0;
+	animation: flight-loading 2s infinite
+}
+
+.fa-plane {
+	position: relative;
+	top: -30px;
+	animation-delay: 300ms !important;
+}
+
+.fa-luggage-cart {
+	animation-delay: 300ms !important;
+}
+
+.fa-plane-arrival,
+.fa-bed {
+	animation-delay: 600ms !important;
+}
+
+@keyframes flight-loading {
+	50% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0
+	}
+}
+
+.trips-flight {
+	background-color: #333;
+	border-radius: 10px;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+.trips-flight > h2 {
+	font-family: 'Comfortaa', sans-serif;
+	text-align: center;
+	color: #eee;
+	margin: 1% 0;
+	font-size: 2vh;
+}
+
+.trips-flight-leaving,
+.trips-flight-returning {
+	border: 1px solid #eee;
+	border-radius: 10px;
+	margin-bottom: 15px;
+}
+
+.trips-flight-leaving >div >div,
+.trips-flight-returning >div >div {
+	display: flex;
+	width: 90%;
+	margin-left: 5%;
+	justify-content: space-between;
+	text-align: center;
+	font-family: 'Comfortaa', sans-serif;
+	color: #eee;
+	padding: 5px 0;
+}
+
+.trips-flight-leaving .fa-plane,
+.trips-flight-returning .fa-plane {
+	top: 15px;
+}
+
+.trips-flight-leaving i,
+.trips-flight-returning i {
+	color: #eee;
+}
+
+.trips-flight-leaving h1,
+.trips-flight-returning h1 {
+	margin-top: 10px;
+}
+
+.trips-flight-leaving a,
+.trips-flight-returning a {
+	color: #ff8421;
+	font-family: 'Comfortaa', sans-serif;
+	font-size: 2.5vh;
+	display: block;
+	text-align: center;
+	margin: 1%;
+	transition: all 350ms ease;
+}
+
+.trips-flight-leaving a:hover,
+.trips-flight-returning a:hover {
+	transform: scale(1.1);
+	color: #dd741d
+}
+
+.trip-column-housing-container >div >div,
+.trip-saved-housing {
+	background-color: #333;
+	color: #eee;
+	font-family: 'Comfortaa', sans-serif;
+	font-size: 2vh;
+	margin: 5% 0;
+	border-radius: 10px;
+	padding: 20px;
+} 
+
+.trip-saved-housing h1 {
+	text-transform: capitalize;
+}
+
+.trip-column-housing-container h1 {
+	margin: 3% 0;
+	text-transform: capitalize;
+}
+
+.trip-column-housing-container i {
+	color: #ff8421;
+}
+
+.fa-star {
+	text-shadow: 0px 0px 10px #ff8421;
+	margin: 0 1%;
+}
+
+.trip-column-housing-container a {
+	color: #ff8421;
+	font-family: 'Comfortaa', sans-serif;
+	font-size: 3vh;
+	transition: all 350ms ease;
+	position: fixed;
+	bottom: 20px;
+	background-color: white;
+	width: 36%;
+	text-align: center;
+	padding: 10px 0;
+}
+
+.trip-column-housing-container a:hover {
+	color: #dd741d
+}
+
+.trip-column-housing-container button:not(.getHousingButton){
+	background: none;
+	border: 1px solid #eee;
+	font-family: 'Comfortaa', sans-serif;
+	color: #eee;
+	width: 50%;
+	font-size: 3vh;
+	margin-left: 50%;
+	padding: 10px 0;
+	border-radius: 10px;
+	transition: all 350ms ease;
+}
+
+.trip-column-housing-container button:not(.getHousingButton):hover {
+	background-color: #eee;
+	color: #333;
+	box-shadow: none;
+	transform: none;
+}
+
 
 .map-container-div {
 	width: 35vw;
@@ -989,6 +1227,16 @@ body,
 	background-color: #ff8421;
 }
 
+.login-error-message {
+	text-align: center;
+	color: #ff8421;
+	text-shadow: 0px 0px 10px #ff8421;
+	font-size: 26px;
+}
+
+button {
+	outline: none;
+}
 .friend-modal-button,
 .friend-modal-title {
 	color: #ff8421;
@@ -1039,6 +1287,7 @@ body,
 }
 
 .friend-modal-friend h1 {
+	color: #ff8421;
 	background: rgba(0,0,0,0.5);
 	padding: 10px 0;
 }
@@ -1157,4 +1406,10 @@ body,
 	border: 1px solid #333;
 	padding: 20px;
 	border-radius: 10px;
+}
+
+.fck-it-button {
+	position: absolute;
+	bottom: 50px;
+	right: 14vw;
 }

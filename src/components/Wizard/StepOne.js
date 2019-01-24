@@ -85,8 +85,8 @@ class StepOne extends Component {
                     <option value='' >Select City</option>
                     {citiesOptions}
                 </select>
-                {this.props.originState && this.props.originCity && this.props.from && this.props.to ?
-                <button onClick={this.fuckIt}>F**k it</button>
+                {this.props.originState && this.props.originCity && this.props.from && this.props.to && !this.props.destinationCity && !this.props.destinationState ?
+                <button className='wizard-submit-button fck-it-button' onClick={this.fuckIt}>F**k it</button>
                 : null}
             </div>
         </div>

@@ -9,7 +9,7 @@ export default class extends Component {
         }
     }
     render() {
-        let flights = this.state.flights.map(flight => {
+        let flights = this.state.flights.map((flight, i) => {
 
             //pulling off total price
             const {total, totalTaxes} = flight.offerItems[0].price
@@ -28,12 +28,11 @@ export default class extends Component {
 
 
             return (
-                <Flight trip={this.props.trip} price={price} leavingStops={leavingStops} returningStops={returningStops} leavingSegments={leavingSegments} returningSegments={returningSegments}/>
+                <Flight key={i} trip={this.props.trip} price={price} leavingStops={leavingStops} returningStops={returningStops} leavingSegments={leavingSegments} returningSegments={returningSegments}/>
             )
         })
         return (
             <div>
-            <h1>Flights</h1>
             {flights}
             </div>
         )
