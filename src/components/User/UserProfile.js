@@ -60,23 +60,17 @@ class UserProfile extends Component {
           return (
               <div key={'friend' + i}>
                   <p>{friend.username}</p>
-                  <img src={friend.profile_img} alt='' style={{height: '50px', width: '50px'}} />
+                    <img src={friend.profile_img} alt='' style={{height: '50px', width: '50px'}} />
               </div>
           )
       })
 
       let usersTrips = this.state.trips.map((trip, i) => {
           return (
-<<<<<<< HEAD
               <div key={'trip' + i} style={{border: '1px solid black'}}>
                   <p>{trip.destination_city.slice(4)}, {trip.destination_state}</p>
                   <p><Moment date={trip.leaving_date} format='ddd MMM DD, YYYY' /></p>
                   <p>to <Moment date={trip.returning_date} format='ddd MMM DD, YYYY' /></p>
-=======
-              <div key={'trip' + i} className='user-profile-trip'>
-                  <h2>Trip to {trip.destination_city.slice(4)}, {trip.destination_state}</h2>
-                  <h4><Moment date={trip.leaving_date} format='ddd MMM DD, YYYY' /> - <Moment date={trip.returning_date} format='ddd MMM DD, YYYY' /></h4>
->>>>>>> master
               </div>
         )
       })
@@ -86,6 +80,13 @@ class UserProfile extends Component {
         <div className='user-profile-header'>
             <img src={this.state.user.profile_img} alt='' />
             <h1>{this.state.user.username}</h1>
+            <div className='dashboard-header-venmo-container'>
+                <div>
+                </div>
+                <h2>{this.state.user.venmo}</h2>
+            </div>
+          {/* <div className='dashboard-header-venmo-container'> */}
+
         </div> 
         <div className='user-profile-content'>
             <div className='user-profile-friends'>

@@ -73,11 +73,7 @@ class Flight extends Component {
 
         leaving = 
                 <div style={{border: '1px solid green'}} onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
-<<<<<<< HEAD
-                        <a href={`${this.state[carrierCode].link}`} target='_blank' rel="noopener noreferrer">{this.state[carrierCode].airline}</a>
-=======
                         <a href={`${this.state[carrierCode].link}`} target='_blank' rel='noopener noreferrer' >{this.state[carrierCode].airline}</a>
->>>>>>> master
                         <h1>Departing from {departure.iataCode} on {departureDate}</h1>
                         <h1>Arriving to {arrival.iataCode} on {arrivalDate}</h1>
                         <h1>Flight will take {duration}</h1>
@@ -109,11 +105,7 @@ class Flight extends Component {
             } else {
             return (
                 <div onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
-<<<<<<< HEAD
-                    <a href={`${this.state[carrierCode].link}`} target='_blank' rel="noopener noreferrer">{this.state[carrierCode].airline}</a>
-=======
                     <a href={`${this.state[carrierCode].link}`} target='_blank' rel='noopener noreferrer' >{this.state[carrierCode].airline}</a>
->>>>>>> master
                     <h1>Departing from {departure.iataCode} on {departureDate}</h1>
                     <h1>Arriving at {arrival.iataCode} on {arrivalDate}</h1>
                     <h1>Flight time {duration}</h1>
@@ -142,11 +134,7 @@ class Flight extends Component {
 
        returning = 
                 <div style={{border: '1px solid yellow'}} onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
-<<<<<<< HEAD
-                   <a href={`${this.state[carrierCode].link}`} target='_blank' rel="noopener noreferrer">{this.state[carrierCode].airline}</a>
-=======
                    <a href={`${this.state[carrierCode].link}`} target='_blank' rel='noopener noreferrer' >{this.state[carrierCode].airline}</a>
->>>>>>> master
                    <h1>Departing from {departure.iataCode} on {departureDate}</h1>
                    <h1>Arriving at {arrival.iataCode} on {arrivalDate}</h1>
                    <h1>Total flight time is {duration}</h1>
@@ -169,10 +157,7 @@ class Flight extends Component {
 
             if (i > 0) {
                 return (<div onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
-<<<<<<< HEAD
-=======
                     {/* <a href={`${this.state[carrierCode].link}`} target='_blank' rel='noopener noreferrer' >{this.state[carrierCode].airline}</a> */}
->>>>>>> master
                     <h1>Departing from {departure.iataCode} on {departureDate}</h1>
                     <h1>Arriving at {arrival.iataCode} on {arrivalDate}</h1>
                     <h1>Flight time {duration}</h1>
@@ -180,11 +165,7 @@ class Flight extends Component {
             } else {
             return (
                 <div onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
-<<<<<<< HEAD
-                    <a href={`${this.state[carrierCode].link}`} target='_blank' rel="noopener noreferrer">{this.state[carrierCode].airline}</a>
-=======
                     <a href={`${this.state[carrierCode].link}`} target='_blank' rel='noopener noreferrer' >{this.state[carrierCode].airline}</a>
->>>>>>> master
                     <h1>Departing from {departure.iataCode} on {departureDate}</h1>
                     <h1>Arriving at {arrival.iataCode} on {arrivalDate}</h1>
                     <h1>Flight time {duration}</h1>

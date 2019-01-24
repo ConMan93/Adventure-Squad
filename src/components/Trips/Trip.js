@@ -59,14 +59,6 @@ class Trip extends Component {
         })
 
         axios.get(`/trip/housing/${this.props.match.params.id}`).then(response => {
-<<<<<<< HEAD
-            if (response.data[0]) {
-            this.props.setHousing(response.data[0])
-        
-            this.setState({
-                housing: response.data[0]
-            })}
-=======
             console.log(response)
             if (response.data[0]) {
                 this.props.setHousing(response.data[0])
@@ -74,7 +66,6 @@ class Trip extends Component {
                     housing: response.data[0]
                 })
             }
->>>>>>> master
         }).catch(error => {
             console.log(error)
             this.props.history.push('/')

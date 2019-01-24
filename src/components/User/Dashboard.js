@@ -7,6 +7,8 @@ import Friends from './Friends';
 import Wizard from '../Wizard/Wizard';
 import UserMap from './UserMap';
 import LogoutButton from '../Home/LogoutButton';
+import LocationImage from '../Trips/LocationImage';
+import EachTrip from '../Trips/EachTrip';
 
 
 class Dashboard extends Component{
@@ -18,7 +20,7 @@ class Dashboard extends Component{
             trips: [],
             profile_img: '',
             editing: false,
-            loadMap: false
+            loadMap: false,
         }
     }
     componentDidMount() {  
@@ -102,20 +104,12 @@ class Dashboard extends Component{
                         </div>
                     </div>
         })
-
-        let tripsDisplay = this.state.trips.map((trip, i) => {
-            return (
-                <Link to={`/trip/${trip.id}`} key={i}><div className='dashboard-adventure'>
-                    <h2>{trip.destination_city.slice(4)}{/*}, {trip.destination_state}*/}</h2>
-                    <h4>{trip.leaving_date.slice(5, 10)} - {trip.returning_date.slice(5, 10)}</h4>
-                </div></Link>
-            )
-        })
+        
 
         let searchWidth = (this.props.allUsers.length - this.state.filterFriends) * 9
 
 
-        let {username, venmo, profile_img} = this.props.user
+        let {username, profile_img} = this.props.user
         return(
             <div className='dashboard-component-container'>
                 <div className='dashboard-header'>
@@ -138,7 +132,6 @@ class Dashboard extends Component{
                         }
                     </div>
                     <div className='dashboard-header-name-container'><h1>{username}</h1></div>
-                    <div className='dashboard-header-venmo-container'><h2>{venmo}</h2></div>
                     <LogoutButton history={this.props.history}/>
                </div> 
                 
@@ -165,7 +158,13 @@ class Dashboard extends Component{
                         <h6>My Adventures</h6>
                         <div className='dashboard-adventures-content'>
                             <div className='dashboard-adventure-list'>
-                                {tripsDisplay}
+                                {this.state.trips.map((trip, i) => {
+                                    return (<EachTrip destination_city={trip.destination_city} 
+                                                destination_state={trip.destination_state}  
+                                                trip_id={trip.id} leaving_date={trip.leaving_date} 
+                                                returning_date={trip.returning_date} />)
+                            })}
+
                             </div>
                             {this.state.loadMap ?
                             <UserMap />
