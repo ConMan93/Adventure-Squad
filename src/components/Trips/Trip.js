@@ -61,6 +61,10 @@ class Trip extends Component {
         })
 
         axios.get(`/trip/housing/${this.props.match.params.id}`).then(response => {
+<<<<<<< HEAD
+            console.log(response)
+=======
+>>>>>>> master
             if (response.data[0]) {
                 this.props.setHousing(response.data[0])
                 this.setState({
