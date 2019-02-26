@@ -225,6 +225,10 @@ button:active {
             border-radius: 5px;
         }
 
+        input:focus {
+            outline-color: $teal;
+        }
+
         p {
             text-align: center;
             color: $text;

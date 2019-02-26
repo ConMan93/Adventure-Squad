@@ -43,7 +43,13 @@ class Auth extends Component {
 
     loginViewVisible = () => {
         this.setState({
-            login: !this.state.login
+            login: !this.state.login,
+            email: '',
+            username: '',
+            password: '',
+            confirmPassword: '',
+            venmo: '',
+            errorMessage: ''
         })
     }
 
