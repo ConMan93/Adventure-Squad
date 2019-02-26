@@ -105,7 +105,7 @@ class Auth extends Component {
     return (
         <div>
             
-        <button onClick={this.openModal}>Login</button>
+        <button onClick={this.openModal}>Get Started</button>
   
       <Modal
       isOpen={this.state.modalIsOpen}
