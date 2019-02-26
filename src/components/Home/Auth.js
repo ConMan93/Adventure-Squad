@@ -117,7 +117,7 @@ class Auth extends Component {
               <button className='auth-close-button' onClick={this.closeModal}>X</button>
               {this.state.login ? 
               <div className='login-container'>
-                  <h1>Login</h1>
+                  {/* <h1>Login</h1> */}
                   <input placeholder='email' name='email' onChange={this.handleChange} value={this.state.email} onKeyPress={this.handleKeyPress} />
                   <input placeholder='password' name='password' type='password' onChange={this.handleChange} value={this.state.password} onKeyPress={this.handleKeyPress} />
                   {this.state.errorMessage ?
@@ -125,24 +125,28 @@ class Auth extends Component {
                     :
                     null}
                   <button onClick={this.loginUser} >Log In</button>
-                  <h1>Need an account?</h1>
-                  <button onClick={this.loginViewVisible}>Register!</button>
+                  <div className='auth-switch'>
+                    <h1>Need an account?</h1>
+                    <button onClick={this.loginViewVisible}>Register!</button>
+                  </div>
               </div>
               :
               <div className='login-container register-container'>
-                  <h1>Register</h1>
+                  {/* <h1>Register</h1> */}
                   <input placeholder='email' name='email' onChange={this.handleChange} value={this.state.email} />
                   <input placeholder='username' name='username' onChange={this.handleChange} value={this.state.username} />
                   <input placeholder='venmo (optional)' name='venmo' onChange={this.handleChange} value={this.state.venmo} />
                   <input placeholder='password' name='password' type='password' onChange={this.handleChange} value={this.state.password} onKeyPress={this.handleKeyPress} />
-                  <input placeholder='confirmPassword' name='confirmPassword' type='password' onChange={this.handleChange} value={this.state.confirmPassword} onKeyPress={this.handleKeyPress} />
+                  <input placeholder='confirm password' name='confirmPassword' type='password' onChange={this.handleChange} value={this.state.confirmPassword} onKeyPress={this.handleKeyPress} />
                   {this.state.errorMessage ?
                   <p className='login-error-message'>{this.state.errorMessage}</p>
                     :
                     null}
                   <button onClick={this.registerUser} >Register</button>
-                  <h1>Already Registered?</h1>
-                  <button onClick={this.loginViewVisible}>Log In!</button>
+                  <div className='auth-switch'>
+                    <h1>Already Registered?</h1>
+                    <button onClick={this.loginViewVisible}>Log In!</button>
+                  </div>
               </div>}
           </div>
       </Modal>

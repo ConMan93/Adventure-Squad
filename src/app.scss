@@ -10,12 +10,16 @@ $font3: 'Shadows Into Light', serif;
 
 
 // GENERAL RULES
+* {
+    box-sizing: border-box;
+}
+
 body {
     overflow-x: hidden;
 }
 button {
     background: none;
-    border: 1px solid $dark;
+    border: none;
     font-family: $font1;
     transition: all 350ms ease;
 }
@@ -157,4 +161,89 @@ button:active {
     100% {
         transform: none
     }
+}
+
+.auth-modal {
+    // height: 80vh;
+    width: 40vw;
+
+    > button {
+        border: none;
+        font-size: 2vw;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        color: $dark;
+    }
+
+    .login-container,
+    .register-container {
+        height: 90%;
+        padding-top: 10%;
+        display: flex;
+        flex-direction: column;
+
+        button {
+            height: 8%;
+            width: 30%;
+            font-family: $font1;
+            font-weight: bold;
+            font-size: 2vw;
+            color: $teal;
+            text-align: right;
+        }
+
+        button:hover {
+            color: $dark;
+        }
+
+        > button {
+            width: 40%;
+            margin: 10% 30%;
+            text-align: center;
+            font-size: 3vw;
+            margin-bottom: 30%;
+        }
+
+        h1 {
+            font-size: 2.5vw;
+            font-weight: bold;
+            color: $teal;
+        }
+
+        input {
+            font-family: $font2;
+            font-weight: bold;
+            font-size: 1.5vw;
+            letter-spacing: 2px;
+            color: $dark;
+            width: 70%;
+            margin-left: 15%;
+            padding: 5px;
+            margin-bottom: 5%;
+            border: 1px solid $text;
+            border-radius: 5px;
+        }
+
+        p {
+            text-align: center;
+            color: $text;
+            font-family: $font1;
+        }
+
+        .auth-switch {
+            position: absolute;
+            bottom: 50px;
+            width: 40vw;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 10%;
+        }
+    }
+}
+
+.ReactModal__Content {
+    border: none !important;
+    box-shadow: 0px 0px 10px gray;
 }
