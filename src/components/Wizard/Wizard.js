@@ -58,6 +58,7 @@ class Wizard extends Component {
     return (
       <div className='new-trip-button-container'>
         <button className='new-trip-button' onClick={this.openModal}>Create New Trip</button>
+        <div></div>
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}

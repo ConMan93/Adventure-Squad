@@ -20,7 +20,7 @@ export default class EachTrip extends Component {
         return (
             <div>
                 <Link to={`/trip/${this.props.trip_id}`}>
-                    <div className='dashboard-adventure' style={{backgroundImage: `url(${this.state.background})`, backgroundSize: 'cover',  backgroundRepeat: 'no-repeat'}}>
+                    <div className='dashboard-adventure' style={{backgroundImage: `linear-gradient(rgba(72, 103, 142, 0.5), rgba(72, 103, 142, 0.5)), url(${this.state.background})`, backgroundSize: 'cover',  backgroundRepeat: 'no-repeat'}}>
                         <h2 style={{color: 'white'}}>{this.props.destination_city.slice(4)}</h2>
                         <h4 style={{color: 'white'}}>{this.props.leaving_date.slice(5, 10)} - {this.props.returning_date.slice(5, 10)}</h4>  
                     </div>
