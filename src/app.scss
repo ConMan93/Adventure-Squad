@@ -306,14 +306,14 @@ button:active {
             }
 
             .dashboard-header-edit {
-                background-color: $teal;
+                background-color: white;
                 transform: translateY(-5px);
                 padding-bottom: 10px;
 
                 input,
                 div {
-                    width: 90%;
-                    margin-left: 5%;
+                    width: 80%;
+                    margin-left: 10%;
                     font-family: $font2;
                     letter-spacing: 1px;
                 }
@@ -329,7 +329,7 @@ button:active {
 
                 button {
                     font-family: $font1;
-                    color: white;
+                    color: $dark;
                     font-size: 1.5vw;
                 }
             }
@@ -440,7 +440,7 @@ button:active {
 
             h6 {
                 height: 17%;
-                font-size: 8vw;
+                font-size: 10vw;
                 font-family: $font3;
                 color: $dark;
                 text-align: center;
