@@ -7,8 +7,8 @@ module.exports = {
 
         try {
             let db = req.app.get('db');
-            let { email, password } = req.body;
-            email = email.toLowerCase();
+            let { loginEmail, loginPassword } = req.body;
+            email = loginEmail.toLowerCase();
 
             let userResponse = await db.get_user_by_email(email)
             let user = userResponse[0]
@@ -17,7 +17,7 @@ module.exports = {
                 return res.status(401).send('Email not found')
             }
 
-            let isAuthenticated = bcrypt.compareSync(password, user.password)
+            let isAuthenticated = bcrypt.compareSync(loginPassword, user.password)
             if (!isAuthenticated) {
                 return res.status(403).send('Incorrect password')
             }
