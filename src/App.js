@@ -44,7 +44,7 @@ class App extends Component {
         :
         <HashRouter>
           <div>
-            <Switch>
+            <Switch> 
               <Route exact path='/' component={HomePage} />
               <Route path='/trip/:id' component={Trip} />
               <Route path="/dashboard" component={Dashboard} />
