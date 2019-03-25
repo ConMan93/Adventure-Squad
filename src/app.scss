@@ -489,3 +489,299 @@ input {border: none;}
 
 
 // DASHBOARD
+
+.dashboard {
+    height: 100vh;
+
+    i {
+        transition: all 350ms ease;
+    }
+
+    i:hover {
+        color: $color3;
+    }
+
+    .header {
+        height: 15%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+
+        .header-image {
+            height: 10vh;
+            margin: 0 2.5vh;
+            display: flex;
+            align-items: center;
+            width: 10vh;
+
+            img {
+                height: 100%;
+                border-radius: 50%;
+            }
+
+            .fa-edit {
+                opacity: 0;
+                position: relative;
+                left: -6.5vh;
+                color: white;
+                text-shadow: 0px 0px 10px black;
+                transition: all 350ms ease;
+            }
+
+            .header-edit {
+                background-color: white;
+                z-index: 2;
+                padding: 10px;
+                position: relative;
+                left: -2vh;
+
+                input {
+                    padding: 10px;
+                    border-bottom: 1px solid $color5;
+                }
+
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    :first-child {
+                        margin-top: 5px;
+                    }
+                }
+
+                * {
+                    font-family: $font2;
+                    color: $color5;
+                    border: none;
+                }
+            }
+        }
+
+        .header-image:hover .fa-edit {
+            opacity: 1;
+        }
+
+
+        .header-name-container {
+            h1 {
+                color: $color5;
+                font-family: $font1;
+                font-size: 4vh;
+            }
+        }
+
+        .dashboard-logout-button {
+            position: absolute;
+            right: 2.5vh;
+            
+            button {
+                border: none;
+                color: $color5;
+            }
+        }
+    }
+
+    .content {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+
+        .adventures {
+            width: 75%;
+            height: 75vh;
+
+            h6 {
+                font-family: $font1;
+                color: $color5;
+                font-size: 30px;
+                padding-left: 3%;
+                height: 10%;
+            }
+
+            .adventures-content {
+                display: flex;
+                height: 90%;
+
+                .adventure-list {
+                    width: 30%;
+                    margin-right: 12%;
+                    height: 100%;
+                    overflow-y: scroll;
+                    padding-right: 10px;
+
+                    a {
+                        text-decoration: none;
+                    }
+
+                    .dashboard-adventure {
+                        height: 70px;
+                        margin-bottom: 20px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-around;
+                        align-items: center;
+                        transition: all 350ms ease;
+
+                        h2, h4 {
+                            font-family: $font2;
+                            font-weight: bold;
+                            font-size: 20px;
+                        }
+                    }
+
+                    .dashboard-adventure:hover {
+                        height: 80px;
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+
+            .new-trip-button-container {
+                width: 20%;
+                position: absolute;
+                margin-left: auto;
+                margin-right: auto;
+                left: 0;
+                right: 0;
+                bottom: 15%;
+
+                button {
+                    width: 100%;
+                    font-family: $font1;
+                    color: white;
+                    background-color: $color5;
+                    font-size: 25px;
+                    padding: 10px 0;
+                    transition: all 350ms ease;
+                    border: none;
+                }
+
+                button:hover {
+                    transform: scale(1.05);
+                    box-shadow: 2px 2px 10px gray;
+                    background-color: $color3;
+                }
+            }
+        }
+
+        .user-map-container {
+
+            width: 100%;
+            height: 100%;
+            > div {
+                // position: static !important;
+                width: 40vw !important;
+                height: 50vh !important;
+                max-width: 500px !important;
+                margin-left: auto;
+                margin-right: auto;
+                left: 0;
+                right: 0;
+            }
+        }
+
+        .friends-search-container {
+            width: 25%;
+            height: 75vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .friends {
+                height: 50%;
+
+                h6 {
+                    height: 20%;
+                    color: $color5;
+                    font-family: $font1;
+                    font-size: 30px;
+                    text-align: center;
+                }
+
+                > div {
+                    height: 80%;
+                    overflow-y: scroll;
+                }
+            }
+
+            .search {
+                height: 45%;
+                h6 {
+                    height: 10%;
+                    color: $color5;
+                    font-family: $font1;
+                    font-size: 30px;
+                    text-align: center;
+                }
+
+                .searchbar {
+                    height: 15%;
+                    display: flex;
+                    flex-direction: row-reverse;
+                    justify-content: center;
+                    align-items: center;
+                    margin-bottom: 5%;
+
+                    input {
+                        border-bottom: 1px solid $color5;
+                        width: 70%;
+                        height: 60%;
+                        text-align: center;
+                        font-family: $font2;
+                        font-size: 18px;
+                        margin-left: 10%;
+                    }
+
+                    i {
+                        color: $color5;
+                    }
+                }
+
+                .search-list-container {
+                    height: 70%;
+                    overflow-y: scroll;
+                }
+            }
+
+            .friend {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 20px;
+
+                a {
+                    text-decoration: none;
+                    div {
+                        display: flex;
+                        align-items: center;
+                    }
+                }
+
+                img {
+                    border-radius: 50%;
+                    margin-right: 10px;
+                }
+
+                span,
+                h1 {
+                    font-family: $font2;
+                    color: $color5;
+                    font-size: 16px;
+                    font-weight: bold;
+                    text-overflow: ellipsis;
+                }
+
+                button {
+                    border: none;
+                    color: $color5;
+                }
+
+                i {
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+}

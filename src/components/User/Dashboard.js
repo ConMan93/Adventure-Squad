@@ -93,29 +93,28 @@ class Dashboard extends Component{
         let eachUser = allUsers.filter(user => {
            return user.username.toLowerCase().includes(this.state.filterFriends)
         }).map((user, i) => {
-            return  <div>
+            return  <div key={i} className='search-friend friend'>
                         <Link to={`/profile/${user.id}`}>
-                            <div key={i} className='dashboard-search-friend friend'>
+                            <div>
                                 <img src={user.profile_img} alt="img" height='60' width='60'/>
                                 
                                 <h1>{user.username}</h1>
-                                <button onClick={()=>this.handleAddFriend(user.id)}><i className="fas fa-user-plus fa-2x"></i></button>
                             </div>
                         </Link>
+                        <button onClick={()=>this.handleAddFriend(user.id)}><i className="fas fa-user-plus fa-2x"></i></button>
                     </div>
         })
 
         let {username, profile_img} = this.props.user
         return(
-            <div className='dashboard-component-container'>
-                <div className='dashboard-header'>
-                    <div className='dashboard-header-name-container'><h1>{username}</h1></div>
-                    <div className='dashboard-header-image'>
+            <div className='dashboard'>
+                <div className='header'>
+                    <div className='header-image'>
                         <img src={profile_img} alt="img" />
                         <i onClick={this.toggleEdit} className='fas fa-edit fa-2x'/>
 
                         {this.state.editing ? 
-                        <div className='dashboard-header-edit'>
+                        <div className='header-edit'>
                             <input placeholder='Enter Image URL Here' onChange={(e)=>this.onImageChange(e.target.value)}></input>
                             <div>
                                 <button onClick={()=>this.handleChangeImage()}>Update Image</button>
@@ -126,14 +125,15 @@ class Dashboard extends Component{
                         null
                         }
                     </div>
+                    <div className='header-name-container'><h1>{username}</h1></div>
                     <LogoutButton history={this.props.history}/>
                </div> 
                 
-                <div className='dashboard-content'>
-                    <div className='dashboard-adventures'>
+                <div className='content'>
+                    <div className='adventures'>
                         <h6>My Adventures</h6>
-                        <div className='dashboard-adventures-content'>
-                            <div className='dashboard-adventure-list'>
+                        <div className='adventures-content'>
+                            <div className='adventure-list'>
                                 {this.state.trips.map(trip => {
                                     return (<EachTrip destination_city={trip.destination_city} 
                                                 destination_state={trip.destination_state}  
@@ -151,19 +151,19 @@ class Dashboard extends Component{
                         <Wizard
                         history={this.props.history} />
                     </div>
-                    <div className='dashboard-friends-search-container'>
-                        <div className='dashboard-friends'>
+                    <div className='friends-search-container'>
+                        <div className='friends'>
                             <h6>My Friends</h6>
                             <Friends/>
                         </div>
-                        <div className='dashboard-search'>
+                        <div className='search'>
                             <h6>Find Friends</h6>
-                            <div className='dashboard-searchbar'>
+                            <div className='searchbar'>
                                 <input onChange={(e) => this.handleSearchFriends(e.target.value)} type="text" placeholder="enter username"></input>
-                                <span><i className="fas fa-search fa-2x"></i></span>
+                                <span><i className="fas fa-search"></i></span>
                             </div>
-                            <div className='dashboard-search-list-container'>
-                            <div className='dashboard-search-list'>
+                            <div className='search-list-container'>
+                            <div className='search-list'>
                                 {eachUser}
                             </div>
                             </div>
