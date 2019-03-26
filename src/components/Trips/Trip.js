@@ -167,7 +167,7 @@ class Trip extends Component {
         }
 
         if (this.state.dest_city) {
-            var locationImage = <LocationImage dest_city={this.state.dest_city} destination_state={this.state.trip.destination_state}/>
+            var locationImage = <LocationImage dest_city={this.state.dest_city} destination_state={this.state.trip.destination_state} date1={this.state.trip.leaving_date.slice(5,10)} date2={this.state.trip.returning_date.slice(5,10)}/>
         } else {
             locationImage = null;
         }
@@ -200,30 +200,32 @@ class Trip extends Component {
         
         return (
             <div className='trip-component-container'>
-                <div className='trip-discussion-container'>
-                    <Board trip_id={this.props.match.params.id} />
-                </div>
-                <div className='trip-content-container'>
-                    {locationImage}
-                    <div className='trip-columns'>
-                        <div className='trip-left-column'>
-                            <div className='trip-column-flights-container'>
-                                {flights}
+                {locationImage}
+                <div className='trip-component-content-container'>
+                    <div className='trip-discussion-container'>
+                        <Board trip_id={this.props.match.params.id} />
+                    </div>
+                    <div className='trip-content-container'>
+                        <div className='trip-columns'>
+                            <div className='trip-left-column'>
+                                <div className='trip-column-flights-container'>
+                                    {flights}
+                                </div>
+                                <div className='trip-column-housing-container'>
+                                {housing}
+                                </div>
+                                
                             </div>
-                            <div className='trip-column-housing-container'>
-                               {housing}
+                            <div className='trip-right-column'>
+                                <Members
+                                trip_id={this.props.match.params.id}
+                                />
+                                {this.state.loadMap ?
+                                <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city}
+                                />
+                                :
+                                null}
                             </div>
-                            
-                        </div>
-                        <div className='trip-right-column'>
-                            <Members
-                            trip_id={this.props.match.params.id}
-                            />
-                            {this.state.loadMap ?
-                            <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city}
-                             />
-                            :
-                            null}
                         </div>
                     </div>
                 </div>       

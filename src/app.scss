@@ -13,6 +13,16 @@ $color5: #944F00;
     box-sizing: border-box;
 }
 
+::-webkit-scrollbar{
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $color5;
+    z-index: 10;
+    border-radius: 5px;
+}
+
 button {
     background: none;
     border: 1px solid $color5;
@@ -492,6 +502,8 @@ input {border: none;}
 
 .dashboard {
     height: 100vh;
+    overflow: hidden;
+    background-color: $color1;
 
     i {
         transition: all 350ms ease;
@@ -502,10 +514,13 @@ input {border: none;}
     }
 
     .header {
-        height: 15%;
+        height: 15vh;
         overflow: hidden;
         display: flex;
         align-items: center;
+        background-image: linear-gradient(rgba(148, 70, 0, 0.3), rgba(148, 70, 0, 0.3) ), url('https://images.unsplash.com/photo-1503221043305-f7498f8b7888?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60');
+        background-size: cover;
+        background-position: center 42%;
 
         .header-image {
             height: 10vh;
@@ -538,12 +553,18 @@ input {border: none;}
                 input {
                     padding: 10px;
                     border-bottom: 1px solid $color5;
+                    font-size: 30px;
+                    text-align: center;
                 }
 
                 div {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
+
+                    > button {
+                        font-size: 20px;
+                    }
 
                     :first-child {
                         margin-top: 5px;
@@ -565,9 +586,10 @@ input {border: none;}
 
         .header-name-container {
             h1 {
-                color: $color5;
+                color: white;
                 font-family: $font1;
-                font-size: 4vh;
+                font-size: 80px;
+                text-shadow: -2px 2px gray;
             }
         }
 
@@ -577,17 +599,21 @@ input {border: none;}
             
             button {
                 border: none;
-                color: $color5;
+                color: white;
+                text-shadow: -2px 2px gray;
             }
         }
     }
 
     .content {
-        width: 90%;
-        max-width: 1200px;
+        width: 100%;
+        height: 100%;
+        max-width: 1500px;
+        padding: 50px;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
+        background-color: white;
 
         .adventures {
             width: 75%;
@@ -596,7 +622,7 @@ input {border: none;}
             h6 {
                 font-family: $font1;
                 color: $color5;
-                font-size: 30px;
+                font-size: 50px;
                 padding-left: 3%;
                 height: 10%;
             }
@@ -606,8 +632,8 @@ input {border: none;}
                 height: 90%;
 
                 .adventure-list {
-                    width: 30%;
-                    margin-right: 12%;
+                    width: 35%;
+                    margin-right: 7%;
                     height: 100%;
                     overflow-y: scroll;
                     padding-right: 10px;
@@ -617,23 +643,25 @@ input {border: none;}
                     }
 
                     .dashboard-adventure {
-                        height: 70px;
+                        height: 100px;
                         margin-bottom: 20px;
                         display: flex;
                         flex-direction: column;
                         justify-content: space-around;
                         align-items: center;
                         transition: all 350ms ease;
-
+                        
                         h2, h4 {
                             font-family: $font2;
                             font-weight: bold;
-                            font-size: 20px;
+                            font-size: 25px;
+                            color: white !important;
+                            text-shadow: -2px 2px gray;
                         }
                     }
 
                     .dashboard-adventure:hover {
-                        height: 80px;
+                        height: 110px;
                         margin-bottom: 10px;
                     }
                 }
@@ -646,17 +674,18 @@ input {border: none;}
                 margin-right: auto;
                 left: 0;
                 right: 0;
-                bottom: 15%;
+                bottom: 10%;
 
                 button {
                     width: 100%;
                     font-family: $font1;
                     color: white;
                     background-color: $color5;
-                    font-size: 25px;
-                    padding: 10px 0;
+                    font-size: 30px;
+                    padding: 20px 0;
                     transition: all 350ms ease;
                     border: none;
+                    text-shadow: -2px 2px gray;
                 }
 
                 button:hover {
@@ -697,7 +726,7 @@ input {border: none;}
                     height: 20%;
                     color: $color5;
                     font-family: $font1;
-                    font-size: 30px;
+                    font-size: 50px;
                     text-align: center;
                 }
 
@@ -707,6 +736,7 @@ input {border: none;}
                 }
             }
 
+            
             .search {
                 height: 45%;
                 h6 {
@@ -743,6 +773,7 @@ input {border: none;}
                 .search-list-container {
                     height: 70%;
                     overflow-y: scroll;
+                    overflow-x: visible;
                 }
             }
 
@@ -750,6 +781,7 @@ input {border: none;}
                 display: flex;
                 justify-content: space-between;
                 margin-bottom: 20px;
+                width: 100%;
 
                 a {
                     text-decoration: none;
@@ -768,7 +800,7 @@ input {border: none;}
                 h1 {
                     font-family: $font2;
                     color: $color5;
-                    font-size: 16px;
+                    font-size: 20px;
                     font-weight: bold;
                     text-overflow: ellipsis;
                 }
@@ -780,6 +812,195 @@ input {border: none;}
 
                 i {
                     margin-right: 10px;
+                }
+            }
+        }
+    }
+}
+
+.ReactModal__Overlay {
+    background-color: rgba(100, 100, 100, 0.7) !important;
+}
+
+.wizard-close-button {
+    font-family: $font1;
+    color: $color5;
+    font-size: 30px;
+    border: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.wizard-modal-container {
+    width: 50vw !important;
+    height: 50vh !important;
+
+    .wizard-options-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 90%;
+        margin-top: 10%;
+
+        .wizard-calendar-container {
+            display: flex;
+            justify-content: space-around;
+
+            .wizard-calendar-instructions {
+                font-family: $font1;
+                color: $color5;
+                font-size: 30px;
+                width: 40%;
+                display: flex;
+                flex-direction: column;
+
+                h2 {
+                    margin: 10px 0;
+                }
+
+                .wizard-calendar-reset-button {
+                    font-family: $font1;
+                    background-color: $color5;
+                    color: white;
+                    font-size: 30px;
+                    border: none;
+                    padding: 0;
+                    width: 30%;
+                    transition: all 350ms ease;
+                }
+
+                .wizard-calendar-reset-button:hover {
+                    background-color: $color3;
+                }
+            }
+
+            .DayPicker-Month {
+                margin-top: 0 !important;
+                * {
+                    font-size: 24px;
+                    font-family: $font2;
+                    color: $color5;
+                }
+
+                .DayPicker-Caption {
+                    div {
+                        font-family: $font1;
+                        font-size: 30px;
+                    }
+                }
+            }
+
+            .DayPicker-Day--start,
+            .DayPicker-Day--end {
+                background-color: $color5;
+                color: white;
+            }
+
+            .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+                background-color: $color1 !important;
+                color: $color5;
+            }
+
+            .DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside):hover {
+                background-color: $color4;
+            }
+        }
+
+        .wizard-places-container {
+            width: 50%;
+            height: 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            > div {
+                height: 40%;
+
+                h5 {
+                    font-family: $font1;
+                    color: $color5;
+                    font-size: 30px;
+                    text-align: center;
+                    margin-bottom: 20px;
+                }
+
+                select {
+                    width: 40%;
+                    font-family: $font2;
+                    color: $color5;
+                    font-size: 20px;
+                    margin: 0 5%;
+                }
+            }
+        }
+    }
+    
+    .wizard-submit-button {
+        position: absolute;
+        width: 40%;
+        right: 60px;
+        bottom: 120px;
+        height: 100px;
+        background-color: $color5;
+        font-family: $font1;
+        color: white;
+        font-size: 40px;
+        transition: all 350ms ease;
+    }
+
+    .wizard-submit-button:hover {
+        background-color: $color3;
+    }
+}
+
+.trip-component-container {
+    height: 100vh;
+    width: 100vw;
+    background-color: $color1;
+    
+    .trip-location-image-container {
+        height: 15%;
+        background-size: cover;
+        background-position: bottom;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        h1 {
+            color: white;
+            font-family: $font1;
+            font-size: 100px;
+            text-align: center;
+        }
+
+        :last-child {
+            font-size: 60px;
+            font-family: $font2;
+            font-weight: bold;
+        }
+    }
+
+    .trip-component-content-container {
+        display: flex;
+        width: 100%;
+        height: 85%;
+        max-width: 1600px;
+        margin: 0 auto;
+        background-color: white;
+
+        .trip-discussion-container {
+            width: 20%;
+        }
+
+        .trip-content-container {
+            width: 80%;
+
+
+            .map-container-div {
+                > div {
+                    width: 30% !important;
+                    height: 50% !important;
                 }
             }
         }

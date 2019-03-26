@@ -111,7 +111,7 @@ class Dashboard extends Component{
                 <div className='header'>
                     <div className='header-image'>
                         <img src={profile_img} alt="img" />
-                        <i onClick={this.toggleEdit} className='fas fa-edit fa-2x'/>
+                        <i onClick={this.toggleEdit} className='fas fa-edit fa-3x'/>
 
                         {this.state.editing ? 
                         <div className='header-edit'>
