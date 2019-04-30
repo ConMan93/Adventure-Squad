@@ -43,7 +43,7 @@ class Board extends Component {
         return (
         <div className='trip-discussion'>
             <h1>Discussion</h1>
-            <button className='discussion-refresh-button' onClick={this.refreshDiscussion}><i className="fas fa-sync-alt"></i></button>
+            <button className='discussion-refresh-button' onClick={this.refreshDiscussion}><i className="fas fa-2x fa-sync-alt"></i></button>
             <div className='trip-discussion-messages'>
                 {discussionBoard}
             </div>

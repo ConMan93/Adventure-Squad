@@ -52,16 +52,17 @@ class MessageForm extends Component {
 
     return (
       <div className='message-form-container'>
-        <button onClick={this.handleClick}>New Message</button>
+        
         {this.state.newMessage ?
         <div>
             <textarea value={this.state.message} onChange={this.handleChange} name='message' />
-            <button onClick={this.postMessage}>Post</button>
-            <button onClick={this.handleToggle}>Cancel</button>
+            <div className='new-message-buttons'>
+                <button onClick={this.postMessage}>Post</button>
+                <button onClick={this.handleToggle}>Cancel</button>
+            </div>
         </div> 
         :
-        <div>
-        </div>}
+        <button onClick={this.handleClick}>New Message</button>}
       </div>
     )
   }

@@ -151,7 +151,9 @@ class Trip extends Component {
     render() {
 
         if (this.state.loadingFlights === 0) {
-            var flights = <button onClick={this.getAmadeusFlights}>Find Flights</button>
+            var flights =   <div className='flights-button'>
+                                <button onClick={this.getAmadeusFlights}>Find Flights</button>
+                            </div>
         } else if (this.state.loadingFlights === 1) {
             flights = <div className='flights-loading-animation'>
                         <i className='fas fa-2x fa-plane-departure'></i>
@@ -161,7 +163,7 @@ class Trip extends Component {
         } else if (this.state.loadingFlights === 4) {
             flights = <h2>{this.state.errorMessage}</h2>
         } else {
-            flights =  <div>
+            flights =  <div className='flights-list-container'>
                         <Flights flights={this.state.flights} trip={this.state.trip} />
                     </div> 
         }
@@ -184,7 +186,7 @@ class Trip extends Component {
         }
 
         if (this.state.loadingHousing===0) {
-            var housing =   <div>
+            var housing =   <div className='housing-button'>
                             {savedHousing}
                             <button className='getHousingButton' onClick={this.getAmadeusHotels}>Find Housing</button>
                             </div>
@@ -195,7 +197,7 @@ class Trip extends Component {
                         <i className='fas fa-2x fa-bed'></i>
                       </div>
         } else if (this.state.loadingHousing===2) {
-            housing = <Housing trip_id={this.props.match.params.id} hotels={this.state.hotels} city=                {this.state.dest_city} state={this.state.trip.destination_state} checkin=                     {this.state.trip.leaving_date.slice(0,10)} checkout=                                          {this.state.trip.returning_date.slice(0,10)} resetMap={this.resetMap}/>
+            housing = <Housing trip_id={this.props.match.params.id} hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)} resetMap={this.resetMap}/>
         }
         
         return (
@@ -206,26 +208,24 @@ class Trip extends Component {
                         <Board trip_id={this.props.match.params.id} />
                     </div>
                     <div className='trip-content-container'>
-                        <div className='trip-columns'>
-                            <div className='trip-left-column'>
-                                <div className='trip-column-flights-container'>
-                                    {flights}
-                                </div>
-                                <div className='trip-column-housing-container'>
-                                {housing}
-                                </div>
-                                
+                        <div className='trip-left-column'>
+                            <div className='trip-column-flights-container'>
+                                {flights}
                             </div>
-                            <div className='trip-right-column'>
-                                <Members
-                                trip_id={this.props.match.params.id}
-                                />
-                                {this.state.loadMap ?
-                                <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city}
-                                />
-                                :
-                                null}
+                            <div className='trip-column-housing-container'>
+                            {housing}
                             </div>
+                            
+                        </div>
+                        <div className='trip-right-column'>
+                            <Members
+                            trip_id={this.props.match.params.id}
+                            />
+                            {this.state.loadMap ?
+                            <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city}
+                            />
+                            :
+                            null}
                         </div>
                     </div>
                 </div>       

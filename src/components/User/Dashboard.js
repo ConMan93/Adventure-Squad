@@ -149,7 +149,7 @@ class Dashboard extends Component{
                             null}
                         </div>
                         <Wizard
-                        history={this.props.history} />
+                        history={this.props.history} colorStyle={this.props.colorStyle} />
                     </div>
                     <div className='friends-search-container'>
                         <div className='friends'>
