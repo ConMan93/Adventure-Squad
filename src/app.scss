@@ -1719,6 +1719,22 @@ input {border: none;}
     }
 }
 
+.mobile-error {
+    display: none;
+    font-family: $font1;
+    color: var(--color5);
+    font-size: 5vw;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: var(--color1);
+
+    p {
+        width: 80%;
+        line-height: 10vw;
+    }
+}
+
 @keyframes flights-housing-loading {
     30% {
         opacity: 1
@@ -1726,5 +1742,16 @@ input {border: none;}
 
     60% {
         opacity: 0;
+    }
+}
+
+@media (orientation: portrait) {
+    .content-top,
+    .content-bottom {
+        display: none;
+    }
+
+    .mobile-error {
+        display: flex;
     }
 }
