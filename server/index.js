@@ -26,7 +26,7 @@ massive(CONNECTION_STRING).then( db => {
 const cors = require('cors');
 app.use(cors());
 
-// app.use(express.static(`${__dirname}/../build`))
+app.use(express.static(`${__dirname}/../build`))
 
 // Authorization Endpoints
 app.post('/auth/register', ac.register)
