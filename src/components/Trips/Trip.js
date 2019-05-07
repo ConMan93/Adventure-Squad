@@ -175,7 +175,7 @@ class Trip extends Component {
         }
 
         if (this.state.housing.name) {
-            var savedHousing = <div className='trip-saved-housing'>
+            var savedHousing = <div className='hotel'>
                                 <h1>{this.state.housing.name.toLowerCase()}</h1>
                                 <h1>{this.state.housing.address.toLowerCase()}</h1>
                                 <h1>{this.state.housing.phone}</h1>
@@ -220,6 +220,7 @@ class Trip extends Component {
                         <div className='trip-right-column'>
                             <Members
                             trip_id={this.props.match.params.id}
+                            colorStyle={this.props.colorStyle}
                             />
                             {this.state.loadMap ?
                             <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city}

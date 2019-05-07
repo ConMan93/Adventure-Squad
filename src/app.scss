@@ -52,7 +52,7 @@ input {border: none;}
         width: 20px;
         height: 20px;
         background-size: contain;
-        border-radius: 50%;
+        border-radius: 5%;
         position: absolute;
         top: 10px;
         right: 10px;
@@ -587,7 +587,7 @@ input {border: none;}
 
             img {
                 height: 100%;
-                border-radius: 50%;
+                border-radius: 5%;
             }
 
             .fa-edit {
@@ -851,7 +851,7 @@ input {border: none;}
                 }
 
                 img {
-                    border-radius: 50%;
+                    border-radius: 5%;
                     margin-right: 10px;
                 }
 
@@ -1241,12 +1241,52 @@ input {border: none;}
 
                         .trip-members-container {
                             display: flex;
-                            flex-direction: row-reverse;
                             height: 60%;
                             margin-top: 10%;
                             .trip-member {
                                 width: 9vw;
                                 margin-right: 1vw;
+                                border-radius: 5px;
+                                display: flex;
+                                justify-content: space-around;
+                                padding-top: 20px;
+
+                                a {
+                                    color: white;
+                                    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+                                    font-family: $font1;
+                                    text-decoration: none;
+                                    font-size: 20px;
+                                    height: 24px;
+                                }
+
+                                button {
+                                    border: none;
+                                    color: white;
+                                    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+                                    height: 24px;
+                                }
+                            }
+
+                            .friend-modal-button-container {
+                                button {
+                                    border: none;
+                                    color: var(--color5);
+                                    font-family: $font1;
+                                    font-size: 24px;
+                                    text-align: center;
+                                    height: 100%;
+                                    width: 9vw;
+                                    transition: color 350ms ease;
+                                }
+
+                                button:hover {
+                                    color: var(--color3);
+                                }
+
+                                .friend-modal-button {
+                                    border: none;
+                                }
                             }
                         }
                     }
@@ -1292,6 +1332,10 @@ input {border: none;}
                             width: 50%;
                             height: 20%;
                         }
+                    }
+
+                    .housing-button {
+                        justify-content: space-around;
                     }
 
                     .flights-loading-animation,
@@ -1350,32 +1394,124 @@ input {border: none;}
                                 margin-bottom: 20px;
                             }
 
-                            > div {
-                                height: 15vh;
+                            .trips-flight-leaving,
+                            .trips-flight-returning {
                                 display: flex;
-
-                                > div {
+                                flex-direction: column;
+                                align-items: center;
+                                
+                                .leaving-segments {
+                                    height: 15vh;
+                                    width: 90%;
                                     display: flex;
                                     flex-wrap: wrap;
+                                    justify-content: space-around;
 
                                     a {
                                         width: 100%;
                                         font-family: $font1;
                                         color: white;
-                                        font-size: 24px;
-                                        text-align: center;
+                                        font-size: 24px;text-align: center;
                                     }
-                                    > div {
+
+                                    .segment {
+                                        width: 45%;
                                         display: flex;
-                                        width: 50%;
-                                        justify-content: space-around;
 
                                         > div {
-                                            width: 30%;
+                                            display: flex;
+                                            flex-direction: column;
+                                            justify-content: space-around;
+                                            align-items: center;
+                                            text-align: center;
+                                            font-family: $font2;
+                                            color: white;
+                                        }
+                                    }
+                                }
+
+                                .returning-segments {
+                                    margin-top: 3vh;
+                                    height: 10vh;
+                                    display: flex;
+                                    width: 90%;
+                                    justify-content: space-around;
+                                    
+                                    .segment {
+                                        width: 45%;
+                                        display: flex;
+
+                                        > div {
+                                            display: flex;
+                                            flex-direction: column;
+                                            justify-content: space-around;
+                                            align-items: center;
+                                            text-align: center;
+                                            font-family: $font2;
+                                            color: white;
                                         }
                                     }
                                 }
                             }
+                        }
+                    }
+                }
+
+                .trip-column-housing-container {
+                    .housing {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+
+                        .hotels {
+                            height: 85%;
+                            overflow-y: scroll;
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: space-between;
+
+                        }
+                        
+                        a {
+                            width: 100%;
+                            text-align: center;
+                            font-family: $font1;
+                            color: var(--color5);
+                            font-size: 30px;
+                            text-decoration: none;
+                            transition: color 350ms ease;
+                        }
+                        
+                        a:hover {
+                            color: var(--color3)
+                        }
+                    }
+
+                    .hotel {
+                        width: 48%;
+                        height: 45%;
+                        background-color: var(--color5);
+                        border-radius: 5px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-around;
+                        align-items: center;
+                        font-family: $font2;
+                        color: white;
+                        text-transform: capitalize;
+    
+                        > :first-child {
+                            font-size: 20px;
+                        }
+    
+                        button {
+                            border: none;
+                            font-family: $font2;
+                            color: white;
+                            border-bottom: 1px solid white;
+                            font-size: 20px;
                         }
                     }
                 }
@@ -1390,9 +1526,194 @@ input {border: none;}
 
                 > div {
                     height: 50% !important;
-                    max-width: 528px !important;
+                    max-width: 415px !important;
                     width: 25vw !important;
                 }
+            }
+        }
+    }
+}
+
+.friend-modal-container {
+    height: 100%;
+
+    > button {
+        color: var(--color5);
+        border: none;
+        font-family: $font1;
+        font-size: 30px;
+    }
+
+    > :first-child {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    > :last-child {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .friend-modal-title {
+        font-family: $font1;
+        color: var(--color5);
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .friend-modal-list-container {
+        height: 80%;
+        width: 90%;
+        margin-left: 5%;
+        overflow-y: scroll;
+
+        .friend-modal-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding-top: 30px;
+
+            .friend-modal-friend {
+                width: 20vh;
+                height: 20vh;
+                margin-bottom: 5%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                padding-top: 30px;
+                border-radius: 5px;
+
+                a, button {
+                    font-family: $font1;
+                    color: white;
+                    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+                    text-decoration: none;
+                    font-size: 30px;
+                    height: 30px;
+                    border: none;
+                    padding: 0;
+                }
+
+                button {
+                    font-size: 50px;
+                    height: 50px;
+                }
+            }
+        }
+    }
+}
+
+.user-profile-component-container {
+    height: 100vh;
+
+    .user-profile-header {
+        height: 15%;
+        display: flex;
+        overflow: hidden;
+        align-items: center;
+        background-image: linear-gradient(var(--overlay), var(--overlay)), url('https://images.unsplash.com/photo-1503221043305-f7498f8b7888?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center 40%;
+
+
+        img {
+            height: 12vh;
+            margin: 1.5vh;
+            border-radius: 5%;
+        }
+
+        > h1 {
+            font-family: $font1;
+            color: white;
+            font-size: 80px;
+            margin-left: 50px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        }
+    }
+
+    .user-profile-content {
+        width: 35%;
+        margin-left: 5%;
+        margin-top: 5vh;
+        height: 75vh;
+        display: flex;
+        justify-content: space-between;
+
+        .user-profile-friends {
+            width: 35%;
+
+            h1 {
+                font-family: $font1;
+                color: var(--color5);
+                font-size: 30px;
+                text-align: center;
+                height: 10%;
+            }
+
+            .user-profile-friends-list {
+                height: 90%;
+                overflow-y: scroll;
+
+                > div {
+                    width: 100%;
+                    height: 15vh;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    align-items: center;
+                    margin-top: 5vh;
+
+                    p {
+                        height: 20%;
+                        font-family: $font1;
+                        color: var(--color5);
+                        font-size: 24px;
+                    }
+
+                    img {
+                        height: 75%;
+                    }
+                }
+            }
+        }
+
+        .user-profile-trips {
+            width: 55%;
+            height: 100%;
+            overflow-y: scroll;
+
+            .user-profile-trip {
+                width: 90%;
+                margin-right: 5%;
+                height: 10vh;
+                margin-bottom: 5vh;
+                border-radius: 5px;
+                border: 1px solid var(--color5);
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                font-family: $font2;
+                color: var(--color5);
+                font-size: 20px;
+                text-align: center;
+                padding: 10px;
+            }
+        }
+    }
+
+    .user-profile-map {
+        .user-map-container {
+            > div {
+                width: 50vw !important;
+                height: 75vh !important;
+                position: absolute;
+                right: 5vw;
+                bottom: 5vh;
             }
         }
     }

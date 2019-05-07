@@ -96,7 +96,7 @@ class App extends Component {
           <div style={colorStyle}>
             <Switch> 
               <Route exact path='/' render={(props) => <HomePage {...props}/>}/>
-              <Route path='/trip/:id' render={(props) => <Trip {...props}/>}/>
+              <Route path='/trip/:id' render={(props) => <Trip {...props} colorStyle={colorStyle}/>}/>
               <Route path="/dashboard" render={(props) => <Dashboard {...props} colorStyle={colorStyle}/>}/>
               <Route path='/profile/:id' render={(props) => <UserProfile {...props}/>}/>
             </Switch>

@@ -98,14 +98,14 @@ class Flight extends Component {
             let duration = `${durationArr[0]} Hr, ${durationArr[1]} Min`;
 
             if (i > 0) {
-                return (<div key={i}  onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})} >
+                return (<div key={i} className='segment' onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})} >
                     <div><h1>{departure.iataCode}</h1><h2>{departureDate}</h2><i className='fas fa-2x fa-plane-departure'></i></div>
                     <div><i className='fas fa-2x fa-plane'></i><h3>{duration}</h3></div>
                     <div><h1>{arrival.iataCode}</h1><h2>{arrivalDate}</h2><i className='fas fa-2x fa-plane-arrival'></i></div>
                 </div>)
             } else {
             return (
-                <div onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
+                <div className='segment' onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
                     {/* <a href={`${this.state[carrierCode].link}`} target='_blank' rel='noopener noreferrer' >{this.state[carrierCode].airline}</a> */}
                     <div><h1>{departure.iataCode}</h1><h2>{departureDate}</h2><i className='fas fa-2x fa-plane-departure'></i></div>
                     <div><i className='fas fa-2x fa-plane'></i><h3>{duration}</h3></div>
@@ -113,7 +113,7 @@ class Flight extends Component {
                 </div>
             )}
         });
-        leaving = <div>
+        leaving = <div className='leaving-segments'>
                     <a href={`${this.state[leavingSegments[0].flightSegment.carrierCode].link}`} target='_blank' rel="noopener noreferrer" >{this.state[leavingSegments[0].flightSegment.carrierCode].airline}</a>
                     {segments}
                   </div>
@@ -161,14 +161,14 @@ class Flight extends Component {
             let duration = `${durationArr[0]} Hr, ${durationArr[1]} Min`;
 
             if (i > 0) {
-                return (<div key={i} onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})} >
+                return (<div className='segment' key={i} onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})} >
                     <div><h1>{departure.iataCode}</h1><h2>{departureDate}</h2><i className='fas fa-2x fa-plane-departure'></i></div>
                     <div><i className='fas fa-2x fa-plane'></i><h3>{duration}</h3></div>
                     <div><h1>{arrival.iataCode}</h1><h2>{arrivalDate}</h2><i className='fas fa-2x fa-plane-arrival'></i></div>
                 </div>)
             } else {
             return (
-                <div key={i} onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
+                <div className='segment' key={i} onClick={() => this.handleAirlineResponse({carrierCode: carrierCode, departure: departure.iataCode, arrival: arrival.iataCode, duration, departureDate, arrivalDate})}>
                     {/* <a href={`${this.state[carrierCode].link}`} target='_blank' rel="noopener noreferrer" >{this.state[carrierCode].airline}</a> */}
                     <div><h1>{departure.iataCode}</h1><h2>{departureDate}</h2><i className='fas fa-2x fa-plane-departure'></i></div>
                     <div><i className='fas fa-2x fa-plane'></i><h3>{duration}</h3></div>
@@ -176,7 +176,7 @@ class Flight extends Component {
                 </div>
             )}
         });
-        returning = <div>
+        returning = <div className='returning-segments'>
                         {segments}
                     </div>
     };
