@@ -84,6 +84,9 @@ class HomePage extends Component {
     }
     return (
       <div className={`homepage ${this.state.animation}`}>
+          <div className='mobile-error'>
+            <p>It looks like you're visiting on mobile!<br/>For best results, please visit on a desktop.<br/>Sorry for the inconvenience!</p>
+          </div>
           <div className='content-top'>
             <h1 className='title'>Adventure Squad</h1>
             <h3 className='subtitle'>The World Is Waiting .</h3>
