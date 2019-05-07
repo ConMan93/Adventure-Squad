@@ -32,7 +32,7 @@ export default class extends Component {
             )
         })
         return (
-            <div>
+            <div className='flights-list'>
             {flights}
             </div>
         )

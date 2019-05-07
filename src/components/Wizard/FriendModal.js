@@ -62,12 +62,12 @@ class FriendModal extends Component {
         let {friends} = this.props
         let displayFriends = friends.map((friend, i) => {
            return <div key={"friend"+i} className='friend-modal-friend' style={{backgroundImage: `url(${friend.profile_img})`}}>         
-                    <Link to={`/profile/${friend.id}`}><h1>{friend.username}</h1></Link>
+                    <Link to={`/profile/${friend.id}`}>{friend.username}</Link>
                     <button onClick={()=>this.handleAddMember(friend.id)} className='friend-modal-button'>+</button>
                   </div>
         })
         return (
-            <div className='friend-modal-container'>
+            <div className='friend-modal-button-container'>
                 <button onClick={this.openModal}>Add Your Squad</button>
                 <Modal
                 isOpen={this.state.modalIsOpen}
@@ -75,15 +75,16 @@ class FriendModal extends Component {
                 style={customStyles}
                 contentLabel="Example Modal"
                 >
-                <button onClick={this.closeModal} className='friend-modal-button' >X</button>
-                <h1 className='friend-modal-title' >Add Squad Members:</h1>
-                <div className='friend-modal-list-container'>
-                    <div className='friend-modal-list'>
-                        {displayFriends}
+                <div className='friend-modal-container' style={this.props.colorStyle}>
+                    <button onClick={this.closeModal} className='friend-modal-button' >X</button>
+                    <h1 className='friend-modal-title' >Add Squad Members:</h1>
+                    <div className='friend-modal-list-container'>
+                        <div className='friend-modal-list'>
+                            {displayFriends}
+                        </div>
                     </div>
+                    <button onClick={this.closeModal} className='friend-modal-button'>Done</button>
                 </div>
-                <button onClick={this.closeModal} className='friend-modal-button'>Done</button>
-            
                 </Modal>
             </div>
         )

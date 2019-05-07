@@ -27,11 +27,15 @@ class Friends extends Component {
     render(){
         let {friends} = this.props
         let displayFriends = friends.map((friend, i) => {
-           return <div key={i}>
-                    <Link to={`/profile/${friend.id}`}><img src={friend.profile_img} alt="profile_pic" height="60" width="60"/></Link>
-                    <span>{friend.username}</span>
-                    <button onClick={()=>this.handleDeleteFriend(friend.id)}><i className="fas fa-user-minus"></i></button>
-                 </div>
+           return   <div key={i} className='friend'>
+                        <Link to={`/profile/${friend.id}`}>
+                            <div>
+                                <img src={friend.profile_img} alt="profile_pic" height="60" width="60"/>
+                                <span>{friend.username}</span>
+                            </div>
+                        </Link>
+                        <button onClick={()=>this.handleDeleteFriend(friend.id)}><i className="fas fa-user-minus fa-2x"></i></button>
+                    </div>
         })
         return (
             <div>

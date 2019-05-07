@@ -151,7 +151,9 @@ class Trip extends Component {
     render() {
 
         if (this.state.loadingFlights === 0) {
-            var flights = <button onClick={this.getAmadeusFlights}>Find Flights</button>
+            var flights =   <div className='flights-button'>
+                                <button onClick={this.getAmadeusFlights}>Find Flights</button>
+                            </div>
         } else if (this.state.loadingFlights === 1) {
             flights = <div className='flights-loading-animation'>
                         <i className='fas fa-2x fa-plane-departure'></i>
@@ -161,19 +163,19 @@ class Trip extends Component {
         } else if (this.state.loadingFlights === 4) {
             flights = <h2>{this.state.errorMessage}</h2>
         } else {
-            flights =  <div>
+            flights =  <div className='flights-list-container'>
                         <Flights flights={this.state.flights} trip={this.state.trip} />
                     </div> 
         }
 
         if (this.state.dest_city) {
-            var locationImage = <LocationImage dest_city={this.state.dest_city} destination_state={this.state.trip.destination_state}/>
+            var locationImage = <LocationImage dest_city={this.state.dest_city} destination_state={this.state.trip.destination_state} date1={this.state.trip.leaving_date.slice(5,10)} date2={this.state.trip.returning_date.slice(5,10)}/>
         } else {
             locationImage = null;
         }
 
         if (this.state.housing.name) {
-            var savedHousing = <div className='trip-saved-housing'>
+            var savedHousing = <div className='hotel'>
                                 <h1>{this.state.housing.name.toLowerCase()}</h1>
                                 <h1>{this.state.housing.address.toLowerCase()}</h1>
                                 <h1>{this.state.housing.phone}</h1>
@@ -184,7 +186,7 @@ class Trip extends Component {
         }
 
         if (this.state.loadingHousing===0) {
-            var housing =   <div>
+            var housing =   <div className='housing-button'>
                             {savedHousing}
                             <button className='getHousingButton' onClick={this.getAmadeusHotels}>Find Housing</button>
                             </div>
@@ -195,33 +197,34 @@ class Trip extends Component {
                         <i className='fas fa-2x fa-bed'></i>
                       </div>
         } else if (this.state.loadingHousing===2) {
-            housing = <Housing trip_id={this.props.match.params.id} hotels={this.state.hotels} city=                {this.state.dest_city} state={this.state.trip.destination_state} checkin=                     {this.state.trip.leaving_date.slice(0,10)} checkout=                                          {this.state.trip.returning_date.slice(0,10)} resetMap={this.resetMap}/>
+            housing = <Housing trip_id={this.props.match.params.id} hotels={this.state.hotels} city={this.state.dest_city} state={this.state.trip.destination_state} checkin={this.state.trip.leaving_date.slice(0,10)} checkout={this.state.trip.returning_date.slice(0,10)} resetMap={this.resetMap}/>
         }
         
         return (
             <div className='trip-component-container'>
-                <div className='trip-discussion-container'>
-                    <Board trip_id={this.props.match.params.id} />
-                </div>
-                <div className='trip-content-container'>
-                    {locationImage}
-                    <div className='trip-columns'>
+                {locationImage}
+                <div className='trip-component-content-container'>
+                    <div className='trip-discussion-container'>
+                        <Board trip_id={this.props.match.params.id} />
+                    </div>
+                    <div className='trip-content-container'>
                         <div className='trip-left-column'>
                             <div className='trip-column-flights-container'>
                                 {flights}
                             </div>
                             <div className='trip-column-housing-container'>
-                               {housing}
+                            {housing}
                             </div>
                             
                         </div>
                         <div className='trip-right-column'>
                             <Members
                             trip_id={this.props.match.params.id}
+                            colorStyle={this.props.colorStyle}
                             />
                             {this.state.loadMap ?
                             <MapContainer state={this.state.trip.destination_state} city={this.state.trip.destination_city}
-                             />
+                            />
                             :
                             null}
                         </div>

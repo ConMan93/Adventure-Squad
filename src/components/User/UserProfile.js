@@ -60,7 +60,7 @@ class UserProfile extends Component {
           return (
               <div key={'friend' + i}>
                   <p>{friend.username}</p>
-                    <img src={friend.profile_img} alt='' style={{height: '50px', width: '50px'}} />
+                    <img src={friend.profile_img} alt='' />
               </div>
           )
       })
@@ -79,13 +79,6 @@ class UserProfile extends Component {
         <div className='user-profile-header'>
             <img src={this.state.user.profile_img} alt='' />
             <h1>{this.state.user.username}</h1>
-            <div className='dashboard-header-venmo-container'>
-                <div>
-                </div>
-                <h2>{this.state.user.venmo}</h2>
-            </div>
-          {/* <div className='dashboard-header-venmo-container'> */}
-
         </div> 
         <div className='user-profile-content'>
             <div className='user-profile-friends'>
@@ -93,8 +86,8 @@ class UserProfile extends Component {
                 <div className='user-profile-friends-list'>{friends}</div>
             </div>
             <div className='user-profile-trips'>{usersTrips}</div>
-            <div className='user-profile-map'>{this.state.loadMap ? <UserMap /> : null}</div>
         </div>
+        <div className='user-profile-map'>{this.state.loadMap ? <UserMap /> : null}</div>
       </div>
     )
   }

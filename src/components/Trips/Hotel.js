@@ -18,7 +18,7 @@ export default function Hotel (props) {
         phoneNum = 'No Phone Number Listed'
     }
     return (
-        <div>
+        <div className='hotel'>
             <h1>{name.toLowerCase()}</h1>
             <h1>{ratingString}</h1>
             <h1>{phoneNum}</h1>

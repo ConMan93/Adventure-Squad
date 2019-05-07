@@ -58,12 +58,14 @@ class Wizard extends Component {
     return (
       <div className='new-trip-button-container'>
         <button className='new-trip-button' onClick={this.openModal}>Create New Trip</button>
+        <div></div>
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
           style={customStyles}
           contentLabel="Example Modal"
         >
+        <div style={this.props.colorStyle}>
         <button className='wizard-close-button' onClick={this.closeModal}>X</button>
         <div className='wizard-modal-container'>
         <StepOne createTrip={this.createTrip}/>
@@ -72,6 +74,7 @@ class Wizard extends Component {
         <button onClick={this.createTrip} className='wizard-submit-button'>submit</button>
         : null
         }
+        </div>
         </div>
         </Modal>
       </div>

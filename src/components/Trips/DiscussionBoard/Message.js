@@ -55,27 +55,32 @@ class Message extends Component {
       const dateToFormat = this.props.date
     return (
       <div className='trip-discussion-message'>
-        <h2>{this.state.author.username}</h2>
-
-        {this.state.editing ?
-        <textarea value={this.state.message} name='message' onChange={this.handleChange} />
-        :
-        <p>{this.state.message}</p>}
-
-        <div><Moment date={dateToFormat} format='ddd MMM DD, YYYY hh:mm A' /></div>
-
-        {this.state.author.id === this.props.user.id ?  
-        this.state.editing ?
-        <button onClick={this.udpateMessage}>save</button>
-        :
-        <button onClick={this.handleEditClick}>edit</button>
-        :
-        null}
-        {this.state.author.id === this.props.user.id ?
-            <button onClick={this.deleteMessage}>delete</button>
+        <div className='message-content'>
+            {this.state.editing ?
+            <textarea value={this.state.message} name='message' onChange={this.handleChange} />
             :
-            null
-        }  
+            <p>{this.state.message}</p>}
+
+            <div className='message-info'>
+                <h2>{this.state.author.username}</h2>
+                <div><Moment date={dateToFormat} format='ddd MMM DD, hh:mm A' /></div>
+            </div>
+        </div>
+
+        <div className='message-buttons'>
+            {this.state.author.id === this.props.user.id ?  
+            this.state.editing ?
+            <button onClick={this.udpateMessage}><i className='fas fa-2x fa-check'></i></button>
+            :
+            <button onClick={this.handleEditClick}><i className='fas fa-2x fa-edit'></i></button>
+            :
+            null}
+            {this.state.author.id === this.props.user.id ?
+                <button onClick={this.deleteMessage}><i className='fas fa-2x fa-trash-alt'></i></button>
+                :
+                null
+            }
+        </div>  
       </div>
     )
   }

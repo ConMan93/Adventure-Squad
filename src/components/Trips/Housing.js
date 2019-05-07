@@ -40,8 +40,10 @@ class Housing extends Component {
             return <Hotel base={price1} name={name} rating={rating} contact={contact} address={hotel.hotel.address.lines[0]} latitude={hotel.hotel.latitude} longitude={hotel.hotel.longitude} addHousingToTrip={this.addHousingToTrip} />
         })}
         return (
-            <div>
-                {hotels}
+            <div className='housing'>
+                <div className='hotels'>
+                    {hotels}
+                </div>
                 <a href={link} target='_blank' rel="noopener noreferrer">Search Airbnb Listings</a>
             </div>
         )
